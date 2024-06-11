@@ -1,0 +1,40 @@
+pt-BR:
+  number:
+    currency:
+      format:
+        unit: 'R$ '
+        delimiter: '.'
+        separator: ','
+        precision: 2
+        format: '%u %n'
+  resources:
+    controllers:
+      Countries: 'Países'
+      States: Estados
+      Cities: Cidades
+      Companies: Empresas
+      Registrations: Usuário
+      Traders: Participantes
+      Dashboard: Dashboard
+      Banks: Bancos
+
+  activerecord:
+    enums:
+
+  date:
+    formats:
+      default: '%d/%m/%Y'
+
+  settings:
+    parameters:
+
+  activerecord:
+    models:
+      user: Usuários
+    attributes:
+    errors:
+      models:
+        order:
+          attributes:
+            table_number:
+              taken: Já está em uso

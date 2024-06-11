@@ -1,0 +1,8 @@
+@banks.map do |bank|
+  {
+    id: bank.id,
+    code: bank.code,
+    name: bank.name,
+    url: bank_url(bank, format: :json)
+  }
+end

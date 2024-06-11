@@ -1,0 +1,24 @@
+<div data-controller="tabs">
+  <div class=" <%= (["tabfy", "tabs"] + @classes).join(' ') %>">
+    <ul data-tabs-target="tabs">
+      <% tabs.each_with_index do |tab, idx| %>
+        <li data-action="click->tabs#select" data-tab-id="<%= tab.id %>">
+          <a>
+            <%= tab.title %>
+            <% if tab.errors > 0 %>
+              <span class="tag is-danger"><%= tab.errors %></span>
+            <% end %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="tabfy" data-tabs-target="items">
+    <% tabs.each_with_index do |content, idx| %>
+      <div class="tab-container">
+        <%= content %>
+      </div>
+    <% end %>
+  </div>
+</div>

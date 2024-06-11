@@ -1,0 +1,99 @@
+version: '3.0'
+
+services:
+  app: &app
+    build: ./
+    image: pluto:latest
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    depends_on:
+      - database
+      - redis
+    ports:
+      - "3000:3000"
+      - "4000:4000"
+    volumes:
+      - ./:/usr/src/app:cached
+      - ./bundle_cache:/bundle_cache
+    env_file:
+      - ./.environments/development/web
+      - ./.environments/development/database
+    tty: true
+    stdin_open: true
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=webpack-dev-server
+      - BUNDLE_PATH=/bundle_cache
+
+  sidekiq:
+    build: ./
+    image: pluto:latest
+    command: bash -c "bundle exec sidekiq -C config/sidekiq.yml"
+    depends_on:
+      - app
+    volumes:
+      - ./:/usr/src/app:cached
+      - ./bundle_cache:/bundle_cache
+    env_file:
+      - ./.environments/development/web
+      - ./.environments/development/database
+    tty: true
+    stdin_open: true
+    environment:
+      - BUNDLE_PATH=/bundle_cache
+
+  spring:
+    build: ./
+    image: pluto:latest
+    command: bundle exec spring server
+    depends_on:
+      - app
+    volumes:
+      - ./:/usr/src/app:cached
+      - ./bundle_cache:/bundle_cache
+    env_file:
+      - ./.environments/development/web
+      - ./.environments/development/database
+    tty: true
+    environment:
+      - BUNDLE_PATH=/bundle_cache
+    pid: host
+
+  rubocop:
+    build: ./
+    image: pluto:latest
+    command: bundle exec rubocop-daemon start --no-daemon --binding 0.0.0.0 --port 3196
+    volumes:
+      - "./tmp/rubocop-daemon:/root/.cache/rubocop-daemon/usr+src+app"
+      - ./:/usr/src/app:cached
+      - ./bundle_cache:/bundle_cache
+    ports:
+      - "3196:3196"
+    env_file:
+      - ./.environments/development/web
+      - ./.environments/development/database
+    tty: true
+    stdin_open: true
+    environment:
+      - BUNDLE_PATH=/bundle_cache
+    pid: host
+    tmpfs:
+      - /tmp
+
+  redis:
+    image: redis
+    command: [sh, -c, "rm -rf /data/dump.rdb && redis-server"]
+
+  database:
+    image: postgres
+    env_file:
+      - ./.environments/development/database
+    volumes:
+      - db_data:/var/lib/postgresql/data:cached
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1080:1080
+
+volumes:
+  db_data:
+  bundle_cache:

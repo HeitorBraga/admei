@@ -1,0 +1,22 @@
+
+<%= simple_form_for(@bank) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs columns">
+    <div class="column is-one-quarter">
+      <%= f.input :code %>
+    </div>
+    <div class="column">
+      <%= f.input :name %>
+    </div>
+    <div class="column is-one-quarter">
+      <%= f.input :ispb_code %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Salvar' %>
+    <%= link_to 'Cancelar', banks_path %>
+  </div>
+<% end %>

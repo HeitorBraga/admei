@@ -1,0 +1,45 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_country_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-target="list.massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= country_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Nome</th>
+        <th>Código ISO</th>
+        <th>Código IBGE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @countries.each do |country| %>
+        <tr data-target="list.items">
+          <td class="item-check">
+            <input type="checkbox" value="<%= country.id %>" data-action="change->list#itemSelect">
+          </td>
+          <td class="clickable" data-action="click->list#edit" data-edit-url="<%= edit_country_url(country) %>">
+            <%= country.name %>
+          </td>
+          <td>
+            <%= country.iso_code %>
+          </td>
+          <td>
+            <%= country.ibge_code %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @countries %>

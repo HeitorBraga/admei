@@ -1,0 +1,26 @@
+Layout/LineLength:
+  Max: 120
+  IgnoredPatterns: ['\A\ *#']
+
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Airbnb/DefaultScope:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/**
+    - config/**
+    - script/**
+    - 'bundle_cache/**/*'

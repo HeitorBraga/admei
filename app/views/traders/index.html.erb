@@ -1,0 +1,65 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_trader_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-list-target="massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= trader_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Tipo</th>
+        <th>Nome</th>
+        <th>CPF/CNPJ</th>
+        <th>Phone</th>
+        <th>Mobile</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @traders.each do |trader| %>
+        <tr data-target="list.items">
+          <td class="item-check">
+            <input type="checkbox" value="<%= trader.id %>" data-action="change->list#itemSelect">
+          </td>
+          <td>
+            <% if trader.customer? %>
+              <span class="tag is-light">Cliente</span>
+            <% end %>
+            <% if trader.supplier? %>
+              <span class="tag is-light">Fornecedor</span>
+            <% end %>
+            <% if trader.carrier? %>
+              <span class="tag is-light">Transportadora</span>
+            <% end %>
+          </td>
+          <td class="clickable" data-action="click->list#edit" data-edit-url="<%= edit_trader_url(trader) %>">
+            <%= trader.name %>
+          </td>
+          <td class="clickable" data-action="click->list#edit" data-edit-url="<%= edit_trader_url(trader) %>">
+            <%= trader.federal_tax_id %>
+          </td>
+          <td>
+            <%= trader.phone %>
+          </td>
+          <td>
+            <%= trader.mobile %>
+          </td>
+          <td>
+            <%= mail_to trader.email %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @traders_query %>

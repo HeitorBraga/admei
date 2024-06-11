@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pluto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+
+    <%= stimulus_include_tags %>
+    <%= javascript_include_tag 'application_module', type: 'module-shim' %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
+
+    <%= yield :head %>
+  </head>
+
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="<%= internal_root_url %>">
+          <i class="fas fa-globe-europe"></i>
+          &nbsp; &nbsp; <b>Pluto</b>
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <%= render 'layouts/menu' if !Current.accountant? && current_user.present? %>
+    </nav>
+    <section class="section">
+      <%= render 'layouts/notices' %>
+
+      <div class="container">
+        <%= render 'layouts/header_and_search' %>
+
+        <%= yield %>
+      </div>
+    </section>
+
+    <div id="crudfy-shortcuts">
+    SHORTCUTS
+    </div>
+    <div class="loader-wrapper">
+      <div class="loading">
+        <%= image_tag 'loading.gif' %>
+      </div>
+    </div>
+  </body>
+</html>

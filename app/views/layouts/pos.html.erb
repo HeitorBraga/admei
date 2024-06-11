@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LEME | FOOD </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag 'pos/pos', media: 'all', 'data-turbo-track': 'reload' %>
+
+    <%= stimulus_include_tags %>
+    <%= javascript_include_tag 'application_module', type: 'module-shim' %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
+
+    <%= yield :head %>
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <%= link_to pos_food_service_root_url, class: "navbar-item" do %>
+          <i class="fas fa-dharmachakra"></i>
+          &nbsp; &nbsp; <b>LEME</b>&nbsp; | Foodservice
+        <% end %>
+      </div>
+      <% if content_for?(:navbar) %>
+        <%= yield :navbar %>
+      <% end %>
+    </nav>
+    <section class="section">
+      <%= render 'layouts/notices' %>
+      <%= turbo_frame_tag :food_pos do %>
+        <%= yield %>
+      <% end %>
+    </section>
+  </body>
+</html>

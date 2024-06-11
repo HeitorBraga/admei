@@ -1,0 +1,17 @@
+<div class="auto-complete-data-item"
+      data-action="mouseover->auto-complete#onMouseOverItem"
+      data-auto-complete-target="item"
+      data-id="<%= @id %>"
+      data-detail-info="<%= @detail_info.to_json %>"
+      data-text="<%= @text %>">
+  <p>
+    <% if @details.length == 0 %>
+      <%= @text %>
+    <% else %>
+      <b><%= @text %></b>
+    <% end %>
+  <p>
+  <% @details.each do |detail| %>
+    <p><%= detail %></p>
+  <% end %>
+</div>

@@ -1,0 +1,4 @@
+# nfe_status_check:
+#   cron: "*/10 * * * *"
+#   class: "NfeStatusCheckJob"
+#   queue: nfe_misc

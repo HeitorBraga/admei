@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "react/prop-types": 0,
+    "react/destructuring-assignment": 0,
+    "semi": 0,
+    "radix": ["error", "as-needed"],
+    "import/prefer-default-export": 0
+  },
+  "globals": {
+    "window": true,
+    "document": true
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jquery": true
+  },
+}

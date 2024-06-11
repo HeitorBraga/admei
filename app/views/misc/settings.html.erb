@@ -1,0 +1,40 @@
+<script type="text/javascript">
+  function saveConfiguration(name, value, dataType){
+    var _value = null;
+    if (dataType == 'Boolean'){
+      _value = $(value).is(':checked');
+    } else {
+      _value = $(value).val();
+    }
+
+    $.post('<%= save_setting_path %>', { name: name, value: _value});
+  }
+</script>
+
+<% Setting.available_settings(scope: params[:scope] ? params[:scope].to_sym : :tenant).each do |setting| %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label><%= t("settings.parameters.#{setting[:name]}") %></label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <p class="control">
+          <% if setting[:data_type] == Setting::Boolean %>
+            <%= check_box_tag setting[:name], 'true', Setting[setting[:name]],
+                              onchange: "saveConfiguration('#{setting[:name]}', this, '#{setting[:data_type]}');" %>
+          <% elsif setting[:list] %>
+            <%= select_tag setting[:name], options_for_select(Setting.get_options_for_list(setting), Setting[setting[:name]]),
+                                          prompt: 'Selecione uma opção',
+                                          onchange: "saveConfiguration('#{setting[:name]}', this);",
+                                          data: { searchable: true },
+                                          class: "select" %>
+          <% else %>
+            <% mask = setting[:data_type] == Float ? 'negative-currency' : '' %>
+            <%= text_field_tag setting[:name], Setting[setting[:name]],
+                                onblur: "saveConfiguration('#{setting[:name]}', this, '#{setting[:data_type]}');", class: "input", data: { mask: mask } %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>

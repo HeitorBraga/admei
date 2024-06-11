@@ -1,0 +1,10 @@
+{
+  "imports": {
+    "turbo": "<%= asset_path("turbo") %>",
+    "routes": "<%= asset_path("routes") %>",
+    "lodash": "<%= asset_path("lodash-es") %>",
+    "@rails/request.js": "<%= asset_path("@rails/request.js/src/index.js") %>",
+    "fuse": "<%= asset_path("fuse.js") %>",
+    <%= importmap_list_with_stimulus_from "app/assets/javascripts/controllers", "app/assets/javascripts/libraries" %>
+  }
+}

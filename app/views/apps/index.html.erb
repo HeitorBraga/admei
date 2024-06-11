@@ -1,0 +1,45 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_app_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-list-target="massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= app_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+                <th>Name</th>
+                <th>Tenant</th>
+                <th>Secret</th>
+              </tr>
+    </thead>
+    <tbody>
+      <% @apps.each do |app| %>
+        <tr data-target="list.items">
+          <td class="item-check">
+            <input type="checkbox" value="<%= app.id %>" data-action="change->list#itemSelect">
+          </td>
+                    <td class="clickable" data-action="click->list#edit" data-edit-url="<%= edit_app_url(app) %>">
+          <%= app.name %>
+          </td>
+                    <td class="clickable" data-action="click->list#edit" data-edit-url="<%= edit_app_url(app) %>">
+          <%= app.tenant %>
+          </td>
+                    <td class="clickable" data-action="click->list#edit" data-edit-url="<%= edit_app_url(app) %>">
+          <%= app.secret %>
+          </td>
+                  </tr>
+      <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @apps %>

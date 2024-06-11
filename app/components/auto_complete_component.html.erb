@@ -1,0 +1,30 @@
+<div class="field auto-complete"
+     data-controller="auto-complete"
+     data-auto-complete-load-from-value="<%= @load_from %>"
+     data-auto-complete-on-select-request-value="<%= @on_select_request.to_json %>"
+     data-auto-complete-query-context-value="<%= @query_context.to_json %>">
+  <p class="control has-icons-left">
+    <input type="hidden" name="<%= "#{@resource}[#{@field}]" %>" data-auto-complete-target="valueInput" value="<%= @id %>">
+    <input class="input"
+           type="text"
+           value="<%= @text %>"
+           placeholder="<%= @place_holder %>"
+           data-auto-complete-target="searchInput"
+           data-action="
+             keydown->auto-complete#onInputType
+             auto-complete#onSearchInputChange
+             blur->auto-complete#onLeaveInput
+             focus->auto-complete#onInputFocus
+           ">
+    <span class="icon is-small is-left">
+      <i class="fas fa-search"></i>
+    </span>
+  </p>
+  <div class="auto-complete-data-container is-hidden" data-auto-complete-target="dataContainer">
+    <%= turbo_frame_tag @frame_id, data: { 'auto-complete-target': 'frame' } do %>
+      <div class="loading">
+        <%= image_tag 'loading.svg' %>
+      </div>
+    <% end %>
+  </div>
+</div>

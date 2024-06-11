@@ -1,0 +1,9 @@
+@apps.map do |app|
+  {
+    id: app.id,
+    name: app.name,
+    tenant_id: app.tenant_id,
+    secret: app.secret,
+    url: app_url(app, format: :json)
+  }
+end

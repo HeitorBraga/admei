@@ -1,0 +1,38 @@
+.auto-complete {
+  position: relative;
+}
+
+.auto-complete-data-container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 .5em 1em -.125em hsla(0,0%,4%,.1),0 0 0 1px hsla(0,0%,4%,.02);
+  position: absolute;
+  z-index: 999;
+}
+
+.auto-complete-data-item {
+  text-align: inherit;
+  white-space: nowrap;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  color: #4a4a4a;
+  padding: .5rem;
+}
+
+.auto-complete-data-item.is-selected {
+  background-color: #f5f5f5;
+  color: #0a0a0a;
+}
+
+.auto-complete-data-container .loading {
+  text-align: center;
+}
+
+.auto-complete-data-container .loading img {
+  width: 62px;
+  padding: 10px
+}

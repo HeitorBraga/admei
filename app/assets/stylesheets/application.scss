@@ -1,0 +1,357 @@
+/*
+ *= require layout
+ *= require switch
+ *= require auto-complete
+ *= require_self
+ */
+
+html {
+  background-color: #e7e7e7;
+}
+
+.container{
+  background-color: #fff;
+  padding: 20px;
+  min-height: 800px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 5px;
+  border-top: 5px solid #3298dc;
+}
+
+.section {
+  padding: 1rem 1.5rem;
+}
+
+.form-actions {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+table td.clickable {
+  cursor: pointer;
+  color: #3273dc;
+  text-decoration: underline;
+}
+
+table td.item-check {
+  width: 30px;
+}
+
+.notification {
+  width: 400px;
+  z-index: 999;
+  position: fixed;
+  top: 60px;
+  right: 5px;
+}
+
+
+.notification.hidden {
+  display: none;
+}
+
+.list-buttons {
+  padding: 10px 0px 10px 10px;
+
+  .mass-actions {
+    text-align: right;
+    display: none;
+  }
+}
+
+div.no-label {
+  padding-top: 45px;
+}
+
+.form-actions a {
+  margin-right: 15px;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+div.control.select {
+  height: 72px;
+}
+
+.select2.select2-container {
+  width: 100% !important;
+}
+
+p.copy-field {
+  border: solid thin #dbdbdb;
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 4px;
+  padding: 7px;
+  font-family: Monaco, monospace;
+  font-weight: bold;
+}
+
+p.copy-field.dark {
+  background-color: #363636;
+  color: white;
+}
+
+ul.accountant-companies-list {
+  li h1 {
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
+
+.simple_form {
+  .file.has-name {
+    padding-top: 32px;
+  }
+}
+
+.lane-menu {
+  .left {
+    float: left;
+    width: 250px;
+  }
+
+  .right{
+    float: right;
+    width: 250px;
+    border-left: solid thin #eee;
+  }
+
+  h3 {
+    color: #999999;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 15px;
+    text-transform: uppercase;
+  }
+}
+
+.lane-menu.two {
+  width: 500px;
+}
+
+.lane-menu.three {
+  width: 600px;
+}
+
+.navbar-dropdown {
+  font-size: 18px;
+}
+
+.is-scrollable {
+  tbody {
+    display:block;
+    height:400px;
+    overflow:auto;
+  }
+
+}
+
+.is-scrollable.is-fullwidth thead {
+  width: calc( 100% - 1em )
+}
+
+.is-scrollable.is-fullwidth thead,
+.is-scrollable.is-fullwidth tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+div.has-button {
+  padding-top: 44px;
+}
+
+.nested-fields {
+  margin-bottom: 30px;
+}
+
+.tabs .tag {
+  margin-left: 10px;
+}
+
+.sortable-highlight {
+  background-color:#96caec;
+  padding: 20px;
+}
+
+.sortable-selected {
+  background-color: #fff;
+}
+
+.sortable-handle {
+  cursor: grab;
+}
+
+.section-title {
+  margin-bottom: 30px;
+  color: #3273dc;
+  border-bottom-color: #dbdbdb;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  font-size: 1.25rem;
+  padding: 8px 0px 11px;
+
+  span {
+    border-bottom-color: #3273dc;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    padding: 15px;
+  }
+}
+
+.tabfy .tab-container {
+  display: none;
+}
+
+.tabfy .tab-container.is-active {
+  display: block;
+}
+
+
+#crudfy-shortcuts {
+  display: none;
+  width: 50%;
+  height: 50%;
+  background-color: #363636;
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  color: #fff;
+  padding: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  z-index: 999999999;
+}
+
+.inline-loader-wrapper {
+  width: 100%;
+  height: 100%;
+  z-index: 9999999;
+
+  .loading {
+    width: 160px;
+    height: 160px;
+    margin: 25% auto;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+.loader-wrapper {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 9999999;
+
+  .loading {
+    width: 64px;
+    height: 64px;
+    margin: 25% auto;
+  }
+}
+
+.navbar {
+  background-color: #3298dc;
+  color: #fff;
+}
+
+.navbar .navbar-brand > .navbar-item,
+.navbar .navbar-brand .navbar-link {
+  color: #fff;
+}
+
+.navbar .navbar-brand > a.navbar-item:focus, .navbar .navbar-brand > a.navbar-item:hover, .navbar .navbar-brand > a.navbar-item.is-active,
+.navbar .navbar-brand .navbar-link:focus,
+.navbar .navbar-brand .navbar-link:hover,
+.navbar .navbar-brand .navbar-link.is-active {
+  background-color: #238cd1;
+  color: #fff;
+}
+
+.navbar .navbar-brand .navbar-link::after {
+  border-color: #fff;
+}
+
+.navbar .navbar-burger {
+  color: #fff;
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar .navbar-start > .navbar-item,
+  .navbar .navbar-start .navbar-link,
+  .navbar .navbar-end > .navbar-item,
+  .navbar .navbar-end .navbar-link {
+    color: #fff;
+  }
+  .navbar .navbar-start > a.navbar-item:focus, .navbar .navbar-start > a.navbar-item:hover, .navbar .navbar-start > a.navbar-item.is-active,
+  .navbar .navbar-start .navbar-link:focus,
+  .navbar .navbar-start .navbar-link:hover,
+  .navbar .navbar-start .navbar-link.is-active,
+  .navbar .navbar-end > a.navbar-item:focus,
+  .navbar .navbar-end > a.navbar-item:hover,
+  .navbar .navbar-end > a.navbar-item.is-active,
+  .navbar .navbar-end .navbar-link:focus,
+  .navbar .navbar-end .navbar-link:hover,
+  .navbar .navbar-end .navbar-link.is-active {
+    background-color: #238cd1;
+    color: #fff;
+  }
+  .navbar .navbar-start .navbar-link::after,
+  .navbar .navbar-end .navbar-link::after {
+    border-color: #fff;
+  }
+  .navbar .navbar-item.has-dropdown:focus .navbar-link,
+  .navbar .navbar-item.has-dropdown:hover .navbar-link,
+  .navbar .navbar-item.has-dropdown.is-active .navbar-link {
+    background-color: #238cd1;
+    color: #fff;
+  }
+  .navbar .navbar-dropdown a.navbar-item.is-active {
+    background-color: #3298dc;
+    color: #fff;
+  }
+}
+
+.columns.wrapped {
+  flex-wrap: wrap;
+}
+
+.field.has-addons .control.input-holder {
+  width: 100%;
+}
+
+.gap {
+  margin: 5px 0px;
+}
+
+#product-categories {
+  #tab-content div[data-content] {
+    display: none;
+  }
+
+  #tab-content div.is-active {
+    display: block;
+  }
+
+  #pizza-container {
+    display: none;
+  }
+
+  .range-selector {
+    cursor: pointer;
+  }
+}

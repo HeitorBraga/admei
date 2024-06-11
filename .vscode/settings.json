@@ -1,0 +1,17 @@
+{
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste" :true,
+    "editor.formatOnSave": true,
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "misogi.ruby-rubocop",
+    "editor.formatOnPaste" :true,
+    "editor.formatOnSave": true,
+  },
+  "prettier.trailingComma": "none",
+  "ruby.rubocop.executePath": "./scripts/docker/",
+  "ruby.rubocop.onSave": true,
+}

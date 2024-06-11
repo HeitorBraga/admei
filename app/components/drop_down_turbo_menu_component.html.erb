@@ -1,0 +1,20 @@
+<%= turbo_frame_tag @turbo_frame_id do %>
+  <div class="dropdown" data-controller="dropDownMenu" data-action="click@window->dropDownMenu#close">
+    <div class="dropdown-trigger">
+      <%= link_to @menu_load_link, data: {
+                                     action: 'dropDownMenu#toggle',
+                                     'turbo-frame' => "#{@turbo_frame_id}_items"
+                                   } do %>
+        <%= content %>
+        <span class="icon is-small">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      <% end %>
+    </div>
+    <div class="dropdown-menu">
+      <div class="dropdown-content">
+        <%= turbo_frame_tag "#{@turbo_frame_id}_items" %>
+      </div>
+    </div>
+  </div>
+<% end %>

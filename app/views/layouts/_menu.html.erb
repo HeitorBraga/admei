@@ -1,0 +1,78 @@
+<div id="zion-nav-bar" class="navbar-menu">
+  <div class="navbar-start">
+
+    <%= link_to 'Dashboard', '#', class: 'navbar-item' %>
+
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        Cadastros
+      </a>
+
+      <div class="navbar-dropdown lane-menu two">
+        <div class="left">
+          <h3>Cadastros</h3>
+          <%= link_to 'Participantes', traders_url, class: 'navbar-item' %>
+        </div>
+
+        <div class="right">
+          <h3>Geral</h3>
+          <%= link_to 'Participantes', traders_url, class: 'navbar-item' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        Transações
+      </a>
+
+      <div class="navbar-dropdown lane-menu two">
+        <div class="left">
+          <h3>Movimentação</h3>
+          <%= link_to 'Transações', '', class: 'navbar-item' %>
+        </div>
+
+        <div class="right">
+          <h3>Cadastros</h3>
+          <%= link_to 'Transações', '', class: 'navbar-item' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        Configurações
+      </a>
+      <div class="navbar-dropdown lane-menu two">
+        <div class="left">
+          <h3>Geral</h3>
+          <%= link_to 'Empresas', companies_url, class: 'navbar-item' %>
+          <%= link_to 'Bancos', banks_url, class: 'navbar-item' %>
+          <%= link_to 'Países', countries_url, class: 'navbar-item' %>
+          <%= link_to 'Estados', states_url, class: 'navbar-item' %>
+          <%= link_to 'Cidades', cities_url, class: 'navbar-item' %>
+          <%= link_to 'Parâmetros', settings_url, class: 'navbar-item' %>
+        </div>
+
+        <div class="right">
+          <h3>Fiscal</h3>
+          <%= link_to 'Empresas', companies_url, class: 'navbar-item' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar-end">
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        <%= current_user.email %>
+      </a>
+
+      <div class="navbar-dropdown">
+        <%= link_to 'Perfil', edit_user_registration_url(current_user), class: 'navbar-item' %>
+        <hr class="navbar-divider">
+        <%= link_to 'Sair!', destroy_user_session_path, method: :delete, class: 'navbar-item' %>
+      </div>
+    </div>
+  </div>
+</div>

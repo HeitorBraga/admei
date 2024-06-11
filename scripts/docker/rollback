@@ -1,0 +1,4 @@
+#! /bin/bash
+
+echo 'Connecting to the instance, please wait...'
+docker-compose exec railsapp bundle exec rake db:rollback

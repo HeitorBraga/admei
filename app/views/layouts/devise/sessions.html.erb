@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Leme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag controller_asset_file, media: 'all', 'data-turbo-track': 'reload' if asset_exists?(controller_asset_file, 'css') %>
+    <%= javascript_include_tag controller_asset_file, 'data-turbo-track': 'reload' if asset_exists?(controller_asset_file, 'js') %>
+  </head>
+  <body>
+    <div class="columns is-vcentered">
+      <div class="login column is-4 ">
+        <section class="section">
+          <div class="has-text-centered">
+            <div>
+              <%= image_tag 'logo_temp.svg', width: '64px' %>
+            </div>
+            <b>LEME</b>&nbsp; | BACKOFFICE
+          </div>
+
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" } %>
+
+            <%= f.input :password,
+                        required: false,
+                        input_html: { autocomplete: "current-password" } %>
+
+            <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+
+            <div class="has-text-centered">
+              <%= f.button :submit, "Entrar", class: 'button is-vcentered is-info is-outlined' %>
+            </div>
+          <% end %>
+        </section>
+      </div>
+      <div id="particles-js" class="interactive-bg column is-8">
+      </div>
+    </div>
+  </body>
+</html>

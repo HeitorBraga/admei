@@ -1,0 +1,27 @@
+<div class="columns">
+  <div class="column">
+    <h1 class="title">
+      <% if @super_resource.present? %>
+        <%= link_to controller: @super_resource.class.to_s.tableize, action: :index do %>
+          <i class="fas fa-arrow-left"></i>
+        <% end %>
+      <% end %>
+      <%= page_title %>
+    </h1>
+  </div>
+
+  <div class="column is-one-quarter">
+    <% if show_search? %>
+      <form action="<%= url_for controller: controller_name, action: action_name %>" id="simple-search">
+        <div class="field">
+          <p class="control has-icons-left">
+            <input id="main-search" class="input" type="text" name="q" placeholder="Pesquisar" value="<%= params[:q] %>">
+            <span class="icon is-small is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </p>
+        </div>
+      </form>
+    <% end %>
+  </div>
+</div>

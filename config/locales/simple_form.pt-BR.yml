@@ -1,0 +1,82 @@
+pt-BR:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'Obrigatório'
+      mark: '&#8226;'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Verifique os erros no formulário abaixo:"
+    labels:
+      defaults:
+        password: 'Senha'
+        name: 'Nome'
+        code: Código
+        federal_tax_id: CNPJ
+        kind: Tipo
+      user:
+        new:
+          email: 'E-mail usado para entrar no sistema.'
+        edit:
+          email: 'E-mail'
+      country:
+        ibge_code: 'Código IBGE'
+        iso_code: 'Código ISO'
+      state:
+        ibge_code: 'Código IBGE'
+        iso_code: 'Código ISO'
+        country: 'País'
+        uf: 'UF'
+      city:
+        ibge_code: 'Código IBGE'
+        state: Estado
+      company:
+        trade_name: Fantasia
+        legal_name: Razão Social
+        federal_tax_id: CNPJ
+        state_tax_id: IE
+      address:
+        address: Endereço
+        number: Número
+        more: Complemento
+        zip: CEP
+        district: Bairro
+        state_id: Estado
+        city_id: Cidade
+      user:
+        current_password: Senha atual
+        password_confirmation: Confirmação da nova senha
+        password: Nova senha
+      trader:
+        name: Nome
+        profiles: Perfil
+        birth_date: 'Data de nascimento'
+        email: E-mail
+        gender: Genero
+        phone: Telefone
+        mobile: Celular
+        person_type: Tipo
+        legal_name: Razão social
+        federal_tax_id: CPF/CNPJ
+        state_tax_id: RG/IE
+        municipal_tax_id: Inscrição municipal
+        profiles_list:
+          customer: Cliente
+          supplier: Fornecedor
+          carrier: Transportadora
+        person_types_enum:
+          natural: Física
+          legal: Jurídica
+
+    hints:
+      defaults:
+        username: 'Usuário para entrar no sistema.'
+        password: 'Senha usada para entrar no sistema.'
+    include_blanks:
+      defaults:
+    prompts:
+      defaults:
+        age: 'Select your age'

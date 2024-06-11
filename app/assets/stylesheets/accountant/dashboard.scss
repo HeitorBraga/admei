@@ -1,0 +1,49 @@
+// Place all the styles related to the accountant/dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.xml-files {
+  h1 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  h3.align-right {
+    text-align: right;
+  }
+
+  h3.align-center {
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  div.control.select {
+    height: auto;
+  }
+
+  div.box {
+    height: 107px;
+  }
+
+  .dropdown .btn {
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .column.item-action {
+    text-align: right;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+}
+
+.action-buttons {
+  text-align: right;
+  padding-bottom: 15px;
+}

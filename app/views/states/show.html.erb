@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @state.name %>
+</p>
+
+<p>
+  <strong>Uf:</strong>
+  <%= @state.uf %>
+</p>
+
+<p>
+  <strong>Ibge code:</strong>
+  <%= @state.ibge_code %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @state.country_id %>
+</p>
+
+<%= link_to 'Edit', edit_state_path(@state) %> |
+<%= link_to 'Back', states_path %>

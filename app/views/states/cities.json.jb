@@ -1,0 +1,6 @@
+@cities.map do |city|
+  {
+    id: city.id,
+    name: city.name,
+  }
+end

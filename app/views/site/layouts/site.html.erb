@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Leme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= stylesheet_link_tag 'site/site', media: 'all', 'data-turbo-track': 'reload' %>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </section>
+  </body>
+</html>

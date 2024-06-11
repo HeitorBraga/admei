@@ -1,0 +1,43 @@
+
+<%= simple_form_for(@company, html: { multipart: true }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs columns">
+    <div class="column">
+      <%= f.input :legal_name %>
+    </div>
+
+    <div class="column is-one-quarter">
+      <%= f.input :trade_name %>
+    </div>
+  </div>
+
+  <div class="form-inputs columns">
+    <div class="column is-one-quarter">
+      <%= f.input :federal_tax_id, input_html: { data: { mask: 'cnpj' } } %>
+    </div>
+    <div class="column is-one-quarter">
+      <%= f.input :state_tax_id %>
+    </div>
+  </div>
+
+  <%= render partial: 'addresses/address_form', locals: { f: f } %>
+
+  <h1 class="form-divider-title">Certificado digital</h1>
+
+  <div class="form-inputs columns certificate">
+    <div class="column">
+      <%= f.input :certificate, hint: 'Selecione o certificado',
+                                label: (f.object.certificate.filename rescue '...') %>
+    </div>
+    <div class="column is-one-third">
+      <%= f.input :certificate_password %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Salvar' %>
+    <%= link_to 'Cancelar', companies_path %>
+  </div>
+<% end %>

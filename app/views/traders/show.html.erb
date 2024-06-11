@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @trader.customer? %>
+</p>
+
+<p>
+  <strong>Is supplier:</strong>
+  <%= @trader.supplier? %>
+</p>
+
+<p>
+  <strong>Is carrier:</strong>
+  <%= @trader.carrier? %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @trader.name %>
+</p>
+
+<p>
+  <strong>Person type:</strong>
+  <%= @trader.person_type %>
+</p>
+
+<p>
+  <strong>CPF/CNPJ:</strong>
+  <%= @trader.federal_tax_id %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @trader.gender %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @trader.phone %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @trader.mobile %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @trader.email %>
+</p>
+
+<p>
+  <strong>Birth date:</strong>
+  <%= @trader.birth_date %>
+</p>
+
+<%= link_to 'Edit', edit_trader_path(@trader) %> |
+<%= link_to 'Back', traders_path %>

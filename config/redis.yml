@@ -1,0 +1,19 @@
+development:
+  cable_host: <%= ENV.fetch('CABLE_REDIS_HOST', 'redis') %>
+  worker_host: <%= ENV.fetch('WORKER_REDIS_HOST', 'redis') %>
+  port: 6379
+
+staging:
+  cable_host: <%= ENV.fetch('CABLE_REDIS_HOST', 'redis') %>
+  worker_host: <%= ENV.fetch('WORKER_REDIS_HOST', 'redis') %>
+  port: 6379
+
+production:
+  cable_host: <%= ENV.fetch('CABLE_REDIS_HOST', 'redis') %>
+  worker_host: <%= ENV.fetch('WORKER_REDIS_HOST', 'redis') %>
+  port: 6379
+
+test:
+  cable_host: <%= ENV.fetch('CABLE_REDIS_HOST', 'redis') %>
+  worker_host: <%= ENV.fetch('WORKER_REDIS_HOST', 'redis') %>
+  port: 6379

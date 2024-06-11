@@ -1,0 +1,40 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_company_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>Fantasia</th>
+        <th>Razão social</th>
+        <th>CNPJ</th>
+        <th>IE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @companies.each do |company| %>
+        <tr data-target="list.items">
+          <td class="clickable" data-action="click->list#edit" data-edit-url="<%= edit_company_url(company) %>">
+            <%= company.trade_name %>
+          </td>
+          <td>
+            <%= company.legal_name %>
+          </td>
+          <td>
+            <%= company.federal_tax_id %>
+          </td>
+          <td>
+            <%= company.state_tax_id %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @companies %>

@@ -1,0 +1,8 @@
+{
+  id: @app.id,
+  name: @app.name,
+  tenant_id: @app.tenant_id,
+  secret: @app.secret,
+  created_at: @app.created_at,
+  updated_at: @app.updated_at
+}

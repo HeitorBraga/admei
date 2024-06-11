@@ -1,0 +1,11 @@
+# Temporarily disabled until we update all our critical dependencies.  Until
+# then, these random PRs can be a distraction from our sprint priorities.
+#
+version: 2
+  updates:
+    - package-ecosystem: bundler
+      directory: "/"
+      schedule:
+        interval: weekly
+        day: monday
+      open-pull-requests-limit: 5
