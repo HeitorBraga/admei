@@ -18,7 +18,7 @@ staging:
 
 test:
   <<: *default
-  database: pluto_test
+  database: admei_test
 
 production:
   <<: *default

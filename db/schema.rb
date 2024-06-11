@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_11_111936) do
+ActiveRecord::Schema.define(version: 2024_06_11_154052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -71,22 +71,12 @@ ActiveRecord::Schema.define(version: 2021_04_11_111936) do
   end
 
   create_table "backoffice_contracts", force: :cascade do |t|
-    t.bigint "trader_id", null: false
     t.string "contract_key"
     t.integer "users"
     t.integer "terminals"
     t.integer "concurrent_instances"
     t.integer "installations"
     t.decimal "price", precision: 16, scale: 3
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["trader_id"], name: "index_backoffice_contracts_on_trader_id"
-  end
-
-  create_table "banks", force: :cascade do |t|
-    t.string "code"
-    t.string "name"
-    t.string "ispb_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -129,6 +119,12 @@ ActiveRecord::Schema.define(version: 2021_04_11_111936) do
     t.index ["jti"], name: "index_jwt_denylists_on_jti", unique: true
   end
 
+  create_table "product_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "settings", force: :cascade do |t|
     t.string "name", limit: 255, null: false
     t.string "value", null: false
@@ -159,23 +155,6 @@ ActiveRecord::Schema.define(version: 2021_04_11_111936) do
     t.index ["secret_token"], name: "index_tenants_on_secret_token", unique: true
   end
 
-  create_table "traders", force: :cascade do |t|
-    t.string "name", limit: 100, null: false
-    t.string "legal_name", limit: 100
-    t.integer "person_type", default: 0, null: false
-    t.string "federal_tax_id", limit: 25
-    t.string "state_tax_id", limit: 25
-    t.string "municipal_tax_id", limit: 25
-    t.string "gender", limit: 1
-    t.string "phone", limit: 25
-    t.string "mobile", limit: 25
-    t.string "email"
-    t.date "birth_date"
-    t.jsonb "data", default: {}, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -199,7 +178,6 @@ ActiveRecord::Schema.define(version: 2021_04_11_111936) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "backoffice_contracts", "traders"
   add_foreign_key "cities", "states"
   add_foreign_key "states", "countries"
 end

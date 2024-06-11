@@ -1,7 +1,6 @@
 class CreateBackofficeContracts < ActiveRecord::Migration[6.0]
   def change
     create_table :backoffice_contracts do |t|
-      t.references :trader, null: false, foreign_key: true
       t.string :contract_key
       t.integer :users
       t.integer :terminals

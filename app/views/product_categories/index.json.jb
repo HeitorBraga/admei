@@ -1,0 +1,7 @@
+@product_categories.map do |product_category|
+  {
+    id: product_category.id,
+    name: product_category.name,
+    url: product_category_url(product_category, format: :json)
+  }
+end

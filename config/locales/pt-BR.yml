@@ -13,10 +13,8 @@ pt-BR:
       States: Estados
       Cities: Cidades
       Companies: Empresas
-      Registrations: Usuário
-      Traders: Participantes
       Dashboard: Dashboard
-      Banks: Bancos
+      ProductCategories: Categorias de Produtos
 
   activerecord:
     enums:

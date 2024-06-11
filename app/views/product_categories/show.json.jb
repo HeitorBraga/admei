@@ -1,0 +1,6 @@
+{
+  id: @product_category.id,
+  name: @product_category.name,
+  created_at: @product_category.created_at,
+  updated_at: @product_category.updated_at
+}

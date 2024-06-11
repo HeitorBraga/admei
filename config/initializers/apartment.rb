@@ -9,7 +9,7 @@ require 'apartment/elevators/subdomain'
 # require 'apartment/elevators/host'
 
 EXCLUDED_SUBDOMAINS = %w[www api].freeze
-EXCLUDED_MODELS = %w[Tenant Country State City App Bank].freeze
+EXCLUDED_MODELS = %w[Tenant Country State City App].freeze
 
 #
 # Apartment Configuration

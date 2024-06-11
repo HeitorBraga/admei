@@ -32,10 +32,10 @@ module ApplicationHelper
 
   def asset_exists?(asset_file, asset_type)
     if asset_type == 'js'
-      Pluto::Application.assets.find_asset("#{asset_file}.js")
+      Admei::Application.assets.find_asset("#{asset_file}.js")
     else
-      Pluto::Application.assets.find_asset("#{asset_file}.css") ||
-      Pluto::Application.assets.find_asset("#{asset_file}.scss")
+      Admei::Application.assets.find_asset("#{asset_file}.css") ||
+      Admei::Application.assets.find_asset("#{asset_file}.scss")
     end
   end
 

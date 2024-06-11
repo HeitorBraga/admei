@@ -1,7 +1,0 @@
-{
-  id: @bank.id,
-  code: @bank.code,
-  name: @bank.name,
-  created_at: @bank.created_at,
-  updated_at: @bank.updated_at
-}

@@ -1,21 +1,21 @@
-# Pluto Developer Tools
+# Admei Developer Tools
 
-For easier access to Pluto running on your Docker it is recommended to install
-the Pluto developer tools.
+For easier access to Admei running on your Docker it is recommended to install
+the Admei developer tools.
 
 This allows the following conveniences:
 
 ```bash
-$ plto console
-$ plto log
+$ adm console
+$ adm log
 
 # Also some convenient shortcuts for interacting with the docker itself:
-$ plto up           # bring docker up
-$ plto halt         # or take it down
-$ plto pristine     # or totally destroy it and set up a fresh one
-$ plto ssh          # SSH into your VM
-$ plto ssh pwd      # or run an arbitrary shell command on the VM
-$ plto guard        # start guard
+$ adm up           # bring docker up
+$ adm halt         # or take it down
+$ adm pristine     # or totally destroy it and set up a fresh one
+$ adm ssh          # SSH into your VM
+$ adm ssh pwd      # or run an arbitrary shell command on the VM
+$ adm guard        # start guard
 ```
 
 ## Installation

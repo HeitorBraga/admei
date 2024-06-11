@@ -1,5 +1,5 @@
 FROM ruby:3.0.1
-LABEL maintainer="Frank Labs"
+LABEL maintainer="HB Labs"
 
 RUN apt-get update
 

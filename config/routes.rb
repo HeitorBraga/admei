@@ -21,7 +21,6 @@ end
 
 Rails.application.routes.draw do
   namespace :backoffice do
-    resources :contracts
   end
 
   constraints(SubdomainPresent) do
@@ -48,80 +47,18 @@ Rails.application.routes.draw do
     end
 
     devise_for :users
-
-      resources :units do
-        end
-    resources :products do
-      collection do
-        get :price_form
-      end
-
-      member do
-        get :duplicate
-      end
-    end
-    resources :ncms do
-      collection do
-        get :search
-      end
-    end
-    resources :cests do
-      collection do
-        get :search
-      end
-    end
-      resources :countries
+    resources :countries
     resources :cities
-            resources :apps
-    resources :banks
-      resources :finance_categories do
-        end
-        resources :payment_acquirers do
-        end
-      resources :states do
+    resources :states do
       member do
         get :cities
       end
     end
     resources :companies
-    resources :traders do
-      collection do
-        get :search
-      end
-    end
-        resources :state_tax_configurations do
-      member do
-        get :add_ncm
-      end
-    end
+    resources :product_categories
 
     get '/settings' => 'misc#settings', as: :settings
     post '/settings/save' => 'misc#save_setting', as: :save_setting
-
-    namespace :pos do
-      namespace :food_service do
-        root 'home#index'
-
-        resources :orders do
-          resources :order_items
-
-          member do
-            patch :set_customer
-          end
-
-          collection do
-            get :products
-            get :toggle_favorite_product
-          end
-        end
-
-        resources :customer_search, only: [:index] do
-          collection do
-            get :search
-          end
-        end
-      end
-    end
   end
 
   constraints(SubdomainBlank) do

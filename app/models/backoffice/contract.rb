@@ -1,6 +1,4 @@
 class Backoffice::Contract < ApplicationRecord
-  belongs_to :trader
-
   before_create :generate_key
 
   expect_comma_for :price

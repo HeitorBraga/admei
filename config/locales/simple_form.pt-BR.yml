@@ -50,26 +50,6 @@ pt-BR:
         current_password: Senha atual
         password_confirmation: Confirmação da nova senha
         password: Nova senha
-      trader:
-        name: Nome
-        profiles: Perfil
-        birth_date: 'Data de nascimento'
-        email: E-mail
-        gender: Genero
-        phone: Telefone
-        mobile: Celular
-        person_type: Tipo
-        legal_name: Razão social
-        federal_tax_id: CPF/CNPJ
-        state_tax_id: RG/IE
-        municipal_tax_id: Inscrição municipal
-        profiles_list:
-          customer: Cliente
-          supplier: Fornecedor
-          carrier: Transportadora
-        person_types_enum:
-          natural: Física
-          legal: Jurídica
 
     hints:
       defaults:

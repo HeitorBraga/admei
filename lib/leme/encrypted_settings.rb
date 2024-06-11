@@ -1,4 +1,4 @@
-module Pluto::EncryptedSettings
+module Admei::EncryptedSettings
   def decrypt_settings(encrypted_settings)
     return {} if encrypted_settings.nil?
     JSON.parse(encrypted_settings.unpack('m').first.decrypt)
