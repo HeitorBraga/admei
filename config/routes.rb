@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     end
     resources :companies
     resources :product_categories
+    resources :products
 
     get '/settings' => 'misc#settings', as: :settings
     post '/settings/save' => 'misc#save_setting', as: :save_setting
