@@ -1,0 +1,7 @@
+@fabrications.map do |fabrication|
+  {
+    id: fabrication.id,
+    month: fabrication.month,
+    url: fabrication_url(fabrication, format: :json)
+  }
+end

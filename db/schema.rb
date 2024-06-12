@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_11_161908) do
+ActiveRecord::Schema.define(version: 2024_06_11_180530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -109,6 +109,15 @@ ActiveRecord::Schema.define(version: 2024_06_11_161908) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ibge_code"], name: "index_countries_on_ibge_code", unique: true
     t.index ["iso_code"], name: "index_countries_on_iso_code", unique: true
+  end
+
+  create_table "fabrications", force: :cascade do |t|
+    t.date "date", null: false
+    t.bigint "product_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_fabrications_on_product_id"
   end
 
   create_table "jwt_denylists", force: :cascade do |t|

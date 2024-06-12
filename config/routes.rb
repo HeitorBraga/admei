@@ -20,6 +20,7 @@ class SubdomainBlank
 end
 
 Rails.application.routes.draw do
+  resources :fabrications
   namespace :backoffice do
   end
 

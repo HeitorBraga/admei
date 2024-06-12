@@ -1,0 +1,23 @@
+<div data-controller="masks">
+  <%= simple_form_for(@fabrication) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class="form-inputs columns">
+      <div class="column is-one-third">
+        <%= f.association :product %>
+      </div>
+      <div class="column is-one-third">
+        <%= f.input :quantity %>
+      </div>
+      <div class="column is-one-third">
+        <%= f.input :date, as: :date, html5: true %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Salvar' %>
+      <%= link_to 'Cancelar', fabrications_path %>
+    </div>
+  <% end %>
+</div>

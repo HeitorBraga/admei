@@ -50,6 +50,14 @@ pt-BR:
         current_password: Senha atual
         password_confirmation: Confirmação da nova senha
         password: Nova senha
+      product:
+        name: Nome
+        product_category: Categoria
+        price: Preço
+      fabrication:
+        product: Produto
+        quantity: Quantidade
+        date: Data
 
     hints:
       defaults:
