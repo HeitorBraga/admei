@@ -1,0 +1,6 @@
+{
+  id: @fabrication.id,
+  month: @fabrication.month,
+  created_at: @fabrication.created_at,
+  updated_at: @fabrication.updated_at
+}
