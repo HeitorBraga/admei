@@ -58,6 +58,17 @@ pt-BR:
         product: Produto
         quantity: Quantidade
         date: Data
+      product_cost:
+        product: Produto
+        cost: Custo
+        products_quantity: Quantidade
+      cost:
+        units_enum:
+          und: Unidade
+          g: Gramas
+          kg: Quilos
+          ml: ML
+          l: Litros
 
     hints:
       defaults:

@@ -1,0 +1,36 @@
+<div data-controller="product_costs">
+  <%= simple_form_for(@product_cost) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <%= render TabifyComponent.new do |c| %>
+      <%= c.tab(title: "Produto") do %>
+        <div class="form-inputs columns">
+          <div class="column">
+            <%= f.association :product %>
+          </div>
+          <div class="column">
+            <%= f.input :products_quantity, as: :string, input_html: { data: { mask: 'integer'} } %>
+          </div>
+        </div>
+      <% end %>
+      <%= c.tab(title: "Custo") do %>
+        <%= render 'cost_table' %>
+        <div id="costs">
+          <%= f.simple_fields_for :costs do |cost| %>
+            <%= render 'cost_fields', f: cost %>
+          <% end %>
+
+          <div class="links">
+            <%= link_to_add_association "Novo Ingrediente", f, :costs, class: 'button' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Salvar' %>
+      <%= link_to 'Cancelar', product_costs_path %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,7 @@
+{
+  id: @product_cost.id,
+  product_id: @product_cost.product_id,
+  cost: @product_cost.cost,
+  created_at: @product_cost.created_at,
+  updated_at: @product_cost.updated_at
+}

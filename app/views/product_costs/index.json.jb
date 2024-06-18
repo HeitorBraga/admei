@@ -1,0 +1,8 @@
+@product_costs.map do |product_cost|
+  {
+    id: product_cost.id,
+    product_id: product_cost.product_id,
+    cost: product_cost.cost,
+    url: product_cost_url(product_cost, format: :json)
+  }
+end
