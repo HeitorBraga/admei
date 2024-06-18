@@ -1,0 +1,29 @@
+<div class="nested-fields">
+  <div class="form-inputs columns">
+    <div class="column is-1 has-text-centered">
+      <%= link_to_remove_association f, class: 'button is-danger' do %>
+        <i class="fas fa-trash"></i>
+      <% end %>
+    </div>
+    <div class="column">
+      <%= f.input :ingredient, label: false %>
+    </div>
+    <div class="column">
+      <%= f.input :unit, label: false, collection: enum_options_for_select(Cost, :unit) %>
+    </div>
+    <div class="column">
+      <%= f.input :quantity, label: false, as: :string, input_html: { data: { mask: 'integer'}} %>
+    </div>
+    <div class="column">
+      <% price_f = number_to_currency(f.object.price, unit: 'R$ ', separator: ',') %>
+      <%= f.input :price, label: false, as: :string, input_html: { value: price_f, data: { mask: 'money' } }%>
+    </div>
+    <div class="column">
+      <%= f.input :quantity_used, label: false, as: :string, input_html: { data: { mask: 'integer' } } %>
+    </div>
+    <div class="column">
+      <% cost_f = number_to_currency(f.object.cost, unit: 'R$ ', separator: ',') %>
+      <%= f.input :cost, label: false, readonly: true, as: :string, input_html: {value: cost_f, placeholder: 'Calculando...' } %>
+    </div>
+  </div>
+</div>

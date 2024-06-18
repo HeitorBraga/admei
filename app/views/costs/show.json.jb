@@ -1,0 +1,11 @@
+{
+  id: @cost.id,
+  ingredient: @cost.ingredient,
+  unit: @cost.unit,
+  quantity: @cost.quantity,
+  price: @cost.price,
+  quantity_used: @cost.quantity_used,
+  cost: @cost.cost,
+  created_at: @cost.created_at,
+  updated_at: @cost.updated_at
+}

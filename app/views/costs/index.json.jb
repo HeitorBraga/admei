@@ -1,0 +1,12 @@
+@costs.map do |cost|
+  {
+    id: cost.id,
+    ingredient: cost.ingredient,
+    unit: cost.unit,
+    quantity: cost.quantity,
+    price: cost.price,
+    quantity_used: cost.quantity_used,
+    cost: cost.cost,
+    url: cost_url(cost, format: :json)
+  }
+end

@@ -1,21 +1,31 @@
-<%= simple_form_for(@product) do |f| %>
+
+<%= simple_form_for(@cost) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs columns">
     <div class="column is-one-quarter">
-      <%= f.input :name %>
+      <%= f.input :ingredient %>
     </div>
     <div class="column is-one-quarter">
-      <%= f.association :product_category %>
+      <%= f.input :unit %>
     </div>
     <div class="column is-one-quarter">
-      <%= f.input :price, as: :string, input_html: { data: { mask: 'money' } } %>
+      <%= f.input :quantity %>
+    </div>
+    <div class="column is-one-quarter">
+      <%= f.input :price %>
+    </div>
+    <div class="column is-one-quarter">
+      <%= f.input :quantity_used %>
+    </div>
+    <div class="column is-one-quarter">
+      <%= f.input :cost %>
     </div>
   </div>
 
   <div class="form-actions">
     <%= f.button :submit, 'Salvar' %>
-    <%= link_to 'Cancelar', products_path %>
+    <%= link_to 'Cancelar', costs_path %>
   </div>
 <% end %>

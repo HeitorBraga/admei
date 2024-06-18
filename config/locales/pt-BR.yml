@@ -17,6 +17,7 @@ pt-BR:
       ProductCategories: Categorias de Produtos
       Products: Produtos
       Fabrications: Produção
+      ProductCosts: Custos
 
   activerecord:
     enums:

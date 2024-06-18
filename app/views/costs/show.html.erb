@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ingredient:</strong>
+  <%= @cost.ingredient %>
+</p>
+
+<p>
+  <strong>Unit:</strong>
+  <%= @cost.unit %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @cost.quantity %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @cost.price %>
+</p>
+
+<p>
+  <strong>Quantity used:</strong>
+  <%= @cost.quantity_used %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @cost.cost %>
+</p>
+
+<%= link_to 'Edit', edit_cost_path(@cost) %> |
+<%= link_to 'Back', costs_path %>
