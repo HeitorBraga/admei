@@ -1,0 +1,9 @@
+@spendings.map do |spending|
+  {
+    id: spending.id,
+    origin: spending.origin,
+    date: spending.date,
+    price: spending.price,
+    url: spending_url(spending, format: :json)
+  }
+end

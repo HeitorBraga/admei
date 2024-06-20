@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_15_174540) do
+ActiveRecord::Schema.define(version: 2024_06_18_151242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -174,6 +174,14 @@ ActiveRecord::Schema.define(version: 2024_06_15_174540) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "spendings", force: :cascade do |t|
+    t.string "origin", null: false
+    t.date "date", null: false
+    t.float "price", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "states", force: :cascade do |t|
     t.string "name", limit: 100, null: false
     t.string "uf", limit: 2, null: false
@@ -184,6 +192,16 @@ ActiveRecord::Schema.define(version: 2024_06_15_174540) do
     t.index ["country_id"], name: "index_states_on_country_id"
     t.index ["ibge_code"], name: "index_states_on_ibge_code", unique: true
     t.index ["name"], name: "index_states_on_name"
+  end
+
+  create_table "sub_products", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "quantity", null: false
+    t.float "price", null: false
+    t.bigint "spending_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["spending_id"], name: "index_sub_products_on_spending_id"
   end
 
   create_table "tenants", force: :cascade do |t|
@@ -222,4 +240,5 @@ ActiveRecord::Schema.define(version: 2024_06_15_174540) do
   add_foreign_key "cities", "states"
   add_foreign_key "product_costs", "products"
   add_foreign_key "states", "countries"
+  add_foreign_key "sub_products", "spendings"
 end

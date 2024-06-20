@@ -1,0 +1,49 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_sub_product_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-list-target="massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= sub_product_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Spending</th>
+            </tr>
+    </thead>
+    <tbody>
+    <% @sub_products.each do |sub_product| %>
+      <tr data-list-target="items" data-edit-url="<%= edit_sub_product_url(sub_product) %>">
+        <td class="item-check">
+          <input type="checkbox" value="<%= sub_product.id %>" data-action="change->list#itemSelect">
+        </td>
+              <td class="clickable" data-action="click->list#edit">
+      <%= sub_product.name %>
+        </td>
+                <td class="clickable" data-action="click->list#edit">
+      <%= sub_product.quantity %>
+        </td>
+                <td class="clickable" data-action="click->list#edit">
+      <%= sub_product.price %>
+        </td>
+                <td class="clickable" data-action="click->list#edit">
+      <%= sub_product.spending %>
+        </td>
+              </tr>
+    <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @sub_products %>

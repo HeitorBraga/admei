@@ -1,0 +1,40 @@
+<div data-controller="spendings">
+  <%= simple_form_for(@spending) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <%= render TabifyComponent.new do |c| %>
+      <%= c.tab(title: 'Gastos') do %>
+        <div class="form-inputs columns">
+          <div class="column">
+            <%= f.input :origin %>
+          </div>
+          <div class="column">
+            <%= f.input :date, html5: true %>
+          </div>
+          <div class="column">
+            <% price_f = number_to_currency(f.object.price, unit: 'R$', separator: ',')%>
+            <%= f.input :price, as: :string, input_html: { value: price_f, data: { mask: 'money' } } %>
+          </div>
+        </div>
+      <% end %>
+      <%= c.tab(title: 'Produtos') do %>
+        <%= render 'sub_product_table' %>
+        <div id="sub_products">
+          <%= f.simple_fields_for :sub_products do |sub_product| %>
+            <%= render 'sub_product_fields', f: sub_product %>
+          <% end %>
+
+          <div class="links">
+            <%= link_to_add_association "Novo Produto", f, :sub_products, class: 'button' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Salvar' %>
+      <%= link_to 'Cancelar', spendings_path %>
+    </div>
+  <% end %>
+</div>

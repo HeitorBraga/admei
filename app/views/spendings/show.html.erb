@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @spending.origin %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @spending.date %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @spending.price %>
+</p>
+
+<%= link_to 'Edit', edit_spending_path(@spending) %> |
+<%= link_to 'Back', spendings_path %>

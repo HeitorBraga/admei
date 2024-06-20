@@ -20,6 +20,7 @@ class SubdomainBlank
 end
 
 Rails.application.routes.draw do
+  resources :sub_products
   namespace :backoffice do
   end
 
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
     resources :product_costs do
       resources :costs
     end
+    resources :spendings
 
     get '/settings' => 'misc#settings', as: :settings
     post '/settings/save' => 'misc#save_setting', as: :save_setting

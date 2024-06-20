@@ -1,0 +1,10 @@
+@sub_products.map do |sub_product|
+  {
+    id: sub_product.id,
+    name: sub_product.name,
+    quantity: sub_product.quantity,
+    price: sub_product.price,
+    spending_id: sub_product.spending_id,
+    url: sub_product_url(sub_product, format: :json)
+  }
+end
