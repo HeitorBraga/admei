@@ -1,0 +1,8 @@
+{
+  id: @spending.id,
+  origin: @spending.origin,
+  date: @spending.date,
+  price: @spending.price,
+  created_at: @spending.created_at,
+  updated_at: @spending.updated_at
+}

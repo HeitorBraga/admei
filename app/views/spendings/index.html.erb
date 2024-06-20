@@ -1,0 +1,45 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_spending_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-list-target="massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= spending_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+              <th>Origem</th>
+              <th>Data</th>
+              <th>Preço</th>
+            </tr>
+    </thead>
+    <tbody>
+    <% @spendings.each do |spending| %>
+      <tr data-list-target="items" data-edit-url="<%= edit_spending_url(spending) %>">
+        <td class="item-check">
+          <input type="checkbox" value="<%= spending.id %>" data-action="change->list#itemSelect">
+        </td>
+        <td class="clickable" data-action="click->list#edit">
+          <%= spending.origin %>
+        </td>
+        <td>
+          <%= spending.date.strftime('%d/%m/%Y') %>
+        </td>
+        <td>
+          <%= number_to_currency(spending.price, unit: 'R$', separator: ',' ) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @spendings %>

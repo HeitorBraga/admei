@@ -69,6 +69,10 @@ pt-BR:
           kg: Quilos
           ml: ML
           l: Litros
+      spending:
+        origin: Origem
+        date: Data
+        price: Preço
 
     hints:
       defaults:

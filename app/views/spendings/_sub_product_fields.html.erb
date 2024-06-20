@@ -1,0 +1,19 @@
+<div class="nested-fields">
+  <div class="form-inputs columns">
+    <div class="column is-1 has-text-centered">
+      <%= link_to_remove_association f, class: 'button is-danger' do %>
+        <i class="fas fa-trash"></i>
+      <% end %>
+    </div>
+    <div class="column">
+      <%= f.input :name, label: false %>
+    </div>
+    <div class="column">
+      <%= f.input :quantity, label: false, as: :string, input_html: { data: { mask: 'integer'}} %>
+    </div>
+    <div class="column">
+      <% price_f = number_to_currency(f.object.price, unit: 'R$ ', separator: ',') %>
+      <%= f.input :price, label: false, as: :string, input_html: { value: price_f, data: { mask: 'money' } }%>
+    </div>
+  </div>
+</div>
