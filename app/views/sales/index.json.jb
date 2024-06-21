@@ -1,0 +1,8 @@
+@sales.map do |sale|
+  {
+    id: sale.id,
+    date: sale.date,
+    invoicing: sale.invoicing,
+    url: sale_url(sale, format: :json)
+  }
+end

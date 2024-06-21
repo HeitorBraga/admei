@@ -73,6 +73,9 @@ pt-BR:
         origin: Origem
         date: Data
         price: Preço
+      sale:
+        date: Data
+        invoicing: Faturamento
 
     hints:
       defaults:

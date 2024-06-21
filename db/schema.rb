@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_18_151242) do
+ActiveRecord::Schema.define(version: 2024_06_20_190011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -157,6 +157,15 @@ ActiveRecord::Schema.define(version: 2024_06_18_151242) do
     t.index ["product_id"], name: "index_product_costs_on_product_id"
   end
 
+  create_table "product_solds", force: :cascade do |t|
+    t.bigint "sale_id", null: false
+    t.integer "product", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sale_id"], name: "index_product_solds_on_sale_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.bigint "product_category_id"
@@ -164,6 +173,13 @@ ActiveRecord::Schema.define(version: 2024_06_18_151242) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_category_id"], name: "index_products_on_product_category_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.date "date", null: false
+    t.float "invoicing", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "settings", force: :cascade do |t|
@@ -239,6 +255,7 @@ ActiveRecord::Schema.define(version: 2024_06_18_151242) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cities", "states"
   add_foreign_key "product_costs", "products"
+  add_foreign_key "product_solds", "sales"
   add_foreign_key "states", "countries"
   add_foreign_key "sub_products", "spendings"
 end

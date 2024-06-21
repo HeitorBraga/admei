@@ -9,14 +9,13 @@ export default class extends Controller {
   }
 
   maskInputs() {
-    $('#sub_products').on("cocoon:after-insert", function(e, insertedItem) {
+    $(document).on("cocoon:after-insert", function(e, insertedItem) {
       $(insertedItem).find("[data-mask='money']").maskMoney({
         prefix: "R$ ",
         decimal: ",",
-        thousands: ".",
-        allowZero: true
+        allowZero: false
       });
-      $(insertedItem).find("[data-mask=integer]").mask("000000000000000")
+      $(insertedItem).find("[data-mask=integer]").maskMoney("000000000000000")
     })
   }
 }

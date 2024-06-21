@@ -1,0 +1,15 @@
+<div class="nested-fields">
+  <div class="form-inputs columns">
+    <div class="column is-1 has-text-centered">
+      <%= link_to_remove_association f, class: 'button is-danger product_sold' do %>
+        <i class="fas fa-trash"></i>
+      <% end %>
+    </div>
+    <div class="column">
+      <%= f.input :product, collection: Sale.products %>
+    </div>
+    <div class="column">
+      <%= f.input :quantity, as: :string, input_html: { data: {mask: 'integer'} } %>
+    </div>
+  </div>
+</div>

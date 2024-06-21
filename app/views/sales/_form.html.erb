@@ -1,0 +1,36 @@
+<div data-controller="tabify_mask">
+  <%= simple_form_for(@sale) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <%= render TabifyComponent.new do |c| %>
+      <%= c.tab(title: 'Faturamento') do %>
+        <div class="form-inputs columns">
+          <div class="column">
+            <%= f.input :date, html5: true, input_html: { required: true } %>
+          </div>
+          <div class="column">
+            <% invoicing_f = number_to_currency(f.object.invoicing, unit: 'R$ ', separator: ',', thousands: '.') %>
+            <%= f.input :invoicing, as: :string, placeholder: 'R$ 0,00', input_html: { value: invoicing_f, data: { mask: 'money' } } %>
+          </div>
+        </div>
+      <% end %>
+      <%= c.tab(title: 'Produtos') do %>
+        <div id="products_sold">
+          <%= f.simple_fields_for :product_solds do |product_sold| %>
+            <%= render 'product_sold_fields', f: product_sold %>
+          <% end %>
+
+          <div class="links">
+            <%= link_to_add_association "Cadastrar Produto", f, :product_solds, class: 'button' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Salvar' %>
+      <%= link_to 'Cancelar', sales_path %>
+    </div>
+  <% end %>
+</div>

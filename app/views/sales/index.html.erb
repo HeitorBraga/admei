@@ -1,0 +1,41 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_sale_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-list-target="massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= sale_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Data</th>
+        <th>Faturamento</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @sales.each do |sale| %>
+      <tr data-list-target="items" data-edit-url="<%= edit_sale_url(sale) %>">
+        <td class="item-check">
+          <input type="checkbox" value="<%= sale.id %>" data-action="change->list#itemSelect">
+        </td>
+        <td class="clickable" data-action="click->list#edit">
+          <%= sale.date.strftime('%d/%m/%Y') %>
+        </td>
+        <td>
+          <%= number_to_currency(sale.invoicing, unit: 'R$', separator: ',', thousands: '.') %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @sales %>
