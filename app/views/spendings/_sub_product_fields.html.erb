@@ -13,7 +13,7 @@
     </div>
     <div class="column">
       <% price_f = number_to_currency(f.object.price, unit: 'R$ ', separator: ',') %>
-      <%= f.input :price, label: false, as: :string, input_html: { value: price_f, data: { mask: 'money' } }%>
+      <%= f.input :price, label: false, as: :string, placeholder: 'R$ 0,00', input_html: { value: price_f, data: { mask: 'money' } }%>
     </div>
   </div>
 </div>

@@ -19,6 +19,7 @@ pt-BR:
       Fabrications: Produção
       ProductCosts: Custos
       Spendings: Gastos
+      Sales: Vendas
 
   activerecord:
     enums:

@@ -1,0 +1,7 @@
+{
+  id: @sale.id,
+  date: @sale.date,
+  invoicing: @sale.invoicing,
+  created_at: @sale.created_at,
+  updated_at: @sale.updated_at
+}

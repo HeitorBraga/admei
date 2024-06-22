@@ -1,0 +1,8 @@
+{
+  id: @product_sold.id,
+  sale_id: @product_sold.sale_id,
+  product: @product_sold.product,
+  quantity: @product_sold.quantity,
+  created_at: @product_sold.created_at,
+  updated_at: @product_sold.updated_at
+}

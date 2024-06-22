@@ -3,14 +3,14 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs columns">
-    <div class="column is-one-quarter">
+    <div class="column">
       <%= f.input :name %>
     </div>
-    <div class="column is-one-quarter">
+    <div class="column">
       <%= f.association :product_category %>
     </div>
-    <div class="column is-one-quarter">
-      <%= f.input :price, as: :string, input_html: { data: { mask: 'money' } } %>
+    <div class="column">
+      <%= f.input :price, as: :string, placeholder: 'R$ 0,00', input_html: { data: { mask: 'money' } } %>
     </div>
   </div>
 
