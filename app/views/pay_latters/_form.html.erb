@@ -1,0 +1,27 @@
+
+<%= simple_form_for(@pay_latter) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs columns">
+    <div class="column">
+      <%= f.input :name %>
+    </div>
+    <div class="column">
+      <%= f.input :phone, as: :string, input_html: { data: { mask: 'phone' } } %>
+    </div>
+  </div>
+  <div class="form-inputs columns">
+    <div class="column">
+      <%= f.input :date, html5: true %>
+    </div>
+    <div class="column">
+      <%= f.input :price, as: :string, placeholder: "R$ 0,00", input_html: { data: {mask: 'money' } } %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Salvar' %>
+    <%= link_to 'Cancelar', pay_latters_path %>
+  </div>
+<% end %>

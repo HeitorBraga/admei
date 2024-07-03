@@ -91,6 +91,11 @@ pt-BR:
           Outubro: Outubro
           Novembro: Novembro
           Dezembro: Dezembro
+      pay_latter:
+        name: Nome
+        phone: Telefone
+        date: Data
+        price: Preço
 
     hints:
       defaults:

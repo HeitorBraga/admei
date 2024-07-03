@@ -1,0 +1,2 @@
+module PayLattersHelper
+end

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pay_latter.name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @pay_latter.phone %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @pay_latter.price %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @pay_latter.date %>
+</p>
+
+<%= link_to 'Edit', edit_pay_latter_path(@pay_latter) %> |
+<%= link_to 'Back', pay_latters_path %>

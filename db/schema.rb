@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_27_141841) do
+ActiveRecord::Schema.define(version: 2024_07_03_143927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -141,6 +141,15 @@ ActiveRecord::Schema.define(version: 2024_06_27_141841) do
     t.index ["jti"], name: "index_jwt_denylists_on_jti", unique: true
   end
 
+  create_table "pay_latters", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "phone", null: false
+    t.float "price", null: false
+    t.date "date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "product_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -185,6 +194,9 @@ ActiveRecord::Schema.define(version: 2024_06_27_141841) do
     t.float "invoicing", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "pay_latter", default: false
+    t.string "name"
+    t.string "phone"
   end
 
   create_table "settings", force: :cascade do |t|

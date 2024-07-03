@@ -1,0 +1,10 @@
+@pay_latters.map do |pay_latter|
+  {
+    id: pay_latter.id,
+    name: pay_latter.name,
+    phone: pay_latter.phone,
+    price: pay_latter.price,
+    date: pay_latter.date,
+    url: pay_latter_url(pay_latter, format: :json)
+  }
+end

@@ -1,4 +1,4 @@
-<div data-controller="tabify_mask">
+<div data-controller="tabify_mask sales">
   <%= simple_form_for(@sale) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -12,6 +12,20 @@
           <div class="column">
             <% invoicing_f = number_to_currency(f.object.invoicing, unit: 'R$ ', separator: ',', thousands: '.') %>
             <%= f.input :invoicing, as: :string, placeholder: 'R$ 0,00', input_html: { value: invoicing_f, data: { mask: 'money' } } %>
+          </div>
+        </div>
+        <div class="form-inputs columns">
+          <div class="column">
+            <label for="pay_latter" class="label">Fiado?</label>
+            <%= f.input :pay_latter, as: :boolean, label: "Fiado", input_html: { data: { action: "change->sales#changeInputs" } } %>
+          </div>
+        </div>
+        <div class="form-inputs columns">
+          <div class="column" data-sales-target="nameInput">
+            <%= f.input :name %>
+          </div>
+          <div class="column" data-sales-target="phoneInput">
+            <%= f.input :phone, as: :string, input_html: { data: { mask: 'phone' } } %>
           </div>
         </div>
       <% end %>
