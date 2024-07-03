@@ -1,5 +1,5 @@
 class Sale < ApplicationRecord
-  has_many :product_solds, dependent: :delete_all
+  has_many :product_solds, dependent: :destroy
 
   accepts_nested_attributes_for :product_solds, reject_if: :all_blank, allow_destroy: true
 
@@ -7,11 +7,9 @@ class Sale < ApplicationRecord
 
   def self.setEnum
     hash = {}
-    position = 0
 
     Product.all.each do |product|
-      hash[product.name] = position
-      position += 1
+      hash[product.name] = product.id
     end
 
     hash
