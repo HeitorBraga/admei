@@ -1,0 +1,9 @@
+{
+  id: @pay_latter.id,
+  name: @pay_latter.name,
+  phone: @pay_latter.phone,
+  price: @pay_latter.price,
+  date: @pay_latter.date,
+  created_at: @pay_latter.created_at,
+  updated_at: @pay_latter.updated_at
+}

@@ -20,6 +20,7 @@ pt-BR:
       ProductCosts: Custos
       Spendings: Gastos
       Sales: Vendas
+      PayLatters: Contas a Receber
 
   activerecord:
     enums:

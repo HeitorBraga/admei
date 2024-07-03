@@ -67,7 +67,9 @@ Rails.application.routes.draw do
     resources :sales do
       resources :product_solds
     end
+    resources :pay_latters
 
+    post '/paid_out' => 'pay_latters#paid_out'
     get '/settings' => 'misc#settings', as: :settings
     post '/set_profit' => 'dashboard#index'
     post '/settings/save' => 'misc#save_setting', as: :save_setting

@@ -1,0 +1,55 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_pay_latter_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-list-target="massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= pay_latter_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>Preço</th>
+              <th>Data</th>
+              <th></th>
+            </tr>
+    </thead>
+    <tbody>
+      <% @pay_latters.each do |pay_latter| %>
+        <tr data-list-target="items" data-edit-url="<%= edit_pay_latter_url(pay_latter) %>">
+          <td class="item-check">
+            <input type="checkbox" value="<%= pay_latter.id %>" data-action="change->list#itemSelect">
+          </td>
+          <td class="clickable" data-action="click->list#edit">
+            <%= pay_latter.name %>
+          </td>
+          <td>
+            <%= pay_latter.phone %>
+          </td>
+          <td>
+            <%= number_to_currency(pay_latter.price, unit: 'R$', separator: ',', thousands: '.') %>
+          </td>
+          <td>
+            <%= pay_latter.date.strftime('%d/%m/%Y') %>
+          </td>
+          <td>
+            <%= link_to paid_out_url(id: pay_latter.id), method: :post do %>
+              <i class="fas fa-check"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @pay_latters %>
