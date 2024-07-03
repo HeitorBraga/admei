@@ -76,6 +76,21 @@ pt-BR:
       sale:
         date: Data
         invoicing: Faturamento
+      profit:
+        months_enum:
+          set_month: Selecione o Mês
+          Janeiro: Janeiro
+          Fevereiro: Fevereiro
+          Março: Março
+          Abril: Abril
+          Maio: Maio
+          Junho: Junho
+          Julho: Julho
+          Agosto: Agosto
+          Setembro: Setembro
+          Outubro: Outubro
+          Novembro: Novembro
+          Dezembro: Dezembro
 
     hints:
       defaults:
