@@ -3,30 +3,88 @@
 <%# render AutoCompleteComponent.new(:product, :ncm_id, 1250, "Bruno Frank", load_from: search_ncms_path) %>
 
 <div data-controller="dashboard" data-dashboard-invoicing-value="<%= Profit.setInvoicing(@month) %>"
-                                 data-dashboard-cost-value="<%= Profit.setCost(@month) %>"
-                                 data-dashboard-profit-value="<%= Profit.setProfit(@month) %>"
-                                 data-dashboard-sales-value="<%= Profit.setSales(@month).to_json %>">
-  <% @profit_form = Profit.new %>
+                                 data-dashboard-cost-value="<%= Profit.setCost(@month) %>">
 
-  <%= simple_form_for @profit_form, url: internal_root_url  do |f| %>
-    <div class="columns">
-      <div class="column is-one-quarter">
-        <%= f.input :months, collection: enum_options_for_select(Profit, :months),
-                    label: "Selecione o Mês", input_html: { data: { action: "change->dashboard#setMonth" }  } %>
+  <div class="dropdown" id="dropdown-filter" data-action="click->dashboard#activeDropdown" data-dashboard-target="dropdownFilterMonth">
+    <div class="dropdown-trigger">
+      <button class="button is-medium" id="month" aria-haspopup="true" aria-controls="dropdown-menu" data-action="focusout->dashboard#closeDropdown">
+        <span id="selected-month"></span>
+        <span class="icon is-small" id="month">
+          <i class="fas fa-angle-down" id="month" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+      <div class="dropdown-content">
+        <% Profit.setMonths.each do |month| %>
+          <a class="dropdown-item" data-action="click->dashboard#dropdownFilter"><%= I18n.t("months." + month.downcase) %></a>
+        <% end %>
       </div>
     </div>
-  <% end %>
+  </div>
+
+  <div class="dropdown" id="dropdown-filter" data-action="click->dashboard#activeDropdown" data-dashboard-target="dropdownFilterCollaborator">
+    <div class="dropdown-trigger">
+      <button class="button is-medium" id="collaborator" aria-haspopup="true" aria-controls="dropdown-menu" data-action="focusout->dashboard#closeDropdown">
+        <span id="selected-month"></span>
+        <span class="icon is-small" id="collaborator">
+          <i class="fas fa-angle-down" aria-hidden="true" id="collaborator"></i>
+        </span>
+      </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+      <div class="dropdown-content">
+        <% Profit.setMonths.each do |month| %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
 
   <hr />
 
   <div class="columns">
     <div class="column">
-      <canvas id="chart-bar"></canvas>
+      <div class="box">
+        <h2 class="title is-5">Faturamento</h2>
+        <h1 class="title is-1 has-text-weight-bold has-text-centered">
+          <%= number_to_currency(Profit.setProfit(@month).round(2), currency: "R$", separator: ",", thousands: ".") %>
+        </h1>
+      </div>
     </div>
     <div class="column">
-      <canvas id="profit-chart"></canvas>
+      <div class="box">
+        <h2 class="title is-5">Itens Vendidos</h2>
+        <h1 class="title is-1 has-text-weight-bold has-text-centered">
+          <% itens = 0 %>
+          <% Profit.setSales(@month).values.each do |sales| %>
+            <% itens += sales.to_i %>
+          <% end %>
+          <%= itens %>
+        </h1>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box">
+        <h2 class="title is-5">Vendas com Colaboradores</h2>
+        <h1 class="title is-1 has-text-weight-bold has-text-centered">
+          <%= number_to_currency(Profit.setProfit(@month).round(2), currency: "R$", separator: ",", thousands: ".") %>
+        </h1>
+      </div>
     </div>
   </div>
 
-  <canvas id="sales-per-product"></canvas>
+  <div class="columns">
+    <div class="column">
+      <div class="box">
+        <h2 class="title is-5">Faturamento x Gastos</h2>
+        <canvas id="invoicing-vs-cost-chart"></canvas>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box">
+        <h2 class="title is-5">Vendas por Colaborador</h2>
+      </div>
+    </div>
+  </div>
 </div>

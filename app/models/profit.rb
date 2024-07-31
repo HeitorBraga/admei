@@ -1,22 +1,25 @@
 class Profit < ApplicationRecord
-  def self.setEnum
-    months = { set_month: 0 }
+  def self.setMonths
+    months = []
 
     if Sale.all.present?
       Sale.all.each do |sale|
-        months[I18n.t(sale.date.month)] = sale.date.month
+        unless months.include? sale.date.strftime("%b")
+          months.push(sale.date.strftime("%b"))
+        end
       end
     end
+
     if Spending.all.present?
       Spending.all.each do |spending|
-        months[I18n.t(spending.date.month)] = spending.date.month
+        unless months.include? spending.date.strftime("%b")
+          months.push(spending.date.strftime("%b"))
+        end
       end
     end
 
     months
   end
-
-  enum months: setEnum
 
   def self.setProfit(month)
     setInvoicing(month) - setCost(month)
@@ -33,11 +36,12 @@ class Profit < ApplicationRecord
       end
     end
 
-    cost
+    cost.round(2)
   end
 
   def self.setInvoicing(month)
     invoicing = 0.0
+
     Sale.all.each do |sale|
       if month.present? && sale.date.month.to_i == month
         invoicing += sale.invoicing
@@ -46,7 +50,7 @@ class Profit < ApplicationRecord
       end
     end
 
-    invoicing
+    invoicing.round(2)
   end
 
   def self.setSales(month)

@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-#chart-bar {
-  max-height: 500px;
+#dropdown-filter {
+  width: 20% !important;
+}
+
+.dropdown-trigger,
+.dropdown-trigger .button,
+.dropdown-trigger .button span,
+.dropdown-trigger .button span i,
+#dropdown-filter .dropdown-menu {
+  width: 100% !important;
+}
+
+.dropdown-trigger .button span#selected-month {
+  text-align: left !important;
+}
+
+.dropdown-trigger .button span.icon {
+  text-align: right !important;
+  padding-right: 5%;
 }

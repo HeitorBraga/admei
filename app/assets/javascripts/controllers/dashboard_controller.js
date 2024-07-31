@@ -4,71 +4,81 @@ export default class extends Controller {
   static values = {
     invoicing: Number,
     cost: String,
-    profit: String,
-    sales: Object
   }
+
+  static targets = [
+    "dropdownFilterMonth",
+    "dropdownFilterCollaborator"
+  ]
 
   connect() {
-    this.createBarChart()
-    this.createLineChart()
-    this.createDoughnutChart()
-  }
-  setMonth(e) {
-    window.location = '/?month=' + $("#profit_months").val()
-  }
-  createBarChart() {
-    const ctx_bar = $('#chart-bar')
+    const month = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 
-    new Chart(ctx_bar, {
-    type: "bar",
-    data: {
-      labels: ["Faturamento", "Gastos"],
-      datasets: [{
-        label: "Faturamento X Gastos",
-        data: [this.invoicingValue, this.costValue],
-        backgroundColor: [
-          'rgba(54,162,235,0.2)',
-          'rgba(255,99,132,0.2)'
-        ],
-        borderColor: [
-          'rgba(54,162,235)',
-          'rgba(255,99,132)'
-        ],
-        borderWidth: 1
-      }]
+    this.createInvoicingVsCostChart()
+    this.setDropdownMonth(month[new Date().getMonth()])
+  }
+
+  dropdownFilter(e) {
+    this.setDropdownMonth(e.target.innerText)
+    this.setMonth(e.target.innerText)
+  }
+
+  setDropdownMonth(month) {
+    $("#selected-month").html(month)
+  }
+
+  activeDropdown(e) {
+    if (e.target.id == "month") {
+      $(this.dropdownFilterMonthTarget).toggleClass("is-active")
+    } else {
+      $(this.dropdownFilterCollaboratorTarget).toggleClass("is-active")
     }
-  })
   }
 
-  createLineChart() {
-    const ctx_profit = $('#profit-chart')
-
-    new Chart(ctx_profit, {
-      type: "line",
-      data: {
-        labels: [0, this.profitValue],
-        datasets: [{
-          label: "Lucro",
-          data: [0, this.profitValue]
-        }]
-      }
-    })
+  closeDropdown(e) {
+    if (e.target.id == "month") {
+      $(this.dropdownFilterMonthTarget).removeClass("is-active")
+    } else {
+      $(this.dropdownFilterCollaboratorTarget).removeClass("is-active")
+    }
   }
 
-  createDoughnutChart() {
-    const ctx_sales = $('#sales-per-product')
+  setMonth(month) {
+    window.location = '/?month=' + month
+  }
 
-    new Chart(ctx_sales, {
-      type: "bar",
-      data: {
-        labels: Object.keys(this.salesValue),
-        datasets: [{
-          label: "Vendas por Produto",
-          data: Object.values(this.salesValue),
-          indexAxis: 'y',
-          barThickness: 80
-        }]
-      }
-    })
+  createInvoicingVsCostChart() {
+    const ctx_bar = $('#invoicing-vs-cost-chart')
+
+    if(this.invoicingValue != 0 || this.costValue != 0.0) {
+      new Chart(ctx_bar, {
+        type: "bar",
+        data: {
+          labels: ["Faturamento", "Gastos"],
+          datasets: [{
+            label: "Faturamento X Gastos",
+            data: [this.invoicingValue, this.costValue],
+            backgroundColor: [
+              'rgba(54,162,235,0.2)',
+              'rgba(255,99,132,0.2)'
+            ],
+            borderColor: [
+              'rgba(54,162,235)',
+              'rgba(255,99,132)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      })
+    } else {
+      ctx_bar.addClass('is-hidden')
+    }
   }
 }

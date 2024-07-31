@@ -42,15 +42,16 @@ pt-BR:
           attributes:
             table_number:
               taken: Já está em uso
-  1: Janeiro
-  2: Fevereiro
-  3: Março
-  4: Abril
-  5: Maio
-  6: Junho
-  7: Julho
-  8: Agosto
-  9: Setembro
-  10: Outubro
-  11: Novembro
-  12: Dezembro
+  months:
+    jan: Janeiro
+    feb: Fevereiro
+    mar: Março
+    apr: Abril
+    may: Maio
+    jun: Junho
+    jul: Julho
+    aug: Agosto
+    sep: Setembro
+    oct: Outubro
+    nov: Novembro
+    dec: Dezembro
