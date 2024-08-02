@@ -6,8 +6,7 @@
                                  data-dashboard-cost-value="<%= Profit.setCost(@month) %>"
                                  data-dashboard-collaborators-ranking-value="<%= Profit.setCollaboratorsRanking(@month).to_json %>"
                                  data-dashboard-product-sales-ranking-value="<%= Profit.setProductSalesRanking(@month).to_json %>"
-                                 data-dashboard-selected-month-value="<%= I18n.t("months." + @month.to_s ) if @month.present? %>"
-                                 data-dashboard-selected-collaborator-value="<%= @collaborator %>">
+                                 data-dashboard-selected-month-value="<%= I18n.t("months." + @month.to_s ) if @month.present? %>">
 
   <div class="dropdown" id="dropdown-filter" data-action="click->dashboard#activeMonthDropdown" data-dashboard-target="dropdownFilterMonth">
     <div class="dropdown-trigger">
@@ -32,7 +31,7 @@
   <div class="columns">
     <div class="column">
       <div class="box">
-        <h2 class="title is-5">Faturamento</h2>
+        <h2 class="title is-5">Faturamento&nbsp;(R$)</h2>
         <h1 class="title is-1 has-text-weight-bold has-text-centered">
           <%= number_to_currency(Profit.setProfit(@month).round(2), currency: "R$", separator: ",", thousands: ".") %>
         </h1>
@@ -40,7 +39,7 @@
     </div>
     <div class="column">
       <div class="box">
-        <h2 class="title is-5">Itens Vendidos</h2>
+        <h2 class="title is-5">Itens Vendidos&nbsp;(Unid)</h2>
         <h1 class="title is-1 has-text-weight-bold has-text-centered">
           <% itens = 0 %>
           <% Profit.setSales(@month).values.each do |sales| %>
@@ -52,10 +51,25 @@
     </div>
     <div class="column">
       <div class="box">
-        <h2 class="title is-5">Vendas com Colaboradores</h2>
-        <h1 class="title is-1 has-text-weight-bold has-text-centered">
-          <%= number_to_currency(Profit.setCollaboratorsSales(@month).round(2), currency: "R$", separator: ",", thousands: ".") %>
-        </h1>
+        <% if Profit.setCollaboratorsSales(@month) == 0 %>
+          <h2 class="title is-5">Taxa de Crescimento&nbsp;(%)</h2>
+          <h1 class="title is-1 has-text-weight-bold has-text-centered">
+            <%= number_to_currency(Profit.setRateOfGrowth(@month), unit: '', separator: ',') + '%' %>
+            &nbsp;
+            <span class="icon is-small">
+              <% if Profit.setRateOfGrowth(@month).present? && Profit.setRateOfGrowth(@month).negative? %>
+                <i class="fas fa-arrow-down"></i>
+              <% else %>
+                <i class="fas fa-arrow-up"></i>
+              <% end %>
+            </span>
+          </h1>
+        <% else %>
+          <h2 class="title is-5">Vendas com Colaboradores</h2>
+          <h1 class="title is-1 has-text-weight-bold has-text-centered">
+            <%= number_to_currency(Profit.setCollaboratorsSales(@month).round(2), currency: "R$", separator: ",", thousands: ".") %>
+          </h1>
+        <% end %>
       </div>
     </div>
   </div>
@@ -69,7 +83,7 @@
     </div>
     <div class="column">
       <div class="box">
-        <% if Collaborator.last.present? && Collaborator.last.sales.present? %>
+        <% if Profit.setCollaboratorsRanking(@month).present? %>
           <h2 class="title is-5">Melhores Colaboradores (R$)</h2>
           <canvas id="collaborators-ranking-chart"></canvas>
         <% else %>
