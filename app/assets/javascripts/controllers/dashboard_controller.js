@@ -4,48 +4,42 @@ export default class extends Controller {
   static values = {
     invoicing: Number,
     cost: String,
+    collaboratorsRanking: Object,
+    productSalesRanking: Object,
+    selectedMonth: String
   }
 
   static targets = [
-    "dropdownFilterMonth",
-    "dropdownFilterCollaborator"
+    "dropdownFilterMonth"
   ]
 
   connect() {
-    const month = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+    this.setDropdownMonth(this.selectedMonthValue)
 
     this.createInvoicingVsCostChart()
-    this.setDropdownMonth(month[new Date().getMonth()])
+    this.createCollaboratorsRankingChart()
+    this.createProductSalesRankingChart()
   }
 
-  dropdownFilter(e) {
+  dropdownMonthFilter(e) {
     this.setDropdownMonth(e.target.innerText)
     this.setMonth(e.target.innerText)
   }
 
   setDropdownMonth(month) {
-    $("#selected-month").html(month)
-  }
-
-  activeDropdown(e) {
-    if (e.target.id == "month") {
-      $(this.dropdownFilterMonthTarget).toggleClass("is-active")
-    } else {
-      $(this.dropdownFilterCollaboratorTarget).toggleClass("is-active")
-    }
-  }
-
-  closeDropdown(e) {
-    if (e.target.id == "month") {
-      $(this.dropdownFilterMonthTarget).removeClass("is-active")
-    } else {
-      $(this.dropdownFilterCollaboratorTarget).removeClass("is-active")
+    if($("#selected-month")[0].innerText.length == 0) {
+      $("#selected-month").html(month)
     }
   }
 
   setMonth(month) {
     window.location = '/?month=' + month
   }
+
+  activeMonthDropdown(e) {
+    $(this.dropdownFilterMonthTarget).toggleClass("is-active")
+  }
+
 
   createInvoicingVsCostChart() {
     const ctx_bar = $('#invoicing-vs-cost-chart')
@@ -79,6 +73,58 @@ export default class extends Controller {
       })
     } else {
       ctx_bar.addClass('is-hidden')
+    }
+  }
+
+  createCollaboratorsRankingChart() {
+    const ctx_bar = $('#collaborators-ranking-chart')
+
+    if((!$.isEmptyObject(this.collaboratorsRankingValue)) && (ctx_bar.length != 0)) {
+      new Chart(ctx_bar, {
+        type: "bar",
+        data: {
+          labels: Object.keys(this.collaboratorsRankingValue),
+          datasets: [{
+            barPercentage: 0.7,
+            label: "",
+            data: Object.values(this.collaboratorsRankingValue)
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          indexAxis: 'y'
+        }
+      })
+    }
+  }
+
+  createProductSalesRankingChart() {
+    const ctx_bar = $('#product-sales-ranking-chart')
+
+    if((!$.isEmptyObject(this.productSalesRankingValue)) && (ctx_bar.length != 0) ) {
+      new Chart(ctx_bar, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(this.productSalesRankingValue),
+          datasets: [{
+            barPercentage: 0.7,
+            label: '',
+            data: Object.values(this.productSalesRankingValue)
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          indexAxis: 'y'
+        }
+      })
     }
   }
 }

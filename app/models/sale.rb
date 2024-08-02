@@ -1,6 +1,7 @@
 class Sale < ApplicationRecord
   include Models::Searchable
   has_many :product_solds, dependent: :destroy
+  belongs_to :collaborator, optional: true
 
   accepts_nested_attributes_for :product_solds, reject_if: :all_blank, allow_destroy: true
 

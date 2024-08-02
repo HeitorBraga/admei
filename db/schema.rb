@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_03_143927) do
-
+ActiveRecord::Schema.define(version: 2024_07_31_141152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "pgcrypto"
@@ -25,7 +24,8 @@ ActiveRecord::Schema.define(version: 2024_07_03_143927) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index ["record_type", "record_id", "name", "blob_id"],
+            name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -43,7 +43,8 @@ ActiveRecord::Schema.define(version: 2024_07_03_143927) do
   create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index ["blob_id", "variation_digest"],
+            name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "addresses", force: :cascade do |t|
@@ -59,7 +60,8 @@ ActiveRecord::Schema.define(version: 2024_07_03_143927) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
-    t.index ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type"
+    t.index ["addressable_id", "addressable_type"],
+            name: "index_addresses_on_addressable_id_and_addressable_type"
     t.index ["city_id"], name: "index_addresses_on_city_id"
   end
 
@@ -90,6 +92,12 @@ ActiveRecord::Schema.define(version: 2024_07_03_143927) do
     t.index ["ibge_code"], name: "index_cities_on_ibge_code", unique: true
     t.index ["name"], name: "index_cities_on_name"
     t.index ["state_id"], name: "index_cities_on_state_id"
+  end
+
+  create_table "collaborators", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -197,6 +205,9 @@ ActiveRecord::Schema.define(version: 2024_07_03_143927) do
     t.boolean "pay_latter", default: false
     t.string "name"
     t.string "phone"
+    t.bigint "collaborator_id"
+    t.boolean "for_collaborator"
+    t.index ["collaborator_id"], name: "index_sales_on_collaborator_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -273,6 +284,7 @@ ActiveRecord::Schema.define(version: 2024_07_03_143927) do
   add_foreign_key "cities", "states"
   add_foreign_key "product_costs", "products"
   add_foreign_key "product_solds", "sales"
+  add_foreign_key "sales", "collaborators"
   add_foreign_key "states", "countries"
   add_foreign_key "sub_products", "spendings"
 end

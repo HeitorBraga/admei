@@ -80,4 +80,62 @@ class Profit < ApplicationRecord
 
     sales
   end
+
+  def self.setCollaboratorsSales(month)
+    sales = 0.0
+
+    Sale.all.each do |sale|
+      if month.present? && sale.date.month.to_i == month && (sale.for_collaborator? && sale.collaborator_id.present?)
+        sales += sale.invoicing
+        end
+    end
+
+    sales
+  end
+
+  def self.setCollaboratorsRanking(month)
+    ranking = {}
+
+    Collaborator.all.each do |coll|
+      invoicing = 0.0
+      coll.sales.all.each do |sale|
+        if month.present? && sale.date.month.to_i == month
+          invoicing += sale.invoicing
+        end
+      end
+
+      ranking[coll.name] = invoicing
+    end
+
+    ranking.each do |key, value|
+      if value == 0.0
+        ranking.delete(key)
+      end
+    end
+
+    ranking.sort_by(&:last).reverse.first(4).to_h
+  end
+
+  def self.setProductSalesRanking(month)
+    ranking = {}
+
+    Sale.all.each do |sale|
+      if month.present? && sale.date.month == month
+        sale.product_solds.each do |sold|
+          quantity = 0
+
+          quantity += sold.quantity
+          product_name = Product.find_by(id: sold.product).name
+
+          if ranking[product_name].present?
+            ranking[product_name] = ranking[product_name] + quantity
+          else
+            ranking[product_name] = quantity
+          end
+        end
+      end
+    end
+
+    ranking.sort_by(&:last).reverse.first(4).to_h
+  end
 end
