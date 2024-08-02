@@ -7,7 +7,7 @@
       <%= c.tab(title: 'Faturamento') do %>
         <div class="form-inputs columns">
           <div class="column">
-            <%= f.input :date, html5: true, input_html: { required: true } %>
+            <%= f.input :date, html5: true, input_html: { required: true, value: Date.current } %>
           </div>
           <div class="column">
             <% invoicing_f = number_to_currency(f.object.invoicing, unit: 'R$ ', separator: ',', thousands: '.') %>

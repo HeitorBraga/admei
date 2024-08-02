@@ -138,4 +138,18 @@ class Profit < ApplicationRecord
 
     ranking.sort_by(&:last).reverse.first(4).to_h
   end
+
+  def self.setRateOfGrowth(month)
+    last_month = setInvoicing(month - 1)
+    current_month = setInvoicing(month)
+
+    if last_month != 0.0 && current_month != 0.0
+      total = (current_month * 100) / last_month
+      growth = total - 100
+    else
+      growth = 0
+    end
+
+    growth.round(2)
+  end
 end

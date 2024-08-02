@@ -76,6 +76,9 @@ pt-BR:
       sale:
         date: Data
         invoicing: Faturamento
+        collaborator: Colaborador
+        name: Nome
+        phone: Telefone
       profit:
         months_enum:
           set_month: Selecione o Mês

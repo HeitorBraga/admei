@@ -22,6 +22,7 @@ pt-BR:
       Sales: Vendas
       PayLatters: Contas a Receber
       Collaborators: Colaboradores
+      Registrations: Informações de Login
 
   activerecord:
     enums:

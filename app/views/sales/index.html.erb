@@ -18,6 +18,7 @@
         <th>&nbsp;</th>
         <th>Data</th>
         <th>Faturamento</th>
+        <th>Colaborador</th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +32,9 @@
         </td>
         <td>
           <%= number_to_currency(sale.invoicing, unit: 'R$', separator: ',', thousands: '.') %>
+        </td>
+        <td>
+          <%= sale.collaborator.name if sale.collaborator.present? %>
         </td>
       </tr>
     <% end %>

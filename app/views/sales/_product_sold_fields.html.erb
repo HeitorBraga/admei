@@ -6,10 +6,10 @@
       <% end %>
     </div>
     <div class="column">
-      <%= f.input :product, collection: Sale.products %>
+      <%= f.input :product, collection: Sale.products, label: 'Produto' %>
     </div>
     <div class="column">
-      <%= f.input :quantity, as: :string, input_html: { data: {mask: 'integer'} } %>
+      <%= f.input :quantity, as: :string, label: 'Quantidade', input_html: { data: {mask: 'integer'} } %>
     </div>
   </div>
 </div>
