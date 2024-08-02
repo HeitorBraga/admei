@@ -1,0 +1,7 @@
+{
+  id: @collaborator.id,
+  name: @collaborator.name,
+  type: @collaborator.type,
+  created_at: @collaborator.created_at,
+  updated_at: @collaborator.updated_at
+}

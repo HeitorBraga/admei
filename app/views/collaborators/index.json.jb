@@ -1,0 +1,8 @@
+@collaborators.map do |collaborator|
+  {
+    id: collaborator.id,
+    name: collaborator.name,
+    type: collaborator.type,
+    url: collaborator_url(collaborator, format: :json)
+  }
+end

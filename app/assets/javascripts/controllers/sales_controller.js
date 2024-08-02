@@ -1,27 +1,32 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["nameInput", "phoneInput"]
+  static targets = ["payLatterContainer", "collaboratorContainer"]
 
   connect() {
-    this.hideInputs()
   }
 
   changeInputs(e) {
     if (e.target.checked == true) {
-      this.showInputs()
+      this.showInputs(e)
     } else {
-      this.hideInputs()
+      this.hideInputs(e)
     }
   }
 
-  showInputs() {
-    $(this.nameInputTarget).removeClass("is-hidden")
-    $(this.phoneInputTarget).removeClass("is-hidden")
+  showInputs(e) {
+    if (e.target.id == "sale_pay_latter") {
+      $(this.payLatterContainerTarget).removeClass("is-hidden")
+    } else {
+      $(this.collaboratorContainerTarget).removeClass("is-hidden")
+    }
   }
 
-  hideInputs() {
-    $(this.nameInputTarget).addClass("is-hidden")
-    $(this.phoneInputTarget).addClass('is-hidden')
+  hideInputs(e) {
+    if (e.target.id == "sale_pay_latter") {
+      $(this.payLatterContainerTarget).addClass("is-hidden")
+    } else {
+      $(this.collaboratorContainerTarget).addClass("is-hidden")
+    }
   }
 }
