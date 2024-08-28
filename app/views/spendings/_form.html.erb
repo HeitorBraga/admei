@@ -10,7 +10,7 @@
             <%= f.input :origin %>
           </div>
           <div class="column">
-            <%= f.input :date, html5: true %>
+            <%= f.input :date, html5: true, input_html: { required: true, value: Date.current } %>
           </div>
           <div class="column">
             <% price_f = number_to_currency(f.object.price, unit: 'R$', separator: ',')%>
