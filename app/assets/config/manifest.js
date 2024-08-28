@@ -6,3 +6,4 @@
 //= link_directory ../javascripts .js
 //= link_directory ../javascripts/devise .js
 //= link_tree ../javascripts
+//= link_directory ../stylesheets/site .css
