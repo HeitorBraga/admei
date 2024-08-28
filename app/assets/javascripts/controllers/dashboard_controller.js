@@ -73,6 +73,7 @@ export default class extends Controller {
       })
     } else {
       ctx_bar.addClass('is-hidden')
+      $('.invoicing-vs-cost-no-data').removeClass('is-hidden')
     }
   }
 
@@ -125,6 +126,9 @@ export default class extends Controller {
           indexAxis: 'y'
         }
       })
+    } else {
+      $(ctx_bar).addClass('is-hidden')
+      $('.sales-ranking-no-data').removeClass('is-hidden')
     }
   }
 }
