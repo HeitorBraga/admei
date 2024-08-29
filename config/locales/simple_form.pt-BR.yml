@@ -95,6 +95,7 @@ pt-BR:
           Novembro: Novembro
           Dezembro: Dezembro
       pay_latter:
+        collaborator: Colaborador
         name: Nome
         phone: Telefone
         date: Data

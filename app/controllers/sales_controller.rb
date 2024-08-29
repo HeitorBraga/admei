@@ -7,9 +7,15 @@ class SalesController < ApplicationController
 
   def pay_latter?
     if params['sale']['pay_latter'] == "1"
-      PayLatter.new(name: params['sale']['name'], phone: params['sale']['phone'],
-                    price: params['sale']['invoicing'], date: params['sale']['date']).save
-      redirect_to pay_latters_path, notice: "Conta a receber criada com sucesso!"
+      if params['sale']['for_collaborator'] == "1"
+        PayLatter.new(collaborator: params['sale']['collaborator_id'], for_collaborator: params['sale']['for_collaborator'],
+                      price: params['sale']['invoicing'], date: params['sale']['date']).save
+        redirect_to pay_latters_path, notice: "Conta a receber criada com sucesso!"
+      else
+        PayLatter.new(name: params['sale']['name'], phone: params['sale']['phone'],
+                      price: params['sale']['invoicing'], date: params['sale']['date']).save
+        redirect_to pay_latters_path, notice: "Conta a receber criada com sucesso!"
+      end
     end
   end
 
