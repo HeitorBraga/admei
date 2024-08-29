@@ -17,7 +17,6 @@
       <tr>
         <th>&nbsp;</th>
               <th>Nome</th>
-              <th>Telefone</th>
               <th>Preço</th>
               <th>Data</th>
               <th></th>
@@ -30,10 +29,11 @@
             <input type="checkbox" value="<%= pay_latter.id %>" data-action="change->list#itemSelect">
           </td>
           <td class="clickable" data-action="click->list#edit">
-            <%= pay_latter.name %>
-          </td>
-          <td>
-            <%= pay_latter.phone %>
+            <% if pay_latter.name.present? %>
+              <%= pay_latter.name %>
+            <% elsif pay_latter.collaborator.present? %>
+              <%= Collaborator.find_by(id: pay_latter.collaborator).name %>
+            <% end %>
           </td>
           <td>
             <%= number_to_currency(pay_latter.price, unit: 'R$', separator: ',', thousands: '.') %>

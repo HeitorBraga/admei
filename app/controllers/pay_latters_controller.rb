@@ -5,7 +5,12 @@ class PayLattersController < ApplicationController
   def paid_out
     pay_latter = PayLatter.find_by(id: params['id'])
 
-    Sale.new(date: Date.current, invoicing: pay_latter.price).save
+    if pay_latter.collaborator.present?
+      Sale.new(date: Date.current, invoicing: pay_latter.price,
+               collaborator_id: pay_latter.collaborator, for_collaborator: true).save
+    else
+      Sale.new(date: Date.current, invoicing: pay_latter.price).save
+    end
     pay_latter.delete
     redirect_to sales_url, notice: 'Registrado com sucesso!'
   end
@@ -14,6 +19,7 @@ class PayLattersController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def resource_params
-    params.require(:pay_latter).permit(:name, :phone, :price, :date)
+    params.require(:pay_latter).permit(:name, :phone, :price, :date, :collaborator,
+                                       :for_collaborator)
   end
 end

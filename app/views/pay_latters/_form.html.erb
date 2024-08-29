@@ -1,27 +1,39 @@
+<div data-controller="payLaters">
+  <%= simple_form_for(@pay_latter) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-<%= simple_form_for(@pay_latter) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <div class="form-inputs columns">
+      <div class="column">
+        <label for="for_collaborator" class="label">Para Colaborador?</label>
+        <%= f.input :for_collaborator, label: "for_coll", input_html: { data: { action: "change->payLaters#forCollaborator", target: "payLaters.forCollaborator" } } %>
+      </div>
+    </div>
+    <div class="form-inputs columns is-hidden" data-payLaters-target="collaboratorContainer">
+      <div class="column">
+        <%= f.input :collaborator, collection: PayLatter.collaborator_enums %>
+      </div>
+    </div>
+    <div class="form-inputs columns" data-payLaters-target="payLaterData">
+      <div class="column">
+        <%= f.input :name %>
+      </div>
+      <div class="column">
+        <%= f.input :phone, as: :string, input_html: { data: { mask: 'phone' } } %>
+      </div>
+    </div>
+    <div class="form-inputs columns">
+      <div class="column">
+        <%= f.input :date, html5: true, input_html: { required: true, value: Date.current } %>
+      </div>
+      <div class="column">
+        <%= f.input :price, as: :string, placeholder: "R$ 0,00", input_html: { data: {mask: 'money' } } %>
+      </div>
+    </div>
 
-  <div class="form-inputs columns">
-    <div class="column">
-      <%= f.input :name %>
+    <div class="form-actions">
+      <%= f.button :submit, 'Salvar' %>
+      <%= link_to 'Cancelar', pay_latters_path %>
     </div>
-    <div class="column">
-      <%= f.input :phone, as: :string, input_html: { data: { mask: 'phone' } } %>
-    </div>
-  </div>
-  <div class="form-inputs columns">
-    <div class="column">
-      <%= f.input :date, html5: true, input_html: { required: true, value: Date.current } %>
-    </div>
-    <div class="column">
-      <%= f.input :price, as: :string, placeholder: "R$ 0,00", input_html: { data: {mask: 'money' } } %>
-    </div>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, 'Salvar' %>
-    <%= link_to 'Cancelar', pay_latters_path %>
-  </div>
-<% end %>
+  <% end %>
+</div>
