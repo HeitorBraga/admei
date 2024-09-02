@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_01_143724) do
+ActiveRecord::Schema.define(version: 2024_09_02_123343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -166,6 +166,8 @@ ActiveRecord::Schema.define(version: 2024_09_01_143724) do
     t.string "name"
     t.string "phone"
     t.boolean "for_collaborator"
+    t.bigint "payment_method_id", null: false
+    t.index ["payment_method_id"], name: "index_pay_latters_on_payment_method_id"
   end
 
   create_table "payment_methods", force: :cascade do |t|
@@ -223,7 +225,9 @@ ActiveRecord::Schema.define(version: 2024_09_01_143724) do
     t.string "phone"
     t.bigint "collaborator_id"
     t.boolean "for_collaborator"
+    t.bigint "payment_method_id", null: false
     t.index ["collaborator_id"], name: "index_sales_on_collaborator_id"
+    t.index ["payment_method_id"], name: "index_sales_on_payment_method_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -299,9 +303,11 @@ ActiveRecord::Schema.define(version: 2024_09_01_143724) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cash_registers", "payment_methods"
   add_foreign_key "cities", "states"
+  add_foreign_key "pay_latters", "payment_methods"
   add_foreign_key "product_costs", "products"
   add_foreign_key "product_solds", "sales"
   add_foreign_key "sales", "collaborators"
+  add_foreign_key "sales", "payment_methods"
   add_foreign_key "states", "countries"
   add_foreign_key "sub_products", "spendings"
 end

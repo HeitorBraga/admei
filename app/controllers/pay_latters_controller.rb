@@ -20,6 +20,6 @@ class PayLattersController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def resource_params
     params.require(:pay_latter).permit(:name, :phone, :price, :date, :collaborator,
-                                       :for_collaborator)
+                                       :for_collaborator, :payment_method_id)
   end
 end

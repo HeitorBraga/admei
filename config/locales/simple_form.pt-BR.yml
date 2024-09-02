@@ -79,6 +79,7 @@ pt-BR:
         collaborator: Colaborador
         name: Nome
         phone: Telefone
+        payment_method: Forma de Pagamento
       profit:
         months_enum:
           set_month: Selecione o Mês
@@ -100,6 +101,7 @@ pt-BR:
         phone: Telefone
         date: Data
         price: Preço
+        payment_method: Forma de Pagamento
       payment_method:
 
       cash_register:

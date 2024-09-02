@@ -11,7 +11,8 @@
         <%= f.input :quantity %>
       </div>
       <div class="column is-one-third">
-        <%= f.input :date, as: :date, html5: true, input_html: { required: true, value: Date.current } %>
+        <% date_f = Date.current if !f.object.date.present? %>
+        <%= f.input :date, as: :date, html5: true, input_html: { required: true, value: date_f } %>
       </div>
     </div>
 

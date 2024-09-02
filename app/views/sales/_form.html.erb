@@ -7,7 +7,8 @@
       <%= c.tab(title: 'Faturamento') do %>
         <div class="form-inputs columns">
           <div class="column">
-            <%= f.input :date, html5: true, input_html: { required: true, value: Date.current } %>
+            <% date_f = Date.current if !f.object.date.present? %>
+            <%= f.input :date, html5: true, input_html: { required: true, value: date_f  } %>
           </div>
           <div class="column">
             <% invoicing_f = number_to_currency(f.object.invoicing, unit: 'R$ ', separator: ',', thousands: '.') %>
@@ -15,29 +16,14 @@
           </div>
         </div>
         <div class="form-inputs columns">
-          <div class="column is-1">
-            <label for="pay_later" class="label">Fiado?</label>
-            <%= f.input :pay_latter, as: :boolean, label: "Fiado", input_html: { data: { action: "change->sales#payLater", target: "sales.payLater" } } %>
-          </div>
-          <div class="column is-2">
-            <label for="for_collaborator" class="label">Para Colaborador?</label>
-            <%= f.input :for_collaborator, as: :boolean, label: "Collab", required: false, input_html: { data: { action: "change->sales#forCollaborator", target: "sales.forCollaborator" } } %>
+          <div class="column is-6">
+            <%= f.association :payment_method %>
           </div>
         </div>
-        <div class="form-inputs columns is-hidden" data-sales-target="payLaterContainer">
-          <div class="column">
-            <%= f.input :name %>
-          </div>
-          <div class="column">
-            <%= f.input :phone, as: :string, input_html: { data: { mask: 'phone' } } %>
-          </div>
-        </div>
-        <div class="form-inputs columns is-hidden" data-sales-target="collaboratorContainer">
-          <div class="column">
-            <%= f.association :collaborator %>
-          </div>
-        </div>
+
+        <%= render 'associations', f: f %>
       <% end %>
+
       <%= c.tab(title: 'Produtos') do %>
         <div id="products_sold">
           <%= f.simple_fields_for :product_solds do |product_sold| %>

@@ -1,0 +1,25 @@
+<div class="form-inputs columns">
+  <div class="column is-1">
+    <label for="pay_later" class="label">Fiado?</label>
+    <%= f.input :pay_latter, as: :boolean, label: "Fiado", input_html: { data: { action: "change->sales#payLater", target: "sales.payLater" } } %>
+  </div>
+  <div class="column is-2">
+    <label for="for_collaborator" class="label">Para Colaborador?</label>
+    <%= f.input :for_collaborator, as: :boolean, label: "Collab", required: false, input_html: { data: { action: "change->sales#forCollaborator", target: "sales.forCollaborator" } } %>
+  </div>
+</div>
+
+<div class="form-inputs columns is-hidden" data-sales-target="payLaterContainer">
+  <div class="column">
+    <%= f.input :name %>
+  </div>
+  <div class="column">
+    <%= f.input :phone, as: :string, input_html: { data: { mask: 'phone' } } %>
+  </div>
+</div>
+
+<div class="form-inputs columns is-hidden" data-sales-target="collaboratorContainer">
+  <div class="column">
+    <%= f.association :collaborator %>
+  </div>
+</div>
