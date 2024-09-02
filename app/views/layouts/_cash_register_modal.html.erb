@@ -23,34 +23,41 @@
 
       <hr>
 
-      <% cash_register = CashRegister.new %>
-      <%= simple_form_for(cash_register, url: cash_registers_path(wallet: true)) do |f| %>
-        <%= f.error_notification %>
-        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <div class="has-text-centered" data-menu_modal-target="walletContainer">
+        <canvas id="wallet-chart" data-menu_modal-target="chart"></canvas>
+        <hr>
+        <button class="button is-medium" data-action="click->menu_modal#showInputs">Adicionar Movimentação</button>
+      </div>
 
-        <div class="form-inputs">
-          <div class="is-flex">
-            <h2 class="title is-5">Retirar</h2>&nbsp;&nbsp;&nbsp;
-            <%= f.input :add_money, label: "add" %>&nbsp;&nbsp;&nbsp;
-            <h2 class="title is-5">Adicionar</h2>
-          </div>
-          <div>
-            <%= f.input :amount, as: :string, placeholder: 'R$ 0,00', input_html: { data: { mask: "money" } } %>
-          </div>
-          <div>
-            <%= f.association :payment_method %>
-          </div>
-          <div>
-            <%= f.input :month, collection: CashRegister.month_enums %>
-          </div>
-        </div>
+      <div class="is-hidden" data-menu_modal-target="cashRegisterInputsContainer">
+        <% cash_register = CashRegister.new %>
+        <%= simple_form_for(cash_register, url: cash_registers_path(wallet: true)) do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-        <div class="form-actions">
-          <%= f.button :submit, 'Salvar' %>
-          <%= link_to 'Cancelar', cash_registers_path %>
-        </div>
-      <% end %>
+          <div class="form-inputs">
+            <div class="is-flex">
+              <h2 class="title is-5">Retirar</h2>&nbsp;&nbsp;&nbsp;
+              <%= f.input :add_money, label: "add" %>&nbsp;&nbsp;&nbsp;
+              <h2 class="title is-5">Adicionar</h2>
+            </div>
+            <div>
+              <%= f.input :amount, as: :string, placeholder: 'R$ 0,00', input_html: { data: { mask: "money" } } %>
+            </div>
+            <div>
+              <%= f.association :payment_method %>
+            </div>
+            <div>
+              <%= f.input :month, collection: CashRegister.month_enums %>
+            </div>
+          </div>
 
+          <div class="form-actions">
+            <%= f.button :submit, 'Salvar' %>
+            <a data-action="click->menu_modal#hiddeInputs">Cancelar</a>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
   <button class="modal-close is-large" aria-label="close" data-menu_modal-target="closeModal" data-action="click->menu_modal#closeModal"></button>

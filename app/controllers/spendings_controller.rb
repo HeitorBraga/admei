@@ -26,7 +26,7 @@ class SpendingsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def resource_params
-    params.require(:spending).permit(:origin, :date, :price,
+    params.require(:spending).permit(:origin, :date, :price, :payment_method_id,
                                      sub_products_attributes: %i(id name quantity price _destroy))
   end
 end

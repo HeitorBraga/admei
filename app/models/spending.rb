@@ -1,5 +1,6 @@
 class Spending < ApplicationRecord
   has_many :sub_products, dependent: :delete_all
+  belongs_to :payment_method
 
   expect_comma_for :price
 

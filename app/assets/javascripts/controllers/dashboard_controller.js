@@ -19,6 +19,7 @@ export default class extends Controller {
     this.createInvoicingVsCostChart()
     this.createCollaboratorsRankingChart()
     this.createProductSalesRankingChart()
+    console.log(Object.keys(this.collaboratorsRankingValue))
   }
 
   dropdownMonthFilter(e) {

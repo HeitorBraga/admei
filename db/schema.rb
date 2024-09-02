@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_02_123343) do
+ActiveRecord::Schema.define(version: 2024_09_02_140554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -244,6 +244,8 @@ ActiveRecord::Schema.define(version: 2024_09_02_123343) do
     t.float "price", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "payment_method_id"
+    t.index ["payment_method_id"], name: "index_spendings_on_payment_method_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -308,6 +310,7 @@ ActiveRecord::Schema.define(version: 2024_09_02_123343) do
   add_foreign_key "product_solds", "sales"
   add_foreign_key "sales", "collaborators"
   add_foreign_key "sales", "payment_methods"
+  add_foreign_key "spendings", "payment_methods"
   add_foreign_key "states", "countries"
   add_foreign_key "sub_products", "spendings"
 end
