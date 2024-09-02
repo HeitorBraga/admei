@@ -1,0 +1,8 @@
+{
+  id: @cash_register.id,
+  amount: @cash_register.amount,
+  payment_method_id: @cash_register.payment_method_id,
+  month: @cash_register.month,
+  created_at: @cash_register.created_at,
+  updated_at: @cash_register.updated_at
+}

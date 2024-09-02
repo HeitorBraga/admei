@@ -1,0 +1,57 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_cash_register_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-list-target="massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= cash_register_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+              <th>Quantia</th>
+              <th>Forma de Pagamento</th>
+              <th>Mês</th>
+              <th></th>
+            </tr>
+    </thead>
+    <tbody>
+    <% @cash_registers.each do |cash_register| %>
+      <tr data-list-target="items" data-edit-url="<%= edit_cash_register_url(cash_register) %>">
+        <td class="item-check">
+          <input type="checkbox" value="<%= cash_register.id %>" data-action="change->list#itemSelect">
+        </td>
+        <td data-action="click->list#edit">
+          <%= number_to_currency(cash_register.amount, prefix: 'R$', separator: ',', thousands: '.') %>
+        </td>
+        <td data-action="click->list#edit">
+          <%= cash_register.payment_method.name %>
+        </td>
+        <td data-action="click->list#edit">
+          <%= I18n.t('months.' + cash_register.month.to_s) %>
+        </td>
+        <td>
+          <% if cash_register.add_money == true %>
+            <span class="icon">
+              <i class="fas fa-arrow-up has-text-success"></i>
+            </span>
+          <% else %>
+            <span class="icon">
+              <i class="fas fa-arrow-down has-text-danger"></i>
+            </span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @cash_registers %>

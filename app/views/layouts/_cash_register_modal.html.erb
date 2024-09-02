@@ -1,0 +1,57 @@
+
+<div class="modal" data-menu_modal-target="modal" data-controller="mask">
+  <div class="modal-background" data-action="click->menu_modal#closeModal"></div>
+  <div class="modal-content">
+    <div class="box">
+      <div class="columns is-vcentered">
+        <div class="column is-1">
+          <span class="icon is-large">
+            <i class="fas fa-2x fa-cash-register"></i>
+          </span>
+        </div>
+        <div class="column">
+          <h1 class="title is-4 has-text-centered">
+            Dinheiro em caixa
+          </h1>
+        </div>
+        <div class="column is-4">
+          <h1 class="title has-text-success has-text-centered is-3 has-text-weight-bold">
+            <%= number_to_currency(CashRegister.amount_available, prefix: 'R$', separator: ',', thousands: '.') %>
+          </h1>
+        </div>
+      </div>
+
+      <hr>
+
+      <% cash_register = CashRegister.new %>
+      <%= simple_form_for(cash_register, url: cash_registers_path(wallet: true)) do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+        <div class="form-inputs">
+          <div class="is-flex">
+            <h2 class="title is-5">Retirar</h2>&nbsp;&nbsp;&nbsp;
+            <%= f.input :add_money, label: "add" %>&nbsp;&nbsp;&nbsp;
+            <h2 class="title is-5">Adicionar</h2>
+          </div>
+          <div>
+            <%= f.input :amount, as: :string, placeholder: 'R$ 0,00', input_html: { data: { mask: "money" } } %>
+          </div>
+          <div>
+            <%= f.association :payment_method %>
+          </div>
+          <div>
+            <%= f.input :month, collection: CashRegister.month_enums %>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, 'Salvar' %>
+          <%= link_to 'Cancelar', cash_registers_path %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" data-menu_modal-target="closeModal" data-action="click->menu_modal#closeModal"></button>
+</div>

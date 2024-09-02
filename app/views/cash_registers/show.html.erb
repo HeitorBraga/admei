@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @cash_register.amount %>
+</p>
+
+<p>
+  <strong>Payment method:</strong>
+  <%= @cash_register.payment_method_id %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @cash_register.month %>
+</p>
+
+<%= link_to 'Edit', edit_cash_register_path(@cash_register) %> |
+<%= link_to 'Back', cash_registers_path %>
