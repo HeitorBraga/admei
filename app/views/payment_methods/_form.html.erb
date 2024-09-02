@@ -1,0 +1,16 @@
+
+<%= simple_form_for(@payment_method) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs columns">
+    <div class="column">
+      <%= f.input :name %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Salvar' %>
+    <%= link_to 'Cancelar', payment_methods_path %>
+  </div>
+<% end %>

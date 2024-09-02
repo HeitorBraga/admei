@@ -2,7 +2,7 @@ class Profit < ApplicationRecord
   def self.setMonths
     months = []
 
-    if Sale.all.present?
+    if Sale.count != 0
       Sale.all.each do |sale|
         unless months.include? sale.date.strftime("%b")
           months.push(sale.date.strftime("%b"))
@@ -10,7 +10,7 @@ class Profit < ApplicationRecord
       end
     end
 
-    if Spending.all.present?
+    if Spending.count != 0
       Spending.all.each do |spending|
         unless months.include? spending.date.strftime("%b")
           months.push(spending.date.strftime("%b"))

@@ -1,0 +1,7 @@
+@payment_methods.map do |payment_method|
+  {
+    id: payment_method.id,
+    name: payment_method.name,
+    url: payment_method_url(payment_method, format: :json)
+  }
+end

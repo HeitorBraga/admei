@@ -1,0 +1,9 @@
+@cash_registers.map do |cash_register|
+  {
+    id: cash_register.id,
+    amount: cash_register.amount,
+    payment_method_id: cash_register.payment_method_id,
+    month: cash_register.month,
+    url: cash_register_url(cash_register, format: :json)
+  }
+end

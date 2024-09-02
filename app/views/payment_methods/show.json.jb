@@ -1,0 +1,6 @@
+{
+  id: @payment_method.id,
+  name: @payment_method.name,
+  created_at: @payment_method.created_at,
+  updated_at: @payment_method.updated_at
+}

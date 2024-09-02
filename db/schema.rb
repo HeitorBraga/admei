@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_28_114715) do
+ActiveRecord::Schema.define(version: 2024_09_01_143724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(version: 2024_08_28_114715) do
     t.decimal "price", precision: 16, scale: 3
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cash_registers", force: :cascade do |t|
+    t.float "amount"
+    t.bigint "payment_method_id", null: false
+    t.integer "month"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "add_money", default: true
+    t.index ["payment_method_id"], name: "index_cash_registers_on_payment_method_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -156,6 +166,12 @@ ActiveRecord::Schema.define(version: 2024_08_28_114715) do
     t.string "name"
     t.string "phone"
     t.boolean "for_collaborator"
+  end
+
+  create_table "payment_methods", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "product_categories", force: :cascade do |t|
@@ -281,6 +297,7 @@ ActiveRecord::Schema.define(version: 2024_08_28_114715) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cash_registers", "payment_methods"
   add_foreign_key "cities", "states"
   add_foreign_key "product_costs", "products"
   add_foreign_key "product_solds", "sales"

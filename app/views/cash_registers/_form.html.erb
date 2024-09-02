@@ -1,0 +1,25 @@
+
+<%= simple_form_for(@cash_register) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs columns">
+    <div class="column">
+      <%= f.input :add_money %>
+    </div>
+    <div class="column is-one-quarter">
+      <%= f.input :amount, as: :string, input_html: { data: { mask: 'money' } } %>
+    </div>
+    <div class="column is-one-quarter">
+      <%= f.association :payment_method %>
+    </div>
+    <div class="column is-one-quarter">
+      <%= f.input :month, collection: CashRegister.month_enums %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Salvar' %>
+    <%= link_to 'Cancelar', cash_registers_path %>
+  </div>
+<% end %>

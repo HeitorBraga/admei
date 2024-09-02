@@ -20,6 +20,8 @@ class SubdomainBlank
 end
 
 Rails.application.routes.draw do
+  resources :cash_registers
+  resources :payment_methods
   resources :collaborators
   namespace :backoffice do
   end

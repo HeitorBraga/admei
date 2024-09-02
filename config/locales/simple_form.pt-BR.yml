@@ -100,6 +100,26 @@ pt-BR:
         phone: Telefone
         date: Data
         price: Preço
+      payment_method:
+
+      cash_register:
+        amount: Quantia
+        payment_method: Forma de Pagamento
+        month: Mês
+        month_enums_enum:
+          Jan: Janeiro
+          feb: Fevereiro
+          mar: Março
+          apr: Abril
+          may: Maio
+          jun: Junho
+          jul: Julho
+          aug: Agosto
+          sep: Setembro
+          oct: Outubro
+          nov: Novembro
+          dec: Dezembro
+
 
     hints:
       defaults:

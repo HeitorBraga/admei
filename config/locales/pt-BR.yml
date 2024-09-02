@@ -23,6 +23,8 @@ pt-BR:
       PayLatters: Contas a Receber
       Collaborators: Colaboradores
       Registrations: Informações de Login
+      PaymentMethods: Métodos de Pagamento
+      CashRegisters: Movimentações do Caixa
 
   activerecord:
     enums:
