@@ -13,9 +13,14 @@
             <% date_f = Date.current if !f.object.date.present? %>
             <%= f.input :date, html5: true, input_html: { required: true, value: date_f } %>
           </div>
+        </div>
+        <div class="form-inputs columns">
           <div class="column">
             <% price_f = number_to_currency(f.object.price, unit: 'R$', separator: ',')%>
             <%= f.input :price, as: :string, placeholder: 'R$ 0,00', input_html: { value: price_f, data: { mask: 'money' } } %>
+          </div>
+          <div class="column">
+            <%= f.association :payment_method %>
           </div>
         </div>
       <% end %>
