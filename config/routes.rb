@@ -20,9 +20,7 @@ class SubdomainBlank
 end
 
 Rails.application.routes.draw do
-  resources :cash_registers
-  resources :payment_methods
-  resources :collaborators
+  resources :employee_overtimes
   namespace :backoffice do
   end
 
@@ -71,8 +69,16 @@ Rails.application.routes.draw do
       resources :product_solds
     end
     resources :pay_latters
+    resources :company_positions
+    resources :employees, only: [:index, :create, :new, :edit, :show, :update]
+    resources :cash_registers
+    resources :payment_methods
+    resources :collaborators
+    resources :employee_absences
 
     post '/paid_out' => 'pay_latters#paid_out'
+    post '/fire_employee' => 'employees#fire_employee'
+    post 'rehire_employee' => 'employees#rehire_employee'
     get '/settings' => 'misc#settings', as: :settings
     post '/set_profit' => 'dashboard#index'
     post '/settings/save' => 'misc#save_setting', as: :save_setting

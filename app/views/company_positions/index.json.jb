@@ -1,0 +1,7 @@
+@company_positions.map do |company_position|
+  {
+    id: company_position.id,
+    name: company_position.name,
+    url: company_position_url(company_position, format: :json)
+  }
+end

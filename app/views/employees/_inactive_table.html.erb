@@ -1,0 +1,37 @@
+<table class="table is-striped is-narrow is-hoverable is-fullwidth is-hidden" data-employee-target="inactiveEmployees">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Função</th>
+      <th>Salário</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employees.each do |employee| %>
+      <% if employee.came_out_in.present? %>
+        <tr data-list-target="items" data-edit-url="<%= edit_employee_url(employee) %>">
+          <td class="clickable" data-action="click->list#edit">
+            <%= employee.name %>
+          </td>
+          <td class="clickable" data-action="click->list#edit">
+            <%= employee.phone %>
+          </td>
+          <td class="clickable" data-action="click->list#edit">
+            <%= employee.company_position.name %>
+          </td>
+          <td class="clickable" data-action="click->list#edit">
+            <%= number_to_currency(employee.wage, prefix: 'R$', separator: ',', thousands: '.') %>
+          </td>
+          <td class="clickable balloon-rehire">
+            <span class="balloon-rehire-text">Readmitir Funcionário</span>
+            <%= link_to rehire_employee_url(employee: employee.id), method: :post do  %>
+              <i class="fas fa-user-plus has-text-success"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,90 @@
+<table class="table is-striped is-narrow is-hoverable is-fullwidth" data-employee-target="activeEmployees">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Função</th>
+      <th>Salário</th>
+      <th>Faltas</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employees.each do |employee| %>
+      <% unless employee.came_out_in.present? %>
+        <tr data-list-target="items" data-edit-url="<%= edit_employee_url(employee) %>">
+          <td class="clickable" data-action="click->list#edit">
+            <%= employee.name %>
+          </td>
+          <td class="clickable" data-action="click->list#edit">
+            <%= employee.phone %>
+          </td>
+          <td class="clickable" data-action="click->list#edit">
+            <%= employee.company_position.name %>
+          </td>
+          <td class="clickable" data-action="click->list#edit">
+            <%= number_to_currency(employee.wage, prefix: 'R$', separator: ',', thousands: '.') %>
+          </td>
+          <td>
+            <%= EmployeeAbsence.where(employee_id: employee.id).count %>
+          </td>
+          <td class="clickable balloon-overtime">
+            <span class="balloon-overtime-text">Registrar Hora Extra</span>
+            <div class="dropdown" data-employee-target="employeeOvertime">
+              <div class="dropdown-trigger" data-action="click->employee#toggleEmployeeOvertime">
+                <span class="icon is-small has-text-success show-balloon">
+                  <i class="fas fa-user-clock" aria-hidden="true"></i>
+                </span>
+              </div>
+              <div class="dropdown-menu" role="menu">
+                <div class="dropdown-content" id="employee-overtime-dropdown">
+                  <% @employee_overtime = EmployeeOvertime.new %>
+                  <%= simple_form_for(@employee_overtime) do |f| %>
+                    <div class="has-text-centered">
+                      <h1 class="title has-text-centered is-6">Registrar Hora Extra</h1>
+                    </div>
+                    <%= f.input :employee_id, as: :integer, label: false, input_html: { value: employee.id, class: 'is-hidden' } %>
+                    <%= f.input :date, html5: true, input_html: { value: Date.current } %>
+                    <%= f.input :hours %>
+                    <%= f.button :submit, "Registrar", class: 'is-fullwidth is-warning' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="clickable balloon-absence">
+            <span class="balloon-absence-text">Registrar Falta</span>
+            <div class="dropdown" data-employee-target="employeeAbsence">
+              <div class="dropdown-trigger" data-action="click->employee#toggleEmployeeAbsence">
+                <span class="icon is-small has-text-warning">
+                  <i class="fas fa-user-minus" aria-hidden="true"></i>
+                </span>
+              </div>
+              <div class="dropdown-menu" role="menu">
+                <div class="dropdown-content" id="employee-absence-dropdown">
+                  <% @employee_absence = EmployeeAbsence.new %>
+                  <%= simple_form_for(@employee_absence) do |f| %>
+                    <h1 class="title has-text-centered is-6">Registrar Falta</h1>
+                    <%= f.input :employee_id, as: :integer, label: false, input_html: { value: employee.id, class: 'is-hidden' } %>
+                    <%= f.input :date, html5: true, input_html: { value: Date.current } %>
+                    <%= f.button :submit, "Registrar", class: 'is-fullwidth is-warning' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="clickable balloon-fire">
+            <span class="balloon-fire-text">Demitir Funcionário</span>
+            <%= link_to fire_employee_url(employee: employee.id), method: :post do %>
+              <span class="icon has-text-danger">
+                <i class="fas fa-user-slash"></i>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

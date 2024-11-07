@@ -1,0 +1,9 @@
+{
+  id: @employee.id,
+  name: @employee.name,
+  phone: @employee.phone,
+  company_position_id: @employee.company_position_id,
+  wage: @employee.wage,
+  created_at: @employee.created_at,
+  updated_at: @employee.updated_at
+}

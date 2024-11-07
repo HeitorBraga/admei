@@ -1,0 +1,55 @@
+// Place all the styles related to the employees controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#employee-absence-dropdown,
+#employee-overtime-dropdown {
+  padding: 10px !important;
+}
+
+.balloon-overtime-text,
+.balloon-absence-text,
+.balloon-fire-text,
+.balloon-rehire-text {
+  display: none;
+  background-color: gray;
+  border-radius: .4em;
+  color: white;
+}
+
+.balloon-overtime,
+.balloon-absence,
+.balloon-fire,
+.balloon-rehire {
+  position: relative;
+}
+
+.balloon-overtime:hover .balloon-overtime-text,
+.balloon-absence:hover .balloon-absence-text,
+.balloon-fire:hover .balloon-fire-text,
+.balloon-rehire:hover .balloon-rehire-text {
+  display: flex;
+  position: absolute;
+  width: 150%;
+  text-align: center;
+  padding: 0 10px;
+  bottom: 45px;
+}
+
+.balloon-overtime:hover .balloon-overtime-text:after,
+.balloon-absence:hover .balloon-absence-text:after,
+.balloon-fire:hover .balloon-fire-text:after,
+.balloon-rehire:hover .balloon-rehire-text:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  border-top-color: gray;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: 10px;
+  margin-bottom: -12px;
+}

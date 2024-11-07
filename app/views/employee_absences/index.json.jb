@@ -1,0 +1,9 @@
+@employee_absences.map do |employee_absence|
+  {
+    id: employee_absence.id,
+    employee_id: employee_absence.employee_id,
+    date: employee_absence.date,
+    reason: employee_absence.reason,
+    url: employee_absence_url(employee_absence, format: :json)
+  }
+end

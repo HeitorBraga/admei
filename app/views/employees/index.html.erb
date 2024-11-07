@@ -1,0 +1,21 @@
+<div data-controller="list employee">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_employee_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <ul>
+      <li class="is-active" data-employee-target="activeTab" data-action="click->employee#activeTab"><a>Ativos</a></li>
+      <li data-employee-target="inactiveTab" data-action="click->employee#inactiveTab"><a>Inativos</a></li>
+    </ul>
+  </div>
+  <%= render partial: 'active_table' %>
+  <%= render partial: 'inactive_table' %>
+  </table>
+<div>
+
+<%= will_paginate @employees %>

@@ -1,0 +1,8 @@
+{
+  id: @employee_overtime.id,
+  employee_id: @employee_overtime.employee_id,
+  date: @employee_overtime.date,
+  hours: @employee_overtime.hours,
+  created_at: @employee_overtime.created_at,
+  updated_at: @employee_overtime.updated_at
+}

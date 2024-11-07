@@ -1,0 +1,8 @@
+{
+  id: @employee_absence.id,
+  employee_id: @employee_absence.employee_id,
+  date: @employee_absence.date,
+  reason: @employee_absence.reason,
+  created_at: @employee_absence.created_at,
+  updated_at: @employee_absence.updated_at
+}
