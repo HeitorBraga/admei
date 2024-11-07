@@ -24,7 +24,32 @@
       <hr>
 
       <div class="has-text-centered" data-menu_modal-target="walletContainer">
-        <canvas id="wallet-chart" data-menu_modal-target="chart"></canvas>
+        <h1 class="title is-5">Últimas Movimentações</h1>
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>Mês</th>
+              <th>Quantia</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% CashRegister.all.last(5).each do |cash| %>
+              <tr>
+                <td><%= I18n.t("months." + cash.month.to_s) %></td>
+                <td><%= number_to_currency(cash.amount, prefix: 'R$', separator: ',', thousands: '.') %></td>
+                <td>
+                  <% if cash.add_money.present? %>
+                    <i class="has-text-success fas fa-arrow-up"></i>
+                  <% else %>
+                    <i class="has-text-danger fas fa-arrow-down"></i>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
         <hr>
         <button class="button is-medium" data-action="click->menu_modal#showInputs">Adicionar Movimentação</button>
       </div>

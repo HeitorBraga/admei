@@ -33,30 +33,4 @@ export default class extends Controller {
     $(this.cashRegisterInputsContainerTarget).addClass("is-hidden")
     $(this.walletContainerTarget).removeClass("is-hidden")
   }
-
-  createWalletChart() {
-    const ctx_bar = $(this.chartTarget)
-
-    if(!$.isEmptyObject(this.walletValue)) {
-      new Chart(ctx_bar, {
-        type: "bar",
-        data: {
-          labels: Object.keys(this.walletValue),
-          datasets: [{
-            barPercentage: 0.5,
-            label: "",
-            data: Object.values(this.walletValue)
-          }]
-        },
-        options: {
-          plugins: {
-            legend: {
-              display: false
-            }
-          },
-          indexAxis: 'y'
-        }
-      })
-    }
-  }
 }
