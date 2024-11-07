@@ -39,14 +39,25 @@
     </div>
     <div class="column">
       <div class="box">
-        <h2 class="title is-5">Itens Vendidos&nbsp;(Unid)</h2>
-        <h1 class="title is-1 has-text-weight-bold has-text-centered">
-          <% itens = 0 %>
-          <% Profit.setSales(@month).values.each do |sales| %>
-            <% itens += sales.to_i %>
-          <% end %>
-          <%= itens %>
-        </h1>
+        <% if @items != 0 %>
+          <h2 class="title is-5">Itens Vendidos&nbsp;(Unid)</h2>
+          <h1 class="title is-1 has-text-weight-bold has-text-centered">
+            <%= @items %>
+          </h1>
+        <% elsif Profit.setCollaboratorsSales(@month) != 0 %>
+          <h2 class="title is-5">Taxa de Crescimento&nbsp;(%)</h2>
+          <h1 class="title is-1 has-text-weight-bold has-text-centered">
+            <%= number_to_currency(Profit.setRateOfGrowth(@month), unit: '', separator: ',') + '%' %>
+            &nbsp;
+            <span class="icon is-small">
+              <% if Profit.setRateOfGrowth(@month).present? && Profit.setRateOfGrowth(@month).negative? %>
+                <i class="fas fa-arrow-down"></i>
+              <% else %>
+                <i class="fas fa-arrow-up"></i>
+              <% end %>
+            </span>
+          </h1>
+        <% end %>
       </div>
     </div>
     <div class="column">

@@ -12,5 +12,10 @@ class DashboardController < ApplicationController
     else
       @month = Date.current.month
     end
+
+    @items = 0
+    Profit.setSales(@month).values.each do |sales|
+      @items += sales.to_i
+    end
   end
 end
