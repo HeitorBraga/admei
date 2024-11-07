@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_02_140554) do
+ActiveRecord::Schema.define(version: 2024_09_11_173142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -117,6 +117,12 @@ ActiveRecord::Schema.define(version: 2024_09_02_140554) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "company_positions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "costs", force: :cascade do |t|
     t.bigint "product_cost_id"
     t.string "ingredient"
@@ -138,6 +144,39 @@ ActiveRecord::Schema.define(version: 2024_09_02_140554) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ibge_code"], name: "index_countries_on_ibge_code", unique: true
     t.index ["iso_code"], name: "index_countries_on_iso_code", unique: true
+  end
+
+  create_table "employee_absences", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.date "date"
+    t.string "reason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_employee_absences_on_employee_id"
+  end
+
+  create_table "employee_overtimes", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.date "date"
+    t.integer "hours"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_employee_overtimes_on_employee_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.bigint "company_position_id", null: false
+    t.float "wage"
+    t.date "entry_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "receives"
+    t.integer "receives_when"
+    t.date "entred_in", null: false
+    t.date "came_out_in"
+    t.index ["company_position_id"], name: "index_employees_on_company_position_id"
   end
 
   create_table "fabrications", force: :cascade do |t|
@@ -305,6 +344,9 @@ ActiveRecord::Schema.define(version: 2024_09_02_140554) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cash_registers", "payment_methods"
   add_foreign_key "cities", "states"
+  add_foreign_key "employee_absences", "employees"
+  add_foreign_key "employee_overtimes", "employees"
+  add_foreign_key "employees", "company_positions"
   add_foreign_key "pay_latters", "payment_methods"
   add_foreign_key "product_costs", "products"
   add_foreign_key "product_solds", "sales"

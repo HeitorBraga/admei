@@ -1,0 +1,6 @@
+{
+  id: @company_position.id,
+  name: @company_position.name,
+  created_at: @company_position.created_at,
+  updated_at: @company_position.updated_at
+}

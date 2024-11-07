@@ -1,0 +1,50 @@
+<div data-controller="employee">
+  <%= simple_form_for(@employee) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class="form-inputs columns">
+      <div class="column">
+        <%= f.input :name %>
+      </div>
+      <div class="column">
+        <%= f.input :phone, input_html: { data: { mask: 'phone' } } %>
+      </div>
+    </div>
+    <div class="form-inputs columns">
+      <div class="column">
+        <%= f.association :company_position %>
+      </div>
+      <div class="column">
+        <%= f.input :wage, as: :string, placeholder: "R$ 0,00", input_html: { data: { mask: 'money' } } %>
+      </div>
+    </div>
+    <div class="form-inputs columns">
+      <div class="column">
+        <%= f.input :receives_when, collection: enum_options_for_select(Employee, :receives_when),
+                    input_html: { id: 'receives_when', data: { target: "employee.receivesWhen", action: "change->employee#setReceives" } } %>
+      </div>
+
+      <div class="column">
+        <%= f.input :receives, collection: (enum_options_for_select(Employee, :receives) rescue []),
+                    input_html: { data: { target: 'employee.receivesInput' } } %>
+      </div>
+    </div>
+    <div class="form-inputs columns">
+      <div class="column">
+        <%= f.input :entred_in, html5: true %>
+      </div>
+    </div>
+
+    <hr>
+
+    <h1 class="title">Endereço</h1>
+
+    <%= render partial: 'addresses/address_form', locals: { f: f } %>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Salvar' %>
+      <%= link_to 'Cancelar', employees_path %>
+    </div>
+  <% end %>
+</div>

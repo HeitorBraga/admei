@@ -1,0 +1,9 @@
+@employee_overtimes.map do |employee_overtime|
+  {
+    id: employee_overtime.id,
+    employee_id: employee_overtime.employee_id,
+    date: employee_overtime.date,
+    hours: employee_overtime.hours,
+    url: employee_overtime_url(employee_overtime, format: :json)
+  }
+end

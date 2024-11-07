@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @employee_overtime.employee_id %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @employee_overtime.date %>
+</p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @employee_overtime.hours %>
+</p>
+
+<%= link_to 'Edit', edit_employee_overtime_path(@employee_overtime) %> |
+<%= link_to 'Back', employee_overtimes_path %>

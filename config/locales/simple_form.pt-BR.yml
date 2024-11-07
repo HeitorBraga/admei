@@ -73,6 +73,7 @@ pt-BR:
         origin: Origem
         date: Data
         price: Preço
+        payment_method: Forma de Pagamento
       sale:
         date: Data
         invoicing: Faturamento
@@ -103,7 +104,7 @@ pt-BR:
         price: Preço
         payment_method: Forma de Pagamento
       payment_method:
-
+        name: Nome
       cash_register:
         amount: Quantia
         payment_method: Forma de Pagamento
@@ -121,7 +122,20 @@ pt-BR:
           oct: Outubro
           nov: Novembro
           dec: Dezembro
-
+      employee:
+        name: Nome
+        phone: Telefone
+        company_position: Função
+        wage: Salário
+        receives_when: Período salarial
+        receives: Recebe aos
+        entred_in: Entrou no dia
+        receives_whens_enum:
+          weekly: Semanal
+          biweekly: Quinzenal
+          monthly: Mensal
+      company_position:
+        name: Nome
 
     hints:
       defaults:

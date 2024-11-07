@@ -1,0 +1,45 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_employee_overtime_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-list-target="massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= employee_overtime_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+              <th>Employee</th>
+              <th>Date</th>
+              <th>Hours</th>
+            </tr>
+    </thead>
+    <tbody>
+    <% @employee_overtimes.each do |employee_overtime| %>
+      <tr data-list-target="items" data-edit-url="<%= edit_employee_overtime_url(employee_overtime) %>">
+        <td class="item-check">
+          <input type="checkbox" value="<%= employee_overtime.id %>" data-action="change->list#itemSelect">
+        </td>
+              <td class="clickable" data-action="click->list#edit">
+      <%= employee_overtime.employee %>
+        </td>
+                <td class="clickable" data-action="click->list#edit">
+      <%= employee_overtime.date %>
+        </td>
+                <td class="clickable" data-action="click->list#edit">
+      <%= employee_overtime.hours %>
+        </td>
+              </tr>
+    <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @employee_overtimes %>
