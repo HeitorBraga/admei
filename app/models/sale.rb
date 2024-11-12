@@ -8,6 +8,8 @@ class Sale < ApplicationRecord
 
   expect_comma_for :invoicing
 
+  default_scope { order(date: :desc) }
+
   def self.setEnum
     hash = {}
 
