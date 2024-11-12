@@ -16,25 +16,25 @@
     <thead>
       <tr>
         <th>&nbsp;</th>
-              <th>Quantia</th>
-              <th>Forma de Pagamento</th>
-              <th>Mês</th>
-              <th></th>
-            </tr>
+        <th>Quantia</th>
+        <th>Forma de Pagamento</th>
+        <th>Mês</th>
+        <th></th>
+      </tr>
     </thead>
     <tbody>
     <% @cash_registers.each do |cash_register| %>
-      <tr data-list-target="items" data-edit-url="<%= edit_cash_register_url(cash_register) %>">
+      <tr data-list-target="items">
         <td class="item-check">
           <input type="checkbox" value="<%= cash_register.id %>" data-action="change->list#itemSelect">
         </td>
-        <td data-action="click->list#edit">
+        <td>
           <%= number_to_currency(cash_register.amount, prefix: 'R$', separator: ',', thousands: '.') %>
         </td>
-        <td data-action="click->list#edit">
+        <td>
           <%= cash_register.payment_method.name %>
         </td>
-        <td data-action="click->list#edit">
+        <td>
           <%= I18n.t('months.' + cash_register.month.to_s) %>
         </td>
         <td>

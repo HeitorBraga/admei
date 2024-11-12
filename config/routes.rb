@@ -71,7 +71,7 @@ Rails.application.routes.draw do
     resources :pay_latters
     resources :company_positions
     resources :employees, only: [:index, :create, :new, :edit, :show, :update]
-    resources :cash_registers
+    resources :cash_registers, only: [:index, :create, :new, :destroy]
     resources :payment_methods
     resources :collaborators
     resources :employee_absences

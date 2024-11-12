@@ -3,6 +3,8 @@ class CashRegister < ApplicationRecord
 
   expect_comma_for :amount
 
+  default_scope { order(created_at: :desc) }
+
   def self.amount_available()
     amounts_per_month = []
 
