@@ -81,6 +81,7 @@ pt-BR:
         name: Nome
         phone: Telefone
         payment_method: Forma de Pagamento
+        employee: Vendedor
       profit:
         months_enum:
           set_month: Selecione o Mês
@@ -134,6 +135,7 @@ pt-BR:
           weekly: Semanal
           biweekly: Quinzenal
           monthly: Mensal
+        commission_percentage: Porcentagem da Comissão
       company_position:
         name: Nome
 

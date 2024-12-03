@@ -9,11 +9,15 @@ export default class extends Controller {
     "activeTab",
     "inactiveTab",
     "employeeAbsence",
-    "employeeOvertime"
+    "employeeOvertime",
+    "commissionPercentage",
+    "commissionBoolean",
+    "commissionModal"
   ]
 
   connect() {
     this.checkReceivesWhenPresent();
+    this.changeCommissionPercentage();
   }
 
   activeTab() {
@@ -35,6 +39,10 @@ export default class extends Controller {
 
   toggleEmployeeOvertime() {
     $(this.employeeOvertimeTarget).toggleClass('is-active')
+  }
+
+  toggleCommissionModal() {
+    $(this.commissionModalTarget).toggleClass('is-active')
   }
 
   setValues(receives_when) {
@@ -64,6 +72,16 @@ export default class extends Controller {
     if ($(this.receivesWhenTarget)[0].value.length != 0) {
       this.setReceives()
       console.log($(this.receivesInputTarget))
+    }
+  }
+
+  changeCommissionPercentage() {
+    var commission = $(this.commissionBooleanTarget)[0].checked
+    if (commission == true ) {
+      $(this.commissionPercentageTarget).attr('disabled', false)
+    } else {
+      $(this.commissionPercentageTarget).val(null)
+      $(this.commissionPercentageTarget).attr('disabled', true)
     }
   }
 }

@@ -15,4 +15,5 @@ class Employee < ApplicationRecord
   }
 
   scope :active, -> { where(came_out_in: nil) }
+  scope :seller, -> { where(commission: true, came_out_in: nil) }
 end

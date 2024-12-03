@@ -2,6 +2,8 @@
 //= require jquery.mask
 
 const Mask = () => {
+  const percentageMasks = ["0%", "00%"]
+
   const phoneMasks = ["(00) 00000-0000", "(00) 0000-00000"]
   const maskBehavior = (val) =>
     val.length > 14 ? phoneMasks[0] : phoneMasks[1]

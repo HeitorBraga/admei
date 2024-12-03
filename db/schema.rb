@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_11_173142) do
+ActiveRecord::Schema.define(version: 2024_11_12_205513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -176,6 +176,8 @@ ActiveRecord::Schema.define(version: 2024_09_11_173142) do
     t.integer "receives_when"
     t.date "entred_in", null: false
     t.date "came_out_in"
+    t.boolean "commission", default: false
+    t.integer "commission_percentage"
     t.index ["company_position_id"], name: "index_employees_on_company_position_id"
   end
 
@@ -265,6 +267,8 @@ ActiveRecord::Schema.define(version: 2024_09_11_173142) do
     t.bigint "collaborator_id"
     t.boolean "for_collaborator"
     t.bigint "payment_method_id", null: false
+    t.boolean "for_seller", default: false
+    t.integer "employee"
     t.index ["collaborator_id"], name: "index_sales_on_collaborator_id"
     t.index ["payment_method_id"], name: "index_sales_on_payment_method_id"
   end
