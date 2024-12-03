@@ -5,7 +5,13 @@
   </div>
   <div class="column is-2">
     <label for="for_collaborator" class="label">Para Colaborador?</label>
-    <%= f.input :for_collaborator, as: :boolean, label: "Collab", required: false, input_html: { data: { action: "change->sales#forCollaborator", target: "sales.forCollaborator" } } %>
+    <%= f.input :for_collaborator, as: :boolean, label: "Collab", required: false,
+                input_html: { data: { action: "change->sales#forCollaborator", target: "sales.forCollaborator" } } %>
+  </div>
+  <div class="column is-2">
+    <label for="" class="label">Para Vendedor?</label>
+    <%= f.input :for_seller, as: :boolean, label: 'Seller', required: false,
+                input_html: { data: { action: "change->sales#forSeller", target: "sales.forSeller" } } %>
   </div>
 </div>
 
@@ -21,5 +27,11 @@
 <div class="form-inputs columns is-hidden" data-sales-target="collaboratorContainer">
   <div class="column">
     <%= f.association :collaborator %>
+  </div>
+</div>
+
+<div class="form-inputs columns is-hidden" data-sales-target="sellerContainer">
+  <div class="column">
+    <%= f.input :employee, collection: Sale.sellers %>
   </div>
 </div>

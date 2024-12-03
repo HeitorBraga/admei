@@ -33,6 +33,7 @@ class EmployeesController < ApplicationController
     params.require(:employee).permit(
       :name, :phone, :company_position_id, :wage, :receives,
       :entred_in, :came_out_in, :receives_when, :entry_date,
+      :commission, :commission_percentage,
       Address.permited_params
     )
   end

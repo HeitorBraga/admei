@@ -1,0 +1,53 @@
+<div class="modal" data-employee-target="commissionModal">
+  <div class="modal-background" data-action="click->employee#toggleCommissionModal"></div>
+  <div class="modal-content">
+    <div class="box has-text-centered">
+      <div class="columns is-vcentered">
+        <div class="column is-1">
+          <span class="icon is-large">
+            <i class="fas fa-2x fa-coins"></i>
+          </span>
+        </div>
+        <div class="column">
+          <h1 class="title is-4 has-text-centered">
+            <%= "Comissão total de " + t('months.' + Date.current.month.to_s) %>
+          </h1>
+        </div>
+        <div class="column is-4">
+          <h1 class="title has-text-success has-text-centered is-3 has-text-weight-bold">
+            <% Sale.for_seller.map do |sale| %>
+              <% commission = 0.0 %>
+              <% if sale.date.month == Date.current.month && sale.employee == @employee.id %>
+                <% commission += sale.invoicing %>
+              <% end %>
+              <%= number_to_currency((@employee.commission_percentage.to_f / 100) * commission, prefix: 'R$', separator: ',', thousands: '.') %>
+            <% end %>
+          </h1>
+        </div>
+      </div>
+
+      <h1 class="title is-5">Últimas Vendas</h1>
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Faturamento</th>
+            <th>Comissão</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Sale.for_seller.map do |sale| %>
+            <% if sale.date.month == Date.current.month && sale.employee == @employee.id %>
+              <tr>
+                <td><%= sale.date %></td>
+                <td><%= number_to_currency(sale.invoicing, prefix: 'R$', separator: ',', thousands: '.') %></td>
+                <td><%= number_to_currency((@employee.commission_percentage.to_f / 100) * sale.invoicing, prefix: 'R$', separator: ',', thousands: '.') %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" data-action="click->employee#toggleCommissionModal"></button>
+</div>

@@ -29,7 +29,8 @@ class SalesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def resource_params
-    params.require(:sale).permit(:date, :invoicing, :pay_latter, :name, :phone, :collaborator_id, :for_collaborator, :payment_method_id,
+    params.require(:sale).permit(:date, :invoicing, :pay_latter, :name, :phone, :collaborator_id,
+                                 :for_collaborator, :payment_method_id, :for_seller, :employee,
                                  product_solds_attributes: %i(id product quantity _destroy))
   end
 end

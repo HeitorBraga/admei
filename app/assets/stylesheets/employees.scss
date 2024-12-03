@@ -10,7 +10,8 @@
 .balloon-overtime-text,
 .balloon-absence-text,
 .balloon-fire-text,
-.balloon-rehire-text {
+.balloon-rehire-text,
+.balloon-commission-text {
   display: none;
   background-color: gray;
   border-radius: .4em;
@@ -20,14 +21,16 @@
 .balloon-overtime,
 .balloon-absence,
 .balloon-fire,
-.balloon-rehire {
+.balloon-rehire,
+.balloon-commission {
   position: relative;
 }
 
 .balloon-overtime:hover .balloon-overtime-text,
 .balloon-absence:hover .balloon-absence-text,
 .balloon-fire:hover .balloon-fire-text,
-.balloon-rehire:hover .balloon-rehire-text {
+.balloon-rehire:hover .balloon-rehire-text,
+.balloon-commission:hover .balloon-commission-text {
   display: flex;
   position: absolute;
   width: 150%;
@@ -39,7 +42,8 @@
 .balloon-overtime:hover .balloon-overtime-text:after,
 .balloon-absence:hover .balloon-absence-text:after,
 .balloon-fire:hover .balloon-fire-text:after,
-.balloon-rehire:hover .balloon-rehire-text:after {
+.balloon-rehire:hover .balloon-rehire-text:after,
+.balloon-commission:hover .balloon-commission-text:after {
   content: '';
   position: absolute;
   bottom: 0;

@@ -31,6 +31,18 @@
       </div>
     </div>
     <div class="form-inputs columns">
+      <div class="column is-2">
+        <label class="label">Recebe Comissão?</label>
+        <%= f.input :commission, label: ".", input_html: { data: {
+                                             target: 'employee.commissionBoolean',
+                                             action: "change->employee#changeCommissionPercentage" } } %>
+      </div>
+      <div class="column">
+        <%= f.input :commission_percentage, as: :string,
+                    input_html: { data: { mask: 'integer', target: 'employee.commissionPercentage' } } %>
+      </div>
+    </div>
+    <div class="form-inputs columns">
       <div class="column">
         <%= f.input :entred_in, html5: true %>
       </div>
