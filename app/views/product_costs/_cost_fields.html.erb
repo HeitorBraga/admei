@@ -6,24 +6,29 @@
       <% end %>
     </div>
     <div class="column">
-      <%= f.input :ingredient, label: false %>
+      <%= f.input :ingredient, label: false, input_html: { data: { action: 'change->product_costs#costCalculator' } } %>
     </div>
     <div class="column">
-      <%= f.input :unit, label: false, collection: enum_options_for_select(Cost, :unit) %>
+      <%= f.input :unit, label: false, collection: enum_options_for_select(Cost, :unit),
+                                       input_html: { data: { action: 'change->product_costs#costCalculator' } } %>
     </div>
     <div class="column">
-      <%= f.input :quantity, label: false, as: :string, input_html: { data: { mask: 'integer'}} %>
+      <%= f.input :quantity, label: false, as: :string, input_html: { data: { mask: 'integer',
+                                                        action: 'change->product_costs#costCalculator' } } %>
     </div>
     <div class="column">
       <% price_f = number_to_currency(f.object.price, unit: 'R$ ', separator: ',') %>
-      <%= f.input :price, label: false, as: :string, placeholder: 'R$ 0,00', input_html: { value: price_f, data: { mask: 'money' } }%>
+      <%= f.input :price, label: false, as: :string, placeholder: 'R$ 0,00', input_html: { value: price_f, data: { mask: 'money',
+                                                                             action: 'change->product_costs#costCalculator' } } %>
     </div>
     <div class="column">
-      <%= f.input :quantity_used, label: false, as: :string, input_html: { data: { mask: 'integer' } } %>
+      <%= f.input :quantity_used, label: false, as: :string, input_html: { data: { mask: 'integer',
+                                                             action: 'change->product_costs#costCalculator' } } %>
     </div>
-    <div class="column">
+    <div class="column cost-separator">
       <% cost_f = number_to_currency(f.object.cost, unit: 'R$ ', separator: ',') %>
-      <%= f.input :cost, label: false, readonly: true, as: :string, input_html: {value: cost_f, placeholder: 'Calculando...' } %>
+      <%= f.input :cost, label: false, readonly: true, as: :string, input_html: {value: cost_f, class: 'cost-input',
+                                                                    data: { target: 'product_costs.unitCostInput' } } %>
     </div>
   </div>
 </div>
