@@ -1,4 +1,4 @@
-<div data-controller="tabify_mask">
+<div data-controller="tabify_mask product_costs">
   <%= simple_form_for(@product_cost) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -18,7 +18,9 @@
         <%= render 'cost_table' %>
         <div id="costs">
           <%= f.simple_fields_for :costs do |cost| %>
-            <%= render 'cost_fields', f: cost %>
+            <div data-product_costs-target="costFields">
+              <%= render 'cost_fields', f: cost %>
+            </div>
           <% end %>
 
           <div class="links">

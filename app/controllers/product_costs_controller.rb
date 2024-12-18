@@ -1,20 +1,7 @@
 class ProductCostsController < ApplicationController
   include Controllers::Crudify
-  before_action :set_cost, only: %i(create update)
   after_action :set_total_cost, only: %i(create update)
   model_klass ProductCost
-
-  def set_cost
-    params['product_cost']['costs_attributes'].each do |ingredient|
-      price = ingredient[1]['price'].gsub(/[R$]/, '').gsub(/,/, '.').to_f
-      quantity = ingredient[1]['quantity'].to_i
-      quantity_used = ingredient[1]['quantity_used'].to_i
-
-      cost = price / quantity * quantity_used
-
-      ingredient[1]['cost'] = cost.round(2)
-    end
-  end
 
   def set_total_cost
     total_cost = 0.to_f
