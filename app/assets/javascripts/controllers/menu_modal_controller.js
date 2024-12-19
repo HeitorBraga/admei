@@ -1,19 +1,13 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static values = {
-    wallet: Object
-  }
-
   static targets = [
     "modal",
-    "chart",
     "cashRegisterInputsContainer",
     "walletContainer"
   ]
 
   connect() {
-    this.createWalletChart()
   }
 
   activeModal() {
