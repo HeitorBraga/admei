@@ -1,0 +1,17 @@
+<div class="dropdown" id="dropdown-filter" data-action="click->dashboard#activeMonthDropdown" data-dashboard-target="dropdownFilterMonth">
+  <div class="dropdown-trigger">
+    <button class="button is-medium" id="month" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span id="selected-month"><%= I18n.t("months." + @month.to_s) if @month.present? %></span>
+      <span class="icon is-small" id="month">
+        <i class="fas fa-angle-down" id="month" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <% Profit.setMonths.each do |month| %>
+        <a class="dropdown-item" data-action="click->dashboard#dropdownMonthFilter"><%= I18n.t("months." + month.downcase) %></a>
+      <% end %>
+    </div>
+  </div>
+</div>
