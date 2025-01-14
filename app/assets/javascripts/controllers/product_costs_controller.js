@@ -4,18 +4,13 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = [
-    "unitCostInput",
-    "costFields"
-  ]
 
   connect() {
     this.maskInputs()
-    this.calculateCost()
   }
 
   maskInputs() {
-    $('#costs').on("cocoon:after-insert", function(e, insertedItem) {
+    $('#costs').on("cocoon:after-insert", function (e, insertedItem) {
       $(insertedItem).find("[data-mask='money']").maskMoney({
         prefix: "R$ ",
         decimal: ",",
@@ -31,30 +26,32 @@ export default class extends Controller {
     const inputsContainer = $(input).parent().closest('.form-inputs')
     const inputs = $(inputsContainer).children().children().children().children()
 
-    var values = inputs.map(function() {
-      if ( $(this).val() === "" ) {
+    var values = inputs.map(function () {
+      if ($(this).val() === "") {
         return 'inputEmpty'
       } else {
         return $(this).val()
       }
-    }).slice(0, -1)
+    }).slice(0, -1).slice(1)
 
     const emptyInputs = Object.values(values).filter((val) => val === "inputEmpty").length
 
-    if (emptyInputs === 0 ) {
-      this.setCostInput(values, inputs[5])
+    if (emptyInputs === 0) {
+      this.setCostInput(values, inputs[6])
     }
   };
 
   setCostInput(values, input) {
     var cost = this.calculateCost(values)
 
-      $(input).parent().addClass('is-loading')
-      setTimeout(function() {
-        $(input).val(cost)
-        $(input).parent().removeClass('is-loading')
-        $(input).css("border", "1.5px #48c774 solid")
-      }, 2000)
+    $('.save-form .button').attr('disabled', true)
+    $(input).parent().addClass('is-loading')
+    setTimeout(function () {
+      $(input).val(cost)
+      $(input).parent().removeClass('is-loading')
+      $(input).css("border", "1.5px #48c774 solid")
+      $('.save-form .button').attr('disabled', false)
+    }, 2000)
   }
 
   calculateCost(values) {
@@ -68,7 +65,7 @@ export default class extends Controller {
   currencyToNumber(number) {
     number = number.replace('R$ ', '')
     number = number.split('.').join("")
-    number = number.replace(',','.')
+    number = number.replace(',', '.')
 
     return number
   }
@@ -80,5 +77,24 @@ export default class extends Controller {
     })
 
     return real.format(number)
+  }
+
+  ownProduct(e) {
+    const inputsContainer = $(e.target).parent().closest('.form-inputs')
+    const productAssociation = inputsContainer.children('.product_association_cost')
+    const otherInputs = (inputsContainer.children())
+    otherInputs.splice(0, 3)
+
+    if (e.target.checked === true) {
+      $(productAssociation).removeClass('is-hidden')
+      otherInputs.each(function () {
+        $(this).addClass('is-hidden')
+      })
+    } else {
+      $(productAssociation).addClass('is-hidden')
+      otherInputs.each(function () {
+        $(this).removeClass('is-hidden')
+      })
+    }
   }
 }

@@ -5,6 +5,12 @@
         <i class="fas fa-trash"></i>
       <% end %>
     </div>
+    <div class="column has-text-centered is-1">
+      <%= f.input :own_product, label: 'own', class: 'is-block', input_html: { data: { action: 'change->product_costs#ownProduct' } } %>
+    </div>
+    <div class="column product_association_cost is-hidden">
+      <%= f.input :product_id, label:false, collection: Cost.products %>
+    </div>
     <div class="column">
       <%= f.input :ingredient, label: false, input_html: { data: { action: 'change->product_costs#costCalculator' } } %>
     </div>

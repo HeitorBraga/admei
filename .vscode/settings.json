@@ -2,7 +2,7 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "vscode.typescript-language-features",
     "editor.formatOnPaste" :true,
     "editor.formatOnSave": true,
   },
