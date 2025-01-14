@@ -1,21 +1,12 @@
 class Profit < ApplicationRecord
   def self.setMonths
-    months = []
-
     if Sale.count != 0
-      Sale.all.each do |sale|
-        unless months.include? sale.date.strftime("%b")
-          months.push(sale.date.strftime("%b"))
-        end
+      months = Sale.all.map do |sale|
+        sale.date.strftime("%b")
       end
-    end
 
-    if Spending.count != 0
-      Spending.all.each do |spending|
-        unless months.include? spending.date.strftime("%b")
-          months.push(spending.date.strftime("%b"))
-        end
-      end
+      months.push(Date.current.strftime("%b"))
+      months = months.to_set
     end
 
     months
@@ -26,85 +17,70 @@ class Profit < ApplicationRecord
   end
 
   def self.setCost(month)
-    cost = 0.0
-
-    Spending.all.each do |spending|
-      if month.present? && spending.date.month.to_i == month
-        cost += spending.price
-      elsif month.blank? || month == 0
-        cost += spending.price
+    cost = Spending.all.map do |spending|
+      if spending.date.month.to_i == month
+        spending.price
+      else
+        0.0
       end
     end
 
-    cost.round(2)
+    cost.inject(0) { |sum, x| sum + x }.round(2)
   end
 
   def self.setInvoicing(month)
-    invoicing = 0.0
-
-    Sale.all.each do |sale|
-      if month.present? && sale.date.month.to_i == month
-        invoicing += sale.invoicing
-      elsif month.blank? || month == 0
-        invoicing += sale.invoicing
+    invoicing = Sale.all.map do |sale|
+      if sale.date.month.to_i == month
+        sale.invoicing
+      else
+        0.0
       end
     end
 
-    invoicing.round(2)
+    invoicing.inject(0) { |sum, x| sum + x }.round(2)
   end
 
   def self.setSales(month)
-    sales = {}
-
-    Sale.all.each do |sale|
-      sale.product_solds.each do |product_sold|
-        Product.all.each do |product|
-          if product.id == product_sold.product
-            if month.present? && sale.date.month.to_i == month
-              if sales[product.name].present?
-                sales[product.name] = (sales[product.name].to_i + product_sold.quantity).to_s
-              else
-                sales[product.name] = product_sold.quantity.to_s
-              end
-            elsif month.blank? || month == 0
-              if sales[product.name].present?
-                sales[product.name] = (sales[product.name].to_i + product_sold.quantity).to_s
-              else
-                sales[product.name] = product_sold.quantity.to_s
-              end
-            end
-          end
+    sales = Sale.all.map do |sale|
+      if sale.date.month.to_i == month
+        product_solds = sale.product_solds.map do |product_sold|
+          product_sold.quantity
         end
+
+        product_solds.inject(0) { |sum, x| sum + x }
+      else
+        0
       end
     end
 
-    sales
+    sales.inject(0) { |sum, x| sum + x }
   end
 
   def self.setCollaboratorsSales(month)
-    sales = 0.0
-
-    Sale.all.each do |sale|
-      if month.present? && sale.date.month.to_i == month && (sale.for_collaborator? && sale.collaborator_id.present?)
-        sales += sale.invoicing
-        end
+    sales = Sale.all.map do |sale|
+      if sale.date.month.to_i == month && (sale.for_collaborator? && sale.collaborator_id.present?)
+        sale.invoicing
+      else
+        0.0
+      end
     end
 
-    sales
+    sales.inject(0) { |sum, x| sum + x }
   end
 
   def self.setCollaboratorsRanking(month)
     ranking = {}
 
     Collaborator.all.each do |coll|
-      invoicing = 0.0
-      coll.sales.all.each do |sale|
-        if month.present? && sale.date.month.to_i == month
-          invoicing += sale.invoicing
+      invoicing = coll.sales.all.map do |sale|
+        if sale.date.month.to_i == month
+          sale.invoicing
+        else
+          0.0
         end
       end
 
-      ranking[coll.name] = invoicing
+      ranking[coll.name] = invoicing.inject(0) { |sum, x| sum + x }
     end
 
     ranking.each do |key, value|
@@ -120,7 +96,7 @@ class Profit < ApplicationRecord
     ranking = {}
 
     Sale.all.each do |sale|
-      if month.present? && sale.date.month == month
+      if sale.date.month == month
         sale.product_solds.each do |sold|
           quantity = 0
 
