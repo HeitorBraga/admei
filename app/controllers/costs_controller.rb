@@ -8,6 +8,6 @@ class CostsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def resource_params
     params.require(:cost).permit(:product_cost_id, :ingredient, :unit, :quantity, :price,
-                                 :quantity_used, :cost)
+                                 :quantity_used, :cost, :product_id, :own_product)
   end
 end
