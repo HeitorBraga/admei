@@ -10,7 +10,8 @@ export default class extends Controller {
   }
 
   static targets = [
-    "dropdownFilterMonth"
+    "dropdownFilterMonth",
+    "dropdownFilterYear"
   ]
 
   connect() {
@@ -19,33 +20,84 @@ export default class extends Controller {
     this.createInvoicingVsCostChart()
     this.createCollaboratorsRankingChart()
     this.createProductSalesRankingChart()
-    console.log(Object.keys(this.collaboratorsRankingValue))
   }
 
   dropdownMonthFilter(e) {
     this.setDropdownMonth(e.target.innerText)
     this.setMonth(e.target.innerText)
   }
+  dropdownYearFilter(e) {
+    this.setDropdownYear(e.target.innerText)
+    this.setYear(e.target.innerText)
+  }
 
   setDropdownMonth(month) {
-    if($("#selected-month")[0].innerText.length == 0) {
+    if ($("#selected-month")[0].innerText.length == 0) {
       $("#selected-month").html(month)
     }
   }
 
+  setDropdownYear(year) {
+    if ($("#selected-year")[0].innerText.length == 0) {
+      $("#selected-year").html(year)
+    }
+  }
+
   setMonth(month) {
-    window.location = '/?month=' + month
+    let link = window.location.toString()
+
+    if (link.includes('month') && (link.includes('year'))) {
+      var params = link.split('?')[1].split('&')
+      if (params[0].includes('month')) {
+        var year = params[1]
+        window.location = '/?month=' + month + '&' + year
+      } else if (params[1].includes('month')) {
+        var year = params[0]
+        window.location = '/?month=' + month + '&' + year
+      }
+    } else if (link.includes('month') && (!link.includes('year'))) {
+      window.location = '/?month=' + month
+    } else if (!link.includes('month') && (link.includes('year'))) {
+      window.location = window.location + '&month=' + month
+    } else {
+      window.location = '/?month=' + month
+    }
+  }
+
+  setYear(year) {
+    let link = window.location.toString()
+
+    if (link.includes('year') && (link.includes('month'))) {
+      var params = link.split('?')[1].split('&')
+      if (params[0].includes('year')) {
+        var month = params[1]
+        window.location = '/?year=' + year + '&' + month
+      } else if (params[1].includes('year')) {
+        var month = params[0]
+        window.location = '/?year=' + year + '&' + month
+      }
+    } else if (link.includes('year') && (!link.includes('month'))) {
+      window.location = '/?year=' + month
+    } else if (!link.includes('year') && (link.includes('month'))) {
+      window.location = window.location + '&year=' + year
+    } else {
+      window.location = '/?year=' + year
+    }
   }
 
   activeMonthDropdown(e) {
     $(this.dropdownFilterMonthTarget).toggleClass("is-active")
   }
 
+  activeYearDropdown(e) {
+    $(this.dropdownFilterYearTarget).toggleClass("is-active")
+  }
+
 
   createInvoicingVsCostChart() {
     const ctx_bar = $('#invoicing-vs-cost-chart')
 
-    if(this.invoicingValue != 0 || this.costValue != 0.0) {
+    if (this.invoicingValue != 0 || this.costValue != 0.0) {
       new Chart(ctx_bar, {
         type: "bar",
         data: {
@@ -81,7 +133,7 @@ export default class extends Controller {
   createCollaboratorsRankingChart() {
     const ctx_bar = $('#collaborators-ranking-chart')
 
-    if((!$.isEmptyObject(this.collaboratorsRankingValue)) && (ctx_bar.length != 0)) {
+    if ((!$.isEmptyObject(this.collaboratorsRankingValue)) && (ctx_bar.length != 0)) {
       new Chart(ctx_bar, {
         type: "bar",
         data: {
@@ -107,7 +159,7 @@ export default class extends Controller {
   createProductSalesRankingChart() {
     const ctx_bar = $('#product-sales-ranking-chart')
 
-    if((!$.isEmptyObject(this.productSalesRankingValue)) && (ctx_bar.length != 0) ) {
+    if ((!$.isEmptyObject(this.productSalesRankingValue)) && (ctx_bar.length != 0)) {
       new Chart(ctx_bar, {
         type: 'bar',
         data: {

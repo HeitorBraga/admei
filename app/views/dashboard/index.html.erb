@@ -2,13 +2,13 @@
 <%# render AutoCompleteComponent.new(:product, :ncm_id, load_from: search_ncms_path, query_context: { ncm_id: 112 }) %>
 <%# render AutoCompleteComponent.new(:product, :ncm_id, 1250, "Bruno Frank", load_from: search_ncms_path) %>
 
-<div data-controller="dashboard" data-dashboard-invoicing-value="<%= Profit.setInvoicing(@month) %>"
-                                 data-dashboard-cost-value="<%= Profit.setCost(@month) %>"
-                                 data-dashboard-collaborators-ranking-value="<%= Profit.setCollaboratorsRanking(@month).to_json %>"
-                                 data-dashboard-product-sales-ranking-value="<%= Profit.setProductSalesRanking(@month).to_json %>"
+<div data-controller="dashboard" data-dashboard-invoicing-value="<%= Profit.setInvoicing(@month, @year) %>"
+                                 data-dashboard-cost-value="<%= Profit.setCost(@month, @year) %>"
+                                 data-dashboard-collaborators-ranking-value="<%= Profit.setCollaboratorsRanking(@month, @year).to_json %>"
+                                 data-dashboard-product-sales-ranking-value="<%= Profit.setProductSalesRanking(@month, @year).to_json %>"
                                  data-dashboard-selected-month-value="<%= I18n.t("months." + @month.to_s ) if @month.present? %>">
 
-  <%= render partial: 'month_filter' %>
+  <%= render partial: 'filters' %>
 
   <hr />
 
@@ -17,7 +17,7 @@
       <div class="box">
         <h2 class="title is-5">Faturamento&nbsp;(R$)</h2>
         <h1 class="title is-1 has-text-weight-bold has-text-centered">
-          <%= number_to_currency(Profit.setInvoicing(@month).round(2), currency: "R$", separator: ",", thousands: ".") %>
+          <%= number_to_currency(Profit.setInvoicing(@month, @year).round(2), currency: "R$", separator: ",", thousands: ".") %>
         </h1>
       </div>
     </div>
@@ -28,13 +28,13 @@
           <h1 class="title is-1 has-text-weight-bold has-text-centered">
             <%= @items %>
           </h1>
-        <% elsif Profit.setCollaboratorsSales(@month) != 0 %>
+        <% elsif Profit.setCollaboratorsSales(@month, @year) != 0 %>
           <h2 class="title is-5">Taxa de Crescimento&nbsp;(%)</h2>
           <h1 class="title is-1 has-text-weight-bold has-text-centered">
-            <%= number_to_currency(Profit.setRateOfGrowth(@month), unit: '', separator: ',') + '%' %>
+            <%= number_to_currency(Profit.setRateOfGrowth(@month, @year), unit: '', separator: ',') + '%' %>
             &nbsp;
             <span class="icon is-small">
-              <% if Profit.setRateOfGrowth(@month).present? && Profit.setRateOfGrowth(@month).negative? %>
+              <% if Profit.setRateOfGrowth(@month, @year).present? && Profit.setRateOfGrowth(@month, @year).negative? %>
                 <i class="fas fa-arrow-down"></i>
               <% else %>
                 <i class="fas fa-arrow-up"></i>
@@ -46,14 +46,14 @@
     </div>
     <div class="column">
       <div class="box">
-        <% if Profit.setCollaboratorsSales(@month) == 0 %>
-          <% if Profit.setRateOfGrowth(@month) != 0 %>
+        <% if Profit.setCollaboratorsSales(@month, @year) == 0 %>
+          <% if Profit.setRateOfGrowth(@month, @year) != 0 %>
             <h2 class="title is-5">Taxa de Crescimento&nbsp;(%)</h2>
             <h1 class="title is-1 has-text-weight-bold has-text-centered">
-              <%= number_to_currency(Profit.setRateOfGrowth(@month), unit: '', separator: ',') + '%' %>
+              <%= number_to_currency(Profit.setRateOfGrowth(@month, @year), unit: '', separator: ',') + '%' %>
               &nbsp;
               <span class="icon is-small">
-                <% if Profit.setRateOfGrowth(@month).present? && Profit.setRateOfGrowth(@month).negative? %>
+                <% if Profit.setRateOfGrowth(@month, @year).present? && Profit.setRateOfGrowth(@month, @year).negative? %>
                   <i class="fas fa-arrow-down"></i>
                 <% else %>
                   <i class="fas fa-arrow-up"></i>
@@ -63,13 +63,13 @@
           <% else %>
             <h2 class="title is-5">Lucro&nbsp;(R$)</h2>
             <h1 class="title is-1 has-text-weight-bold has-text-centered">
-              <%= number_to_currency(Profit.setProfit(@month), unit: 'R$', separator: ',', thousands: '.') %>
+              <%= number_to_currency(Profit.setProfit(@month, @year), unit: 'R$', separator: ',', thousands: '.') %>
             </h1>
           <% end%>
         <% else %>
           <h2 class="title is-5">Vendas para Colaboradores</h2>
           <h1 class="title is-1 has-text-weight-bold has-text-centered">
-            <%= number_to_currency(Profit.setCollaboratorsSales(@month).round(2), currency: "R$", separator: ",", thousands: ".") %>
+            <%= number_to_currency(Profit.setCollaboratorsSales(@month, @year).round(2), currency: "R$", separator: ",", thousands: ".") %>
           </h1>
         <% end %>
       </div>
@@ -88,7 +88,7 @@
     </div>
     <div class="column">
       <div class="box">
-        <% if Profit.setCollaboratorsRanking(@month).present? %>
+        <% if Profit.setCollaboratorsRanking(@month, @year).present? %>
           <h2 class="title is-5">Melhores Colaboradores (R$)</h2>
           <canvas id="collaborators-ranking-chart"></canvas>
         <% else %>

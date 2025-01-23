@@ -13,6 +13,15 @@ class DashboardController < ApplicationController
       @month = Date.current.month
     end
 
-    @items = Profit.setSales(@month)
+    if params["year"].present?
+      @year = params["year"]
+      puts ">>>>>>>>>>>>>>>>>>>>>>>>>"
+      puts params["year"]
+      puts ">>>>>>>>>>>>>>>>>>>>>>>>>"
+    else
+      @year = Date.current.year
+    end
+
+    @items = Profit.setSales(@month, @year)
   end
 end
