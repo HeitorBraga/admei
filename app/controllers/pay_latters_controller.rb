@@ -7,9 +7,11 @@ class PayLattersController < ApplicationController
 
     if pay_latter.collaborator.present?
       Sale.new(date: Date.current, invoicing: pay_latter.price,
-               collaborator_id: pay_latter.collaborator, for_collaborator: true).save
+               collaborator_id: pay_latter.collaborator, for_collaborator: true,
+               payment_method_id: pay_latter.payment_method_id).save
     else
-      Sale.new(date: Date.current, invoicing: pay_latter.price).save
+      Sale.new(date: Date.current, invoicing: pay_latter.price,
+               payment_method_id: pay_latter.payment_method_id).save
     end
     pay_latter.delete
     redirect_to sales_url, notice: 'Registrado com sucesso!'
