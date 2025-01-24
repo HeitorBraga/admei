@@ -38,6 +38,6 @@
 
   <div class="form-actions">
     <%= f.button :submit, 'Salvar' %>
-    <%= link_to 'Cancelar', companies_path %>
+    <%= link_to 'Cancelar', company_path(Company.last) if Company.last.present? %>
   </div>
 <% end %>
