@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   include Controllers::Crudify
+  before_action :check_company_present, only: %i(new)
 
   model_klass Company
 
@@ -11,6 +12,16 @@ class CompaniesController < ApplicationController
   def edit
     super
     @company.build_address if @company.address.nil?
+  end
+
+  def show
+    @address = @company.address
+  end
+
+  def check_company_present
+    if Company.last.present?
+      redirect_to company_url(Company.last.id), notice: "Você já tem uma empresa criada!"
+    end
   end
 
   private

@@ -77,7 +77,7 @@ pt-BR:
       sale:
         date: Data
         invoicing: Faturamento
-        collaborator: Colaborador
+        collaborator: Ponto de Venda
         name: Nome
         phone: Telefone
         payment_method: Forma de Pagamento
@@ -98,7 +98,7 @@ pt-BR:
           Novembro: Novembro
           Dezembro: Dezembro
       pay_latter:
-        collaborator: Colaborador
+        collaborator: Ponto de Venda
         name: Nome
         phone: Telefone
         date: Data

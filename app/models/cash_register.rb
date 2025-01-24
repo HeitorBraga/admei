@@ -8,26 +8,30 @@ class CashRegister < ApplicationRecord
   def self.amount_available()
     amounts_per_month = []
 
-    Profit.setYears.each do |year|
-      Profit.setMonths.each do |month|
-        month_number = month.to_date.strftime("%m").to_i
-        month_profit = Profit.setProfit(month_number, year.to_i)
+    if Profit.setYears.present? && Profit.setMonths.present?
+      Profit.setYears.each do |year|
+        Profit.setMonths.each do |month|
+          month_number = month.to_date.strftime("%m").to_i
+          month_profit = Profit.setProfit(month_number, year.to_i)
 
-        month_cash = CashRegister.where(month: month_number).map do |cash|
-          if cash.created_at.year.to_i == year.to_i
-            if cash.add_money == true
-              cash.amount
+          month_cash = CashRegister.where(month: month_number).map do |cash|
+            if cash.created_at.year.to_i == year.to_i
+              if cash.add_money == true
+                cash.amount
+              else
+                cash.amount * -1
+              end
             else
-              cash.amount * -1
+              0.0
             end
-          else
-            0.0
           end
-        end
 
-        month_cash = month_cash.inject(0) { |sum, x| sum + x }
-        amounts_per_month.push(month_cash + month_profit)
+          month_cash = month_cash.inject(0) { |sum, x| sum + x }
+          amounts_per_month.push(month_cash + month_profit)
+        end
       end
+    else
+      amounts_per_month.push(0.0)
     end
 
     amounts_per_month.sum.round(2)
@@ -36,9 +40,11 @@ class CashRegister < ApplicationRecord
   def self.set_months_enum
     months = {}
 
-    Profit.setMonths.each do |month|
-      month_number = month.to_date.strftime("%m").to_i
-      months[I18n.t("months." + month.downcase)] = month_number
+    if Profit.setMonths.present?
+      Profit.setMonths.each do |month|
+        month_number = month.to_date.strftime("%m").to_i
+        months[I18n.t("months." + month.downcase)] = month_number
+      end
     end
 
     months

@@ -1,24 +1,56 @@
-<p id="notice"><%= notice %></p>
+<div class="columns">
+  <div class="column">
+    <strong>Nome Legal</strong>
+    <h1 class="title"><%= @company.legal_name %></h1>
+  </div>
+  <div class="column">
+    <strong>Nome Comercial</strong>
+    <h1 class="title"><%= @company.trade_name %></h1>
+  </div>
+  <div class="column">
+    <strong>CNPJ:</strong>
+    <h1 class="title"><%= @company.federal_tax_id %></h1>
+  </div>
+</div>
 
-<p>
-  <strong>Trade name:</strong>
-  <%= @company.trade_name %>
-</p>
+<hr />
 
-<p>
-  <strong>Legal name:</strong>
-  <%= @company.legal_name %>
-</p>
+<h1 class="title is-3">Endereço</h1>
 
-<p>
-  <strong>Federal tax:</strong>
-  <%= @company.federal_tax_id %>
-</p>
+<div class="columns">
+  <div class="column">
+    <strong>Cep</strong>
+    <h1 class="title is-5"><%= @address.zip %></h1>
+  </div>
+  <div class="column">
+    <strong>Cidade</strong>
+    <h1 class="title is-5"><%= @address.city.name %></h1>
+  </div>
+  <div class="column">
+    <strong>Estado</strong>
+    <h1 class="title is-5"><%= @address.city.state.name %></h1>
+  </div>
+</div>
+<div class="columns">
+  <div class="column">
+    <strong>Rua / Avenida</strong>
+    <h1 class="title is-5"><%= @address.address %></h1>
+  </div>
+  <div class="column">
+    <strong>Numero</strong>
+    <h1 class="title is-5"><%= @address.number %></h1>
+  </div>
+  <div class="column">
+    <strong>Bairro</strong>
+    <h1 class="title is-5"><%= @address.district %></h1>
+  </div>
+</div>
 
-<p>
-  <strong>State tax:</strong>
-  <%= @company.state_tax_id %>
-</p>
+<% if @address.more.present? %>
+  <strong>Complemento</strong>
+  <h1 class="title"><%= @address.more %></h1>
+<% end %>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<hr />
+
+<%= link_to 'Editar Dados da Empresa', edit_company_path(@company), class: 'button is-dark' %>

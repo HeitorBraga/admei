@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :verify_payment_day
+  before_action :company_present
 
   private
 
@@ -33,6 +34,12 @@ class ApplicationController < ActionController::Base
           create_payment(employee)
         end
       end
+    end
+  end
+
+  def company_present
+    if Company.last.blank?
+      redirect_to new_company, notice: 'Para continuar, crie sua Empresa'
     end
   end
 
