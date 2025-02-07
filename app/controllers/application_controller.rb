@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 
   def company_present
     if Company.last.blank?
-      redirect_to new_company, notice: 'Para continuar, crie sua Empresa'
+      redirect_to new_company_url, notice: 'Para continuar, crie sua Empresa'
     end
   end
 
