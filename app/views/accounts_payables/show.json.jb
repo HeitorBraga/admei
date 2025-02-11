@@ -1,0 +1,8 @@
+{
+  id: @accounts_payable.id,
+  name: @accounts_payable.name,
+  date: @accounts_payable.date,
+  price: @accounts_payable.price,
+  created_at: @accounts_payable.created_at,
+  updated_at: @accounts_payable.updated_at
+}

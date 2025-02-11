@@ -138,6 +138,10 @@ pt-BR:
         commission_percentage: Porcentagem da Comissão
       company_position:
         name: Nome
+      accounts_payable:
+        name: Nome
+        date: Data do Pagamento
+        price: Preço
 
     hints:
       defaults:

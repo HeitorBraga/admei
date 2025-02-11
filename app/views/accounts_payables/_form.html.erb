@@ -1,0 +1,26 @@
+
+<%= simple_form_for(@accounts_payable) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs columns">
+    <div class="column">
+      <%= f.input :name %>
+    </div>
+  </div>
+
+  <div class="form-inputs columns">
+    <div class="column">
+      <% date_f = Date.current if !f.object.date.present? %>
+      <%= f.input :date, html5: true, input_html: { required: true, value: date_f } %>
+    </div>
+    <div class="column">
+      <%= f.input :price, as: :string, input_html: {data: { mask: 'money' }, placeholder: 'R$ 0,00'} %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Salvar' %>
+    <%= link_to 'Cancelar', accounts_payables_path %>
+  </div>
+<% end %>

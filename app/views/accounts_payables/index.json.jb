@@ -1,0 +1,9 @@
+@accounts_payables.map do |accounts_payable|
+  {
+    id: accounts_payable.id,
+    name: accounts_payable.name,
+    date: accounts_payable.date,
+    price: accounts_payable.price,
+    url: accounts_payable_url(accounts_payable, format: :json)
+  }
+end
