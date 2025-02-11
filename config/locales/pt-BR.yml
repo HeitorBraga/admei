@@ -27,6 +27,7 @@ pt-BR:
       CashRegisters: Movimentações do Caixa
       Employees: Funcionários
       CompanyPositions: Funções
+      AccountsPayables: Contas a Pagar
 
   activerecord:
     enums:

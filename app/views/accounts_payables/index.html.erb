@@ -1,0 +1,52 @@
+<div data-controller="list">
+  <div class="list-buttons columns">
+    <div class="column">
+      <%= link_to new_accounts_payable_path, class: 'button is-primary' do %>
+        Novo
+      <% end %>
+    </div>
+    <div class="column mass-actions" data-list-target="massActionsContainer">
+      <button data-action="click->list#destroySelected" data-destroy-url="<%= accounts_payable_url(id: ':id:') %>.json" class="button is-danger">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+              <th>Nome</th>
+              <th>Data do Pagamento</th>
+              <th>Preço</th>
+              <th></th>
+            </tr>
+    </thead>
+    <tbody>
+    <% @accounts_payables.each do |accounts_payable| %>
+      <tr data-list-target="items" data-edit-url="<%= edit_accounts_payable_url(accounts_payable) %>">
+        <td class="item-check">
+          <input type="checkbox" value="<%= accounts_payable.id %>" data-action="change->list#itemSelect">
+        </td>
+        <td class="clickable" data-action="click->list#edit">
+          <%= accounts_payable.name %>
+        </td>
+        <td class="clickable" data-action="click->list#edit">
+          <%= accounts_payable.date.strftime('%d/%m/%Y') %>
+        </td>
+        <td class="clickable" data-action="click->list#edit">
+          <%= number_to_currency(accounts_payable.price, unit: 'R$', separator: ',', thousands: '.') %>
+        </td>
+        <td class="clickable balloon-confirm-paid">
+          <span class="balloon-confirm-paid-text">Confirmar Pagamento</span>
+          <%= link_to account_paid_url(id: accounts_payable), method: :post do %>
+            <i class="fas fa-check"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @accounts_payables %>

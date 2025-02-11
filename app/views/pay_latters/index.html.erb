@@ -16,11 +16,11 @@
     <thead>
       <tr>
         <th>&nbsp;</th>
-              <th>Nome</th>
-              <th>Preço</th>
-              <th>Data</th>
-              <th></th>
-            </tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Data</th>
+        <th></th>
+      </tr>
     </thead>
     <tbody>
       <% @pay_latters.each do |pay_latter| %>
@@ -41,7 +41,8 @@
           <td>
             <%= pay_latter.date.strftime('%d/%m/%Y') %>
           </td>
-          <td>
+          <td class="clickable balloon-confirm-paid">
+            <span class="balloon-confirm-paid-text">Confirmar Pagamento</span>
             <%= link_to paid_out_url(id: pay_latter.id), method: :post do %>
               <i class="fas fa-check"></i>
             <% end %>
