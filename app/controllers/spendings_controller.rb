@@ -3,7 +3,15 @@ class SpendingsController < ApplicationController
   include Controllers::Crudify
   model_klass Spending
 
+  before_action :check_registration_path, only: %i(new index)
+
   private
+
+  def check_registration_path
+    unless PaymentMethod.count > 0
+      redirect_to new_payment_method_path, notice: 'Cadastre um Método de Pagamento primeiro!'
+    end
+  end
 
   def check_prices
     total_price = 0.0

@@ -2,6 +2,8 @@ class PayLattersController < ApplicationController
   include Controllers::Crudify
   model_klass PayLatter
 
+  before_action :check_registration_path, only: %i(index new)
+
   def paid_out
     pay_latter = PayLatter.find_by(id: params['id'])
 
@@ -18,6 +20,16 @@ class PayLattersController < ApplicationController
   end
 
   private
+
+  def check_registration_path
+    if PaymentMethod.count > 0
+      unless Collaborator.count > 0
+        redirect_to new_collaborator_path, notice: 'Cadastre um Ponto de Venda primeiro!'
+      end
+    else
+      redirect_to new_payment_method_path, notice: 'Cadastre um Método de Pagamento primeiro!'
+    end
+  end
 
   # Only allow a trusted parameter "white list" through.
   def resource_params

@@ -2,6 +2,8 @@ class EmployeesController < ApplicationController
   include Controllers::Crudify
   model_klass Employee
 
+  before_action :check_registration_path, only: %i(index new)
+
   def new
     super
     @employee.build_address
@@ -27,6 +29,12 @@ class EmployeesController < ApplicationController
   end
 
   private
+
+  def check_registration_path
+    unless CompanyPosition.count > 0
+      redirect_to new_company_position_path, notice: 'Cadastre uma Função primeiro!'
+    end
+  end
 
   # Only allow a trusted parameter "white list" through.
   def resource_params
