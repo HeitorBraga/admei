@@ -7,6 +7,7 @@ class Employee < ApplicationRecord
   validates :receives, presence: true
 
   belongs_to :company_position
+  belongs_to :user
 
   expect_comma_for :wage
 

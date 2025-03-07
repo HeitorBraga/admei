@@ -1,0 +1,37 @@
+<div data-controller="list">
+  <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Função</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Employee.all.each do |employee| %>
+        <tr>
+          <td><%= employee.name %></td>
+          <td><%= employee.company_position.name %></td>
+          <td>
+            <% @permission = Permission.find_by(user_id: employee.user.id) %>
+            <% if @permission.present? %>
+              <%= link_to edit_permission_url(@permission) do %>
+                <span class="icon">
+                  <i class="fas fa-pen"></i>
+                </span>
+              <% end %>
+            <% else %>
+              <%= link_to create_permissions_url(user_id: employee.user.id), method: :post do %>
+                <span class="icon">
+                  <i class="fas fa-pen"></i>
+                </span>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<div>
+
+<%= will_paginate @permissions %>

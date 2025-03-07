@@ -28,6 +28,7 @@ pt-BR:
       Employees: Funcionários
       CompanyPositions: Funções
       AccountsPayables: Contas a Pagar
+      Permissions: Permissões
 
   activerecord:
     enums:

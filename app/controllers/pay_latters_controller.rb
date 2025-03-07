@@ -3,6 +3,7 @@ class PayLattersController < ApplicationController
   model_klass PayLatter
 
   before_action :check_registration_path, only: %i(index new)
+  before_action :check_permissions
 
   def paid_out
     pay_latter = PayLatter.find_by(id: params['id'])
@@ -20,6 +21,13 @@ class PayLattersController < ApplicationController
   end
 
   private
+
+  def check_permissions
+    permission = Permission.find_by(user_id: current_user.id)
+    unless permission.pay_latters_and_accounts_payables == true
+      redirect_to root_url, notice: 'Você não tem permissão!'
+    end
+  end
 
   def check_registration_path
     if PaymentMethod.count > 0

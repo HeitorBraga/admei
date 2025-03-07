@@ -1,3 +1,5 @@
+<% permissions = Permission.find_by(user_id: current_user.id) %>
+
 <div id="zion-nav-bar" class="navbar-menu">
   <div class="navbar-start">
     <div data-controller="menu_modal" class="navbar-item">
@@ -9,102 +11,123 @@
       <%= render 'layouts/cash_register_modal' %>
     </div>
 
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        Cadastros
-      </a>
+    <% if permissions.categories_and_products? ||
+          permissions.company_positions_and_employees? ||
+          permissions.collaborators? %>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Cadastros
+        </a>
 
-      <div class="navbar-dropdown lane-menu two">
-        <div class="left">
-          <h3>Produtos</h3>
-          <%= link_to 'Categorias', product_categories_url, class: 'navbar-item' %>
-          <%= link_to 'Produtos', products_url, class: 'navbar-item' %>
-        </div>
+        <div class="navbar-dropdown lane-menu two">
+          <div class="left">
+            <h3>Produtos</h3>
+            <% if permissions.categories_and_products? %>
+              <%= link_to 'Categorias', product_categories_url, class: 'navbar-item' %>
+              <%= link_to 'Produtos', products_url, class: 'navbar-item' %>
+            <% end %>
+          </div>
 
-        <div class="right">
-          <h3>Geral</h3>
-          <%= link_to 'Funções', company_positions_url, class: 'navbar-item' %>
-          <%= link_to 'Funcionários', employees_url, class: 'navbar-item' %>
-          <%= link_to 'Pontos de Venda', collaborators_url, class: 'navbar-item' %>
-        </div>
-      </div>
-    </div>
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        Operacional
-      </a>
-
-      <div class="navbar-dropdown lane-menu two">
-        <div class="left">
-          <h3>Cadastros</h3>
-          <%= link_to 'Produção', fabrications_url, class: 'navbar-item' %>
-          <%= link_to 'Vendas', sales_url, class: 'navbar-item' %>
-        </div>
-
-        <div class="right">
-          <h3>Geral</h3>
-          <%= link_to 'Gastos', spendings_url, class: 'navbar-item' %>
+          <div class="right">
+            <h3>Geral</h3>
+            <% if permissions.company_positions_and_employees? %>
+              <%= link_to 'Funções', company_positions_url, class: 'navbar-item' %>
+              <%= link_to 'Funcionários', employees_url, class: 'navbar-item' %>
+            <% end %>
+            <%= link_to 'Pontos de Venda', collaborators_url, class: 'navbar-item' if permissions.collaborators? %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        Financeiro
-      </a>
+    <% end %>
 
-      <div class="navbar-dropdown lane-menu two">
-        <div class="left">
-          <h3>Cadastros</h3>
-          <%= link_to 'Métodos de Pagamento', payment_methods_url, class: 'navbar-item' %>
-        </div>
+    <% if permissions.production? || permissions.sales? || permissions.spendings? %>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Operacional
+        </a>
 
-        <div class="right">
-          <h3>Geral</h3>
-          <%= link_to 'Contas a Receber', pay_latters_url, class: 'navbar-item' %>
-          <%= link_to 'Contas a Pagar', accounts_payables_url, class: 'navbar-item' %>
-        </div>
-      </div>
-    </div>
+        <div class="navbar-dropdown lane-menu two">
+          <div class="left">
+            <h3>Cadastros</h3>
+            <%= link_to 'Produção', fabrications_url, class: 'navbar-item' if permissions.production? %>
+            <%= link_to 'Vendas', sales_url, class: 'navbar-item' if permissions.sales? %>
+          </div>
 
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        Ferramentas
-      </a>
-
-      <div class="navbar-dropdown lane-menu two">
-        <div class="left">
-          <h3>Movimentação</h3>
-          <%= link_to 'Custos', product_costs_url, class: 'navbar-item' %>
-        </div>
-
-        <div class="right">
-          <h3>Cadastros</h3>
+          <div class="right">
+            <h3>Geral</h3>
+            <%= link_to 'Gastos', spendings_url, class: 'navbar-item' if permissions.spendings %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        Configurações
-      </a>
-      <div class="navbar-dropdown lane-menu two">
-        <div class="left">
-          <h3>Geral</h3>
-          <%= link_to 'Empresas', company_url(Company.last), class: 'navbar-item' if Company.last.present? %>
-          <%= link_to 'Empresas', new_company_url, class: 'navbar-item' unless Company.last.present? %>
-          <% link_to 'Bancos', "#", class: 'navbar-item' %>
-          <% link_to 'Países', countries_url, class: 'navbar-item' %>
-          <% link_to 'Estados', states_url, class: 'navbar-item' %>
-          <% link_to 'Cidades', cities_url, class: 'navbar-item' %>
-          <%= link_to 'Parâmetros', settings_url, class: 'navbar-item' %>
-        </div>
+    <% if permissions.payment_methods? || permissions.pay_latters_and_accounts_payables %>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Financeiro
+        </a>
 
-        <div class="right">
-          <h3>Fiscal</h3>
-          <%= link_to 'Empresas', companies_url, class: 'navbar-item' %>
+        <div class="navbar-dropdown lane-menu two">
+          <div class="left">
+            <h3>Cadastros</h3>
+            <%= link_to 'Métodos de Pagamento', payment_methods_url, class: 'navbar-item' if permissions.payment_methods? %>
+          </div>
+
+          <div class="right">
+            <h3>Geral</h3>
+            <% if permissions.pay_latters_and_accounts_payables? %>
+              <%= link_to 'Contas a Receber', pay_latters_url, class: 'navbar-item' %>
+              <%= link_to 'Contas a Pagar', accounts_payables_url, class: 'navbar-item' %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
+
+    <% if permissions.costs?  %>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Ferramentas
+        </a>
+
+        <div class="navbar-dropdown lane-menu two">
+          <div class="left">
+            <h3>Movimentação</h3>
+            <%= link_to 'Custos', product_costs_url, class: 'navbar-item' if permissions.costs? %>
+          </div>
+
+          <div class="right">
+            <h3>Cadastros</h3>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% if permissions.permissions? || permissions.company? %>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Configurações
+        </a>
+        <div class="navbar-dropdown lane-menu two">
+          <div class="left">
+            <h3>Geral</h3>
+            <%= link_to 'Empresas', company_url(Company.last), class: 'navbar-item' if Company.last.present? && permissions.company? %>
+            <%= link_to 'Empresas', new_company_url, class: 'navbar-item' unless Company.last.present? && permissions.company? %>
+            <% link_to 'Bancos', "#", class: 'navbar-item' %>
+            <% link_to 'Países', countries_url, class: 'navbar-item' %>
+            <% link_to 'Estados', states_url, class: 'navbar-item' %>
+            <% link_to 'Cidades', cities_url, class: 'navbar-item' %>
+            <% link_to 'Parâmetros', settings_url, class: 'navbar-item' %>
+            <%= link_to 'Permissões', permissions_url, class: 'navbar-item' if permissions.permissions? %>
+          </div>
+
+          <div class="right">
+            <h3>Fiscal</h3>
+            <%= link_to 'Empresas', companies_url, class: 'navbar-item' if permissions.company? %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 
   <div class="navbar-end">

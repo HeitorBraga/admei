@@ -2,6 +2,8 @@ class AccountsPayablesController < ApplicationController
   include Controllers::Crudify
   model_klass AccountsPayable
 
+  before_action :check_permissions
+
   def account_paid
     account = AccountsPayable.find_by(id: params['id'])
 
@@ -17,6 +19,13 @@ class AccountsPayablesController < ApplicationController
   end
 
   private
+
+  def check_permissions
+    permission = Permission.find_by(user_id: current_user.id)
+    unless permission.pay_latters_and_accounts_payables == true
+      redirect_to root_url, notice: 'Você não tem permissão!'
+    end
+  end
 
   # Only allow a trusted parameter "white list" through.
   def resource_params

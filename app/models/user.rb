@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :lockable, :trackable, :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
+  has_one :employees, dependent: :destroy
+  has_one :permissions, dependent: :destroy
+
   def jwt_payload
     { id: id }
   end
