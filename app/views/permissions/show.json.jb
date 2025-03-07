@@ -1,0 +1,5 @@
+{
+  id: @permission.id,
+  created_at: @permission.created_at,
+  updated_at: @permission.updated_at
+}

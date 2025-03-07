@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_02_10_162736) do
+ActiveRecord::Schema.define(version: 2025_03_07_151924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -188,7 +188,10 @@ ActiveRecord::Schema.define(version: 2025_02_10_162736) do
     t.date "came_out_in"
     t.boolean "commission", default: false
     t.integer "commission_percentage"
+    t.bigint "user_id", null: false
+    t.string "email"
     t.index ["company_position_id"], name: "index_employees_on_company_position_id"
+    t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
   create_table "fabrications", force: :cascade do |t|
@@ -225,6 +228,24 @@ ActiveRecord::Schema.define(version: 2025_02_10_162736) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "categories_and_products", default: false
+    t.boolean "company_positions_and_employees", default: false
+    t.boolean "collaborators", default: false
+    t.boolean "production", default: true
+    t.boolean "sales", default: false
+    t.boolean "spendings", default: false
+    t.boolean "payment_methods", default: false
+    t.boolean "pay_latters_and_accounts_payables"
+    t.boolean "costs", default: false
+    t.boolean "permissions", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "company", default: false
+    t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
   create_table "product_categories", force: :cascade do |t|
@@ -361,7 +382,9 @@ ActiveRecord::Schema.define(version: 2025_02_10_162736) do
   add_foreign_key "employee_absences", "employees"
   add_foreign_key "employee_overtimes", "employees"
   add_foreign_key "employees", "company_positions"
+  add_foreign_key "employees", "users"
   add_foreign_key "pay_latters", "payment_methods"
+  add_foreign_key "permissions", "users"
   add_foreign_key "product_costs", "products"
   add_foreign_key "product_solds", "sales"
   add_foreign_key "sales", "collaborators"

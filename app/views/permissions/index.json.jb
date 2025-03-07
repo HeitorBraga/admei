@@ -1,0 +1,6 @@
+@permissions.map do |permission|
+  {
+    id: permission.id,
+    url: permission_url(permission, format: :json)
+  }
+end

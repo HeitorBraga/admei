@@ -4,8 +4,16 @@ class SpendingsController < ApplicationController
   model_klass Spending
 
   before_action :check_registration_path, only: %i(new index)
+  before_action :check_permissions
 
   private
+
+  def check_permissions
+    permission = Permission.find_by(user_id: current_user.id)
+    unless permission.spendings == true
+      redirect_to root_url, notice: 'Você não tem permissão!'
+    end
+  end
 
   def check_registration_path
     unless PaymentMethod.count > 0

@@ -3,6 +3,7 @@ class ProductCostsController < ApplicationController
   model_klass ProductCost
 
   before_action :check_registration_path, only: %i(new index)
+  before_action :check_permissions
 
   def create
     ProductCost.new(
@@ -79,6 +80,13 @@ class ProductCostsController < ApplicationController
   end
 
   private
+
+  def check_permissions
+    permission = Permission.find_by(user_id: current_user.id)
+    unless permission.costs == true
+      redirect_to root_url, notice: 'Você não tem permissão!'
+    end
+  end
 
   def check_registration_path
     unless Product.count > 0

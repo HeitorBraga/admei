@@ -4,8 +4,16 @@ class SalesController < ApplicationController
   model_klass Sale
 
   before_action :check_registration_path, only: %i(index new)
+  before_action :check_permissions
 
   private
+
+  def check_permissions
+    permission = Permission.find_by(user_id: current_user.id)
+    unless permission.sales == true
+      redirect_to root_url, notice: 'Você não tem permissão!'
+    end
+  end
 
   def check_registration_path
     if Product.count > 0

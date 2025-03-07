@@ -1,0 +1,63 @@
+
+<%= simple_form_for(@permission) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs columns has-text-centered">
+    <div class="column">
+      <label class="label">Gerenciar Categorias e Produtos?</label>
+      <%= f.input :categories_and_products, label: 'l', as: :boolean %>
+    </div>
+    <div class="column">
+      <label class="label">Gerenciar Funções e Funcionários?</label>
+      <%= f.input :company_positions_and_employees, label: 'l' %>
+    </div>
+    <div class="column">
+      <label class="label">Gerenciar Pontos de Venda?</label>
+      <%= f.input :collaborators, label: 'l' %>
+    </div>
+  </div>
+  <div class="form-inputs columns has-text-centered">
+    <div class="column">
+      <label class="label">Gerenciar Produção?</label>
+      <%= f.input :production, label: 'l' %>
+    </div>
+    <div class="column">
+      <label class="label">Gerenciar Vendas?</label>
+      <%= f.input :sales, label: 'l' %>
+    </div>
+    <div class="column">
+      <label class="label">Gerenciar Gastos?</label>
+      <%= f.input :spendings, label: 'l' %>
+    </div>
+  </div>
+  <div class="form-inputs columns has-text-centered">
+    <div class="column">
+      <label class="label">Gerenciar Métodos de Pagamento?</label>
+      <%= f.input :payment_methods, label: 'l' %>
+    </div>
+    <div class="column">
+      <label class="label">Gerenciar Contas a Pagar e a Receber?</label>
+      <%= f.input :pay_latters_and_accounts_payables, label: 'l' %>
+    </div>
+    <div class="column">
+      <label class="label">Gerenciar Custos?</label>
+      <%= f.input :costs, label: 'l' %>
+    </div>
+  </div>
+  <div class="form-inputs columns has-text-centered">
+    <div class="column is-4">
+      <label class="label">Gerenciar Permissões?</label>
+      <%= f.input :permissions, label: 'l' %>
+    </div>
+    <div class="column is-4">
+      <label class="label">Gerenciar Empresa?</label>
+      <%= f.input :company, label: 'l' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Salvar' %>
+    <%= link_to 'Cancelar', permissions_path %>
+  </div>
+<% end %>

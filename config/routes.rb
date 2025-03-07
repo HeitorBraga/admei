@@ -76,11 +76,13 @@ Rails.application.routes.draw do
     resources :employee_absences
     resources :accounts_payables
     resources :employee_overtimes
+    resources :permissions
 
     post '/paid_out' => 'pay_latters#paid_out'
     post '/account_paid' => 'accounts_payables#account_paid'
     post '/fire_employee' => 'employees#fire_employee'
     post 'rehire_employee' => 'employees#rehire_employee'
+    post '/create_permissions' => 'permissions#create_permissions'
     get '/settings' => 'misc#settings', as: :settings
     post '/set_profit' => 'dashboard#index'
     post '/settings/save' => 'misc#save_setting', as: :save_setting
